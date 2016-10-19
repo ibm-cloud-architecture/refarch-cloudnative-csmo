@@ -1,4 +1,4 @@
-# Hybrid Application using Cloud Service Management and Operation
+# Cloud Service Management and Operation for Hybrid application
 
 ## Architecture Overview
 This project provides is a reference implementation for managing a BlueCompute Application that is hybrid in nature.
@@ -17,10 +17,13 @@ Incident management and its operations are key to cloud service management. Inci
 For more details on this reference architecture visit the [Architecture Center for Incident Management](https://developer.ibm.com/architecture/gallery/incidentManagement)
 
 The tools used for this project is following:
+
 Monitoring - uses [NewRelic](https://newrelic.com/) for resource monitoring and IBM Bluemix Application Management (BAM) for synthetic monitoring of the hybrid application and components.
-Event Correlation - use the [IBM Netcool Operations Insights](http://www-03.ibm.com/software/products/en/netcool-operations-insight
-) to fulfill the event management and correlation activities.
+
+Event Correlation - use the [IBM Netcool Operations Insights](http://www-03.ibm.com/software/products/en/netcool-operations-insight) to fulfill the event management and correlation activities.
+
 Notification - uses [IBM Alert Notification](http://www-03.ibm.com/software/products/en/ibm-alert-notification)
+
 Dashboard - uses open source [Grafana](http://grafana.org/)
 
 
