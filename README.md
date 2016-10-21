@@ -1,5 +1,7 @@
 # Cloud Service Management and Operation for Hybrid application
 
+(In Progress....)
+
 ## Architecture Overview
 This project provides is a reference implementation for managing a BlueCompute Application that is hybrid in nature.
 Cloud based applications need to be available all the time. Proper processes need to be put in place to assure availability and performance. This includes Incident and Problem management to respond to outages, but also Release Management to assure a seamless deployment and release of new versions.
@@ -154,7 +156,23 @@ The covered environment for the BlueCompute application is described in the foll
 | mysql sql nodes               | mysql plugin   |
 | mysql data nodes              | Not available  |
 
+The agents are pre-installed with the GitHub code and will be activated during application start only if a valid NewRelic license is provided. The mechanisms for activation are different based on the deployment type. 
 
++ Bluemix Cloud Foundry application
+
+    For cloud foundry applications the configuration of the NewRelic license is retrieved from a custom user provided service (cups) which shall be called NewRelic. If the application does find the service and the settings for the license key during push, it will activate and start the agent automatically.
+
+    This is true for the cloud foundry applications:
+
+    + [BlueCompute Web Application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bluecompute-web)
+    
+    + Inventory BFF application     : https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-inventory
+    
+    + Social Review BFF application : https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-socialreview
+    
++ Bluemix Container application
+
++ SoftLayer Container application
 
 <!--- ####Step 2b: How to Use for BAM for BlueCompute --->
 
