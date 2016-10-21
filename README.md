@@ -1,5 +1,7 @@
 # Cloud Service Management and Operation for Hybrid application
 
+TEST CHANGE
+
 ## Architecture Overview
 This project provides is a reference implementation for managing a BlueCompute Application that is hybrid in nature.
 Cloud based applications need to be available all the time. Proper processes need to be put in place to assure availability and performance. This includes Incident and Problem management to respond to outages, but also Release Management to assure a seamless deployment and release of new versions.
