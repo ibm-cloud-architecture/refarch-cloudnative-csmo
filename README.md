@@ -164,11 +164,11 @@ The agents are pre-installed with the GitHub code and will be activated during a
 
     This is true for the cloud foundry applications:
 
-    + [BlueCompute Web Application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bluecompute-web)
+    + [BlueCompute web application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bluecompute-web)
     
-    + Inventory BFF application     : https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-inventory
+    + [Inventory BFF application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-inventory)
     
-    + Social Review BFF application : https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-socialreview
+    + [SocialReview BFF application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-socialreview)
     
 + Bluemix Container application
 
