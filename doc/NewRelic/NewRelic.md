@@ -148,7 +148,7 @@ This channel can be used within the alerting policies which are described later 
 
 
 
-### Step 4: Define key transaction
+### Step 4: Define key transactions
 In order to defined key transaction which are most important for you in the BlueCopute environment, you can specify those from the list of discovered transactions.
 To create a key transaction follow the instructions on [https://docs.newrelic.com/docs/apm/transactions/key-transactions/creating-key-transactions](https://docs.newrelic.com/docs/apm/transactions/key-transactions/creating-key-transactions).
 
@@ -231,7 +231,7 @@ By means of the new alert policies you can create also policies for plugins like
 
     | Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
     |:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
-    | Nginx Active client connections (High) | Plugins    | nginx web server   | Critical:Active client connections > 700 units for at least 5 mins | On 1024 worker connections and 1  worker process|
+    | Nginx Active client connections (High) | Plugins    | nginx web server   | Critical: Active client connections > 700 units for at least 5 mins | On 1024 worker connections and 1  worker process|
     | Nginx Connections drop rate (High)     | Plugins    | nginx web server   | Critical: Connections drop rate > 5 units for at least 5 mins ||
 
     For specific nginx entities separate policies can be setup to adopt individual load behavior for metrics like “response time”, “requests rate” or “accept rate”.
@@ -252,7 +252,7 @@ By means of the new alert policies you can create also policies for plugins like
 
     | Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
     |:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
-    | Node.js Apdex (Low)                    | APM        | Application Metric | Critical:Apdex < 0.8 for at least 5 mins                           |   https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction|
+    | Node.js Apdex (Low)                    | APM        | Application Metric | Critical: Apdex < 0.8 for at least 5 mins                           |   https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction|
     | Node.js Error percentage (High)        | APM        | Application Metric | Critical: Error percentage > 5 % for at least 5 mins               ||
     | Node.js Key Transaction Apdex (Low)    | APM        | Application Metric | Critical: Apdex < 0.5 for at least 5 mins for key transaction “get%20/inventory” ||
 
@@ -274,8 +274,8 @@ By means of the new alert policies you can create also policies for plugins like
 
     | Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
     |:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
-    | java Apdex (Low)                       | APM        | Application Metric | Critical:Apdex < 0.8 for at least 5 mins                           |https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction|
-    | Java Error percentage (High)           | APM        | Application Metric | Critical:Error percentage > 5 % for at least 5 mins                ||
+    | Java Apdex (Low)                       | APM        | Application Metric | Critical: Apdex < 0.8 for at least 5 mins           **               |https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction|
+    | Java Error percentage (High)           | APM        | Application Metric | Critical: Error percentage > 5 % for at least 5 mins               ||
 
 
     For specific java entities and key transactions separate policies can be setup to adopt individual load behavior for metrics like “response time”, “apdex”, “throughput” or “web transaction times”.
@@ -295,7 +295,7 @@ By means of the new alert policies you can create also policies for plugins like
 
     | Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
     |:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
-    | Mysql Connections (Low)                | Plugins    | Mysql              | Critical:Connections < 1 unit for at least 120 mins                | One connection is always expected|
+    | Mysql Connections (Low)                | Plugins    | Mysql              | Critical: Connections < 1 unit for at least 120 mins               | One connection is always expected|
     | Mysql Connections (High)               | Plugins    | Mysql              | Critical: Connections > 120 units for at least 5 mins              | Default maximum connections are 151|
 
 
