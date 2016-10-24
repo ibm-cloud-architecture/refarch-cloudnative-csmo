@@ -125,57 +125,13 @@ New Relic is a Software-as-a-Service (SaaS) offering, where agents are injected 
 
 Please be aware that the instrumented components will need an active internet out-bound connection either directly or via various Gateway services.
 
-#####Step (i): Get a Newrelic account
-You will need to get a licence for NewRelic in order to manage the BlueCompute components accordingly.
-
-See [How to NewRelic on Bluemix](https://developer.ibm.com/cloudarchitecture/docs/service-management/new-relic-bluemix-application)
-
-#####Step (ii). BlueCompute Instrumentation
-NewRelic code instrumentation has been added to the supported BlueCompute components which includes:
-  + node.js,
-  + java microservices
-  + nginx web server
-  + mysql sqlnodes 
-
-The covered environment for the BlueCompute application is described in the following table:
-
-| Component                     | NewRelic agent |
-|:------------------------------|----------------|
-| nginx web server LB           | nginx plugin   |
-| bluecompute web app           | node.js agent  |
-| inventory bff app             | node.js agent  |
-| social review bff app         | node.js agent  |
-| API Connect                   | Not available  |
-| Social review microservice    | java agent     |
-| Inventory microservice (HA)   | java agent     |
-| Eureka                        | java agent     |
-| Zuul                          | java agent     |
-| VPN Service                   | Not available  |
-| Cloudant DB                   | Not available  |
-| Vyatta                        | Not available  |
-| mysql sql nodes               | mysql plugin   |
-| mysql data nodes              | Not available  |
-
-The agents are pre-installed with the GitHub code and will be activated during application start only if a valid NewRelic license is provided. The mechanisms for activation are different based on the deployment type. 
-
-+ Bluemix Cloud Foundry application
-
-    For cloud foundry applications the configuration of the NewRelic license is retrieved from a custom user provided service (cups) which shall be called NewRelic. If the application does find the service and the settings for the license key during push, it will activate and start the agent automatically.
-
-    This is true for the cloud foundry applications:
-
-    + [BlueCompute web application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bluecompute-web)
-    
-    + [Inventory BFF application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-inventory)
-    
-    + [SocialReview BFF application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-socialreview)
-    
-+ Bluemix Container application
-
-+ SoftLayer Container application
+For detailed steps please continue with [How to setup NewRelic for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/NewRelic.md)
 
 <!--- ####Step 2b: How to Use for BAM for BlueCompute --->
 
+###Step 3: How to use Netcool Operations Insight for BlueCompote
+
+(to be continued..)
 
 
 
