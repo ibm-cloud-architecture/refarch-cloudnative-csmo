@@ -125,7 +125,7 @@ New Relic is a Software-as-a-Service (SaaS) offering, where agents are injected 
 
 Please be aware that the instrumented components will need an active internet out-bound connection either directly or via various Gateway services.
 
-For detailed steps please continue with [How to setup NewRelic for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/NewRelic.md)
+For detailed steps please continue with [How to setup NewRelic for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/NewRelic/NewRelic.md)
 
 <!--- ####Step 2b: How to Use for BAM for BlueCompute --->
 
