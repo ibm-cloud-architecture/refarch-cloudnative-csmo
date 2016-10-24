@@ -148,7 +148,7 @@ Key transactions can be defined for NewRelic supported application types. We hav
 s with an initial Apdex target value.The Apdex value is a industry standard metric for rating the user satisfaction. See [https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction](https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction) for more details on the definition and measurement. The 
 
 | BlueCompute application component  | Key Transaction                    | Apdex |
-|:-----------------------------------|------------------------------------|-------|
+|:-----------------------------------|:-----------------------------------|-------|
 | bluecompute web app                | get%20/inventory                   | 0.45  |
 | inventory bff app                  | get /api/items                     | 0.76  |
 | socialreview bff app               | Get /reviews/list                  | 0.89  |
@@ -172,16 +172,106 @@ Some recommended violation conditions for the policies are described in the foll
 
 #### Setup Alert Policy for Nginx
 
-1) Create an alert policy (sample name: CSMO nginx policy )
-2) Assign the nginx entities to the policy as desired
-3) Define one or more threshold conditions
+1. Create an alert policy (sample name: CSMO nginx policy )
+2. Assign the nginx entities to the policy as desired
+3. Define one or more threshold conditions
 
-| Condition name                         | Product    | Plugin type      | Condition                                                          | Threshold base |                                              
-|:---------------------------------------|------------|------------------|--------------------------------------------------------------------|----------------|
-| Nginx Active client connections (High) | Plugins    | nginx web server | Critical:Active client connections > 700 units for at least 5 mins | On 1024 worker connections and 1 worker process|
-| Nginx Connections drop rate (High)     | Plugins    | nginx web server | Critical: Connections drop rate > 5 units for at least 5 mins ||
+| Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
+|:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
+| Nginx Active client connections (High) | Plugins    | nginx web server   | Critical:Active client connections > 700 units for at least 5 mins | On 1024 worker connections and 1 worker process|
+| Nginx Connections drop rate (High)     | Plugins    | nginx web server   | Critical: Connections drop rate > 5 units for at least 5 mins ||
 
 For specific nginx entities separate policies can be setup to adopt individual load behavior for metrics like “response time”, “requests rate” or “accept rate”.
+
+#### Setup Alert Policy for node.js
+
+1. Create an alert policy (sample name: CSMO node.js policy )
+2. Assign the node.js entities to the policy as desired
+3. Define one or more threshold conditions
+
+| Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
+|:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
+| Node.js Apdex (Low)                    | APM        | Application Metric | Critical:Apdex < 0.8 for at least 5 mins                           | https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction|
+| Node.js Error percentage (High)        | APM        | Application Metric | Critical: Error percentage > 5 % for at least 5 mins               ||
+| Node.js Key Transaction Apdex (Low)    | APM        | Application Metric | Critical: Apdex < 0.5 for at least 5 mins for key transaction “get%20/inventory” ||
+
+For specific node.js entities and key transactions separate policies can be setup to adopt individual load behavior for metrics like “response time”, “apdex”, “throughput” or “web transaction times”.
+
+#### Setup Alert Policy for java microservices
+
+1. Create an alert policy (sample name: 	CSMO java  policy )
+2. Assign the java microservice entities to the policy as desired
+3. Define one or more conditions
+
+| Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
+|:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
+| java Apdex (Low)                       | APM        | Application Metric | Critical:Apdex < 0.8 for at least 5 mins                           |https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction|
+| Java Error percentage (High)           | APM        | Application Metric | Critical:Error percentage > 5 % for at least 5 mins                ||
+
+
+For specific java entities and key transactions separate policies can be setup to adopt individual load behavior for metrics like “response time”, “apdex”, “throughput” or “web transaction times”.
+#### Setup Alert Policy for mysql sqlnodes
+
+1. Create an alert policy (sample name: 	CSMO mysql policy )
+2. Assign the mysql entities to the policy as desired
+3. Define one or more conditions
+
+| Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
+|:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
+| Mysql Connections (Low)                | Plugins    | Mysql              | Critical:Connections < 1 unit for at least 120 mins                | One connection is always expected|
+| Mysql Connections (High)               | Plugins    | Mysql              | Critical: Connections > 120 units for at least 5 mins              | Default maximum connections are 151|
+
+
+For specific MySQL entities separate policies can be setup to adopt individual load behavior for metrics like “reads/sec”, write/sec” and “connections”.
+
+##### Step 6: Configure Service MAP
+For BlueCompute you can create a service map containing all the instrumented components.
+See details see [https://docs.newrelic.com/docs/data-analysis/service-maps/get-started/customize-your-service-maps](https://docs.newrelic.com/docs/data-analysis/service-maps/get-started/customize-your-service-maps	)
+	
+For a BlueCompute service map do:
+
+- Login into NewRelic UI
+- Select “APM” and “Service maps” and “Map List”  from the menu bars
+- Select “Create new map”
+    1. Select the “application” button and
+        - Select the application components from BlueCompute and add them to the map by clicking the “+” sign
+            + eureka-cluster
+            + zuul-cluster
+            + inventory-bff-app
+            + socialreview-bff-app
+            + bluecompute-web-app
+            + microservice inventory
+            + microservice socialreview
+    2. Now switch to the “plugins” components by selecting the plugins button 
+        - Select the nginx seb server list and add your nginx instance to the map by clicking the “+” sign
+        - Go back to the plugin list, select now the mysql list and add you mysql instances to the map by clicking the “+” sign
+    3. Most connections are between components are created automatically.If links are missing you can create links manually by:
+        - Select the pencil icon of a node.
+        - Select the arrow icon for either inbound or outbound connection
+        - Select the green plus sign of another node which you want to connected
+    4. If node are missing which should be displayed as well-defined, you can create custom nodes by
+        - Click on the “create custom node” snowflake icon
+        - Assign it a name (e.g. VPN service to the Softlayer datacenter) and create links as appropriate to other nodes (see before)
+    5. If nodes are clustered you can group them by drag and drop on each other and assign a group name (e.g. two mysql sqlnodes are building the mysql cluster used by the inventory microservice)
+    6. Arrange the nodes by moving them on the pane
+- Finish the map with the “Save” button
+
+A final service map can look like this:
+![BlueCompute Service Map in NewRelic](doc/NewRelic/NR service map.png?raw=true)  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--- ####Step 2b: How to Use for BAM for BlueCompute --->
 
