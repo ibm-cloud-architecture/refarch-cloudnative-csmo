@@ -185,7 +185,8 @@ get '/nr_mysql_cmdb' => sub {
     my $c        = shift;
     my $line     = '';
     my $dbh      = DBI->connect( $dsn, $uid, $pwd );
-    my $data_ref = $dbh->selectall_arrayref( $cmdb_sql, { Slice => {} } );
+	my $cmdb_sql_mysql = $cmdb_sql . qq| WHERE APPTYPE = 'mysql'|; 
+    my $data_ref = $dbh->selectall_arrayref( $cmdb_sql_mysql, { Slice => {} } );
 
     $c->ua->get(
         $newrelic_components => { 'X-Api-Key' => $api_key } => sub {
@@ -226,7 +227,6 @@ get '/nr_mysql_cmdb' => sub {
                 $line .= "\n";
             }
             chomp $line;
-
             #say $line;
             send_to_influx($line);
         }
@@ -239,7 +239,8 @@ get '/nr_nginx_cmdb' => sub {
     my $c        = shift;
     my $line     = '';
     my $dbh      = DBI->connect( $dsn, $uid, $pwd );
-    my $data_ref = $dbh->selectall_arrayref( $cmdb_sql, { Slice => {} } );
+	my $cmdb_sql_nginx = $cmdb_sql . qq| WHERE APPTYPE = 'nginx-lb'|; 
+    my $data_ref = $dbh->selectall_arrayref( $cmdb_sql_nginx, { Slice => {} } );
 
     $c->ua->get(
         $newrelic_components => { 'X-Api-Key' => $api_key } => sub {
@@ -247,22 +248,15 @@ get '/nr_nginx_cmdb' => sub {
 
             for my $row (@$data_ref) {
                 foreach my $i ( @{ $tx->res->json->{components} } ) {
-                    if (    ( $row->{APPNAME} eq $i->{name} )
-                        and ( $i->{name} eq 'nginx-lb' ) )
-                    {
+                    if ( ($row->{APPNAME} eq $i->{name}) ) {
 
-                        my $total_request_rate =
-                          $i->{summary_metrics}[0]->{values}->{raw};
-                        $total_request_rate .= '.0'
-                          if ( $total_request_rate =~ /^\d+$/ );
-                        my $active_connections =
-                          $i->{summary_metrics}[1]->{values}->{raw};
-                        $active_connections .= '.0'
-                          if ( $active_connections =~ /^\d+$/ );
+                        my $total_request_rate = $i->{summary_metrics}[0]->{values}->{raw};
+                        $total_request_rate .= '.0' if ( $total_request_rate =~ /^\d+$/ );
+                        my $active_connections = $i->{summary_metrics}[1]->{values}->{raw};
+                        $active_connections .= '.0' if ( $active_connections =~ /^\d+$/ );
                         my $connection_drop_rate =
                           $i->{summary_metrics}[2]->{values}->{raw};
-                        $connection_drop_rate .= '.0'
-                          if ( $connection_drop_rate =~ /^\d+$/ );
+                        $connection_drop_rate .= '.0' if ( $connection_drop_rate =~ /^\d+$/ );
                         my $description = $row->{DESCRIPTION};
                         my $regionname  = $row->{REGIONNAME};
                         my $servicename = $row->{SERVICENAME};
@@ -270,10 +264,10 @@ get '/nr_nginx_cmdb' => sub {
                         my $client      = $row->{CLIENT};
 
                         $line .= data2line(
-                            'ngnix_status',
+                            'nginx_status',
                             {
-                                total_request_rate   => ${total_request_rate},
-                                active_connections   => ${active_connections},
+                                total_request_rate      => ${total_request_rate},
+                                active_connections      => ${active_connections},
                                 connection_drop_rate => ${connection_drop_rate},
                             },
                             {
@@ -288,7 +282,6 @@ get '/nr_nginx_cmdb' => sub {
                 $line .= "\n";
             }
             chomp $line;
-
             #say $line;
             send_to_influx($line);
         }
@@ -296,6 +289,7 @@ get '/nr_nginx_cmdb' => sub {
     );
     $c->render( text => 'ok' );
 };
+
 
 get '/logmet_redirect' => sub {
     my $c            = shift;
