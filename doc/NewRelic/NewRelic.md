@@ -118,27 +118,35 @@ The agents are pre-installed with the GitHub code and will be activated during a
     
 ###Step 3: Add notification channel to Netcool Operations Insight (NOI)
 
-The Netcool Operations Insight (Omnibus) integration is done via webhook integration:
+The Netcool Operations Insight (Omnibus) integration is done via webhook integration. There are yet two alert notification technologies for NewRelic in place which will both needed.
 
 Follow these steps to send alerts and notification to NOI. 
 
-#### Setup the Notification channel
-1. Create a new notification channel
-2. Select "WebHook" as the Channel Type
-3. Input Webhook name (e.g. NOI)
-4. Input Base URL of your NOI instance running the message bus probe. Please see [How to setup NOI for BlueCompute](http://to be added) for details about NOI and the message bus probe to receive events.
-5. Finish with “Create Channel”
+#### Step 3a: Setup the Alert (New) Notification channel
+1. Select Alerts(New) from the top menu
+2. Select "Alert notification channel" tab
+3. Create a new notification channel by clicking on "New notification channel"
+4. Select "WebHook" as the Channel Type
+5. Input Webhook name (e.g. NOI)
+6. Input Base URL of your NOI instance running the message bus probe. Please see [How to setup NOI for BlueCompute](http://to be added) for details about NOI and the message bus probe to receive events.
+7. Finish with “Create Channel”
 
 This channel can be used within the alerting policies which are described later on.
 
-#### Assign Notification channel to policies
-To assign a notification channel to an alert policy, you need to: 
+#### Step 3b: Setup the Alert (old) Notification channel
+1. Select "APM" from the top menu
+2. Select "Alerts" from the submenu
+3. Select "Channel and groups" tab from the tree menu on the left
+4. Create a new notification channel by clicking on "Create channel"
+5. Select "WebHook" as the Channel Type from the drop-down list
+6. Input Webhook name (e.g. NOI)
+7. Input Webhook URL of your NOI instance running the message bus probe. Please see [How to setup NOI for BlueCompute](http://to be added) for details about NOI and the message bus probe to receive events.
+8. Switch to "All critical events" from the Notification level drop down list   
+9. Finish with “Integrate with webhooks”
 
-1. Open the policy
-2. Switch to the “Notification channel” tab
-3. Select “Add notification channel”
-4. Select channel type “Webhooks”
-5. Select the channel, you have created about (e.g. NOI)
+This channel can be used within the alerting policies which are described later on.
+
+
 
 ### Step 4: Define key transaction
 In order to defined key transaction which are most important for you in the BlueCopute environment, you can specify those from the list of discovered transactions.
@@ -170,59 +178,136 @@ Here you will create policies for the various component types. If you prefer you
 
 Some recommended violation conditions for the policies are described in the following chapters. These might need to be adapted depending on the different workload configuration of the BlueCompute instance.
 
-#### Setup Alert Policy for Nginx
+
+
+#### Setup Alert (Old) Policy 
+
+The older Alert Policies technology of NewRelic allows to define the monitor of URLs for application availability/Downtime while the new ones yet do not support this. Therefore a old Policy type is needed at this stage.
+
+#####  Alert (Old) Policy for Applications Availability
+
+
+- Login into NewRelic UI
+- Select “APM” -> "Alerts” from the top menu bar (please do not use directly "Alerts" from the top menu).
+- Select "Application policies" from the left menu tree.
+- Create a new policy called "BlueCompute" by creating the "Create application policy" button, enter the name "BlueCompute" and select "Create" button.
+- Enter 2 minutes for "Downtime Alert when any ping URL is unresponsive for x minutes" and select the chechbox to activate the settings.
+- Click on the "Assign Application" button to select your application
+- Select each application for this policy under step 1 "Select applications to move" by ticking the checkbox
+      + eureka-cluster
+      + zuul-cluster
+      + inventory-bff-app
+      + socialreview-bff-app
+      + bluecompute-web-app
+      + microservice-inventory
+      + microservice-socialreview
+- Choose "Move to BlueCompute" under step 2 "Choose destination"  
+- Click the "Assign Application" button to add these applications to your policy
+- For each application do
+    + click on the "Ping URL icon" 
+    + add the "URL to monitor" under the Availability URL section. Use the following URLs or adopt them if you use different routes.
+ 
+        | Application                   | URL to monitor                                    |
+        |:------------------------------|:--------------------------------------------------|
+        | bluecompute-web- app          | https://bluecompute-web-app.eu-gb.mybluemix.net   |
+        | eureka-cluster                | https://eureka-cluster-dev.eu-gb.mybluemix.net    |
+        | zuul-cluster                  | https://zuul-cluster-dev.eu-gb.mybluemix.net/info |
+
+    + Save settting with "Save your changes" button
+- Switch to the "Alert Channels" tab
+- Click on "Select channels" button
+- Select "NOI" channel under the Webhooks section
+- Click "Save now"
+
+
+#### Setup Alert (new) Policies
+By means of the new alert policies you can create also policies for plugins like MySQL.
+
+##### Alert (New) Policy for Nginx
 
 1. Create an alert policy (sample name: CSMO nginx policy )
 2. Assign the nginx entities to the policy as desired
 3. Define one or more threshold conditions
 
-| Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
-|:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
-| Nginx Active client connections (High) | Plugins    | nginx web server   | Critical:Active client connections > 700 units for at least 5 mins | On 1024 worker connections and 1 worker process|
-| Nginx Connections drop rate (High)     | Plugins    | nginx web server   | Critical: Connections drop rate > 5 units for at least 5 mins ||
+    | Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
+    |:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
+    | Nginx Active client connections (High) | Plugins    | nginx web server   | Critical:Active client connections > 700 units for at least 5 mins | On 1024 worker connections and 1  worker process|
+    | Nginx Connections drop rate (High)     | Plugins    | nginx web server   | Critical: Connections drop rate > 5 units for at least 5 mins ||
 
-For specific nginx entities separate policies can be setup to adopt individual load behavior for metrics like “response time”, “requests rate” or “accept rate”.
+    For specific nginx entities separate policies can be setup to adopt individual load behavior for metrics like “response time”, “requests rate” or “accept rate”.
 
-#### Setup Alert Policy for node.js
+4. Switch to the tab "Notification channels"
+5. Click on "Add notification channel"
+6. Select the Webhooks folder
+7. Select "NOI" from the available webhook channels
+8. Click "Update policy" to finish
+9. Click on "Incident preference"
+10. Select "by incident and entity" to get an event for every violation.
+
+##### Alert (New) Policy for node.js
 
 1. Create an alert policy (sample name: CSMO node.js policy )
 2. Assign the node.js entities to the policy as desired
 3. Define one or more threshold conditions
 
-| Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
-|:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
-| Node.js Apdex (Low)                    | APM        | Application Metric | Critical:Apdex < 0.8 for at least 5 mins                           | https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction|
-| Node.js Error percentage (High)        | APM        | Application Metric | Critical: Error percentage > 5 % for at least 5 mins               ||
-| Node.js Key Transaction Apdex (Low)    | APM        | Application Metric | Critical: Apdex < 0.5 for at least 5 mins for key transaction “get%20/inventory” ||
+    | Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
+    |:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
+    | Node.js Apdex (Low)                    | APM        | Application Metric | Critical:Apdex < 0.8 for at least 5 mins                           |   https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction|
+    | Node.js Error percentage (High)        | APM        | Application Metric | Critical: Error percentage > 5 % for at least 5 mins               ||
+    | Node.js Key Transaction Apdex (Low)    | APM        | Application Metric | Critical: Apdex < 0.5 for at least 5 mins for key transaction “get%20/inventory” ||
 
-For specific node.js entities and key transactions separate policies can be setup to adopt individual load behavior for metrics like “response time”, “apdex”, “throughput” or “web transaction times”.
+    For specific node.js entities and key transactions separate policies can be setup to adopt individual load behavior for metrics like “response time”, “apdex”, “throughput” or “web transaction times”.
 
-#### Setup Alert Policy for java microservices
+4. Switch to the tab "Notification channels"
+5. Click on "Add notification channel"
+6. Select the Webhooks folder
+7. Select "NOI" from the available webhook channels
+8. Click "Update policy" to finish
+9. Click on "Incident preference"
+10. Select "by incident and entity" to get an event for every violation.
+
+##### Alert (New) Policy for java microservices
 
 1. Create an alert policy (sample name: 	CSMO java  policy )
 2. Assign the java microservice entities to the policy as desired
 3. Define one or more conditions
 
-| Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
-|:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
-| java Apdex (Low)                       | APM        | Application Metric | Critical:Apdex < 0.8 for at least 5 mins                           |https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction|
-| Java Error percentage (High)           | APM        | Application Metric | Critical:Error percentage > 5 % for at least 5 mins                ||
+    | Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
+    |:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
+    | java Apdex (Low)                       | APM        | Application Metric | Critical:Apdex < 0.8 for at least 5 mins                           |https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction|
+    | Java Error percentage (High)           | APM        | Application Metric | Critical:Error percentage > 5 % for at least 5 mins                ||
 
 
-For specific java entities and key transactions separate policies can be setup to adopt individual load behavior for metrics like “response time”, “apdex”, “throughput” or “web transaction times”.
-#### Setup Alert Policy for mysql sqlnodes
+    For specific java entities and key transactions separate policies can be setup to adopt individual load behavior for metrics like “response time”, “apdex”, “throughput” or “web transaction times”.
+
+4. Switch to the tab "Notification channels"
+5. Click on "Add notification channel"
+6. Select the Webhooks folder
+7. Select "NOI" from the available webhook channels
+8. Click "Update policy" to finish
+9. Click on "Incident preference"
+10. Select "by incident and entity" to get an event for every violation.
+##### Alert (New) Policy for mysql sqlnodes
 
 1. Create an alert policy (sample name: 	CSMO mysql policy )
 2. Assign the mysql entities to the policy as desired
 3. Define one or more conditions
 
-| Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
-|:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
-| Mysql Connections (Low)                | Plugins    | Mysql              | Critical:Connections < 1 unit for at least 120 mins                | One connection is always expected|
-| Mysql Connections (High)               | Plugins    | Mysql              | Critical: Connections > 120 units for at least 5 mins              | Default maximum connections are 151|
+    | Condition name                         | Product    | Plugin type        | Condition                                                          | Threshold base |                                              
+    |:---------------------------------------|------------|--------------------|--------------------------------------------------------------------|----------------|
+    | Mysql Connections (Low)                | Plugins    | Mysql              | Critical:Connections < 1 unit for at least 120 mins                | One connection is always expected|
+    | Mysql Connections (High)               | Plugins    | Mysql              | Critical: Connections > 120 units for at least 5 mins              | Default maximum connections are 151|
 
 
-For specific MySQL entities separate policies can be setup to adopt individual load behavior for metrics like “reads/sec”, write/sec” and “connections”.
+    For specific MySQL entities separate policies can be setup to adopt individual load behavior for metrics like “reads/sec”, write/sec” and “connections”.
+
+4. Switch to the tab "Notification channels"
+5. Click on "Add notification channel"
+6. Select the Webhooks folder
+7. Select "NOI" from the available webhook channels
+8. Click "Update policy" to finish
+9. Click on "Incident preference"
+10. Select "by incident and entity" to get an event for every violation.
 
 ### Step 6: Configure Service MAP
 For BlueCompute you can create a service map containing all the instrumented components.
@@ -259,21 +344,6 @@ For a BlueCompute service map do:
 A final service map can look like this:
 ![BlueCompute Service Map in NewRelic](NR service map.png?raw=true)  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--- ####Step 2b: How to Use for BAM for BlueCompute --->
 
 
 
