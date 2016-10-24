@@ -224,7 +224,7 @@ For specific java entities and key transactions separate policies can be setup t
 
 For specific MySQL entities separate policies can be setup to adopt individual load behavior for metrics like “reads/sec”, write/sec” and “connections”.
 
-##### Step 6: Configure Service MAP
+### Step 6: Configure Service MAP
 For BlueCompute you can create a service map containing all the instrumented components.
 See details see [https://docs.newrelic.com/docs/data-analysis/service-maps/get-started/customize-your-service-maps](https://docs.newrelic.com/docs/data-analysis/service-maps/get-started/customize-your-service-maps	)
 	
@@ -257,7 +257,7 @@ For a BlueCompute service map do:
 - Finish the map with the “Save” button
 
 A final service map can look like this:
-![BlueCompute Service Map in NewRelic](doc/NewRelic/NR service map.png?raw=true)  
+![BlueCompute Service Map in NewRelic](NR service map.png?raw=true)  
 
 
 
