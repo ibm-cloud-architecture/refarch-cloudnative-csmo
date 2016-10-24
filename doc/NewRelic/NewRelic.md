@@ -1,136 +1,17 @@
-# Cloud Service Management and Operation for Hybrid application
+# NewRelic resource monitoring for Hybrid application
 
 (In Progress....)
 
-## Architecture Overview
-This project provides is a reference implementation for managing a BlueCompute Application that is hybrid in nature.
-Cloud based applications need to be available all the time. Proper processes need to be put in place to assure availability and performance. This includes Incident and Problem management to respond to outages, but also Release Management to assure a seamless deployment and release of new versions.
-
-  The Logical Architecture for overall Cloud Service Management and Operations is shown in the picture below.
-   ![CSMO Architecture](static/imgs/Cloud_Service_Management_Incident_Mgmt_Overview-v2.png?raw=true)  
-
-For more details on this reference architecture visit the [Architecture Center for Service Management](https://developer.ibm.com/architecture/serviceManagement)
-
-## Incident Management Architecture Overview
-
-Incident management and its operations are key to cloud service management. Incident management is optimized to restore the normal service operations as quickly as, thus ensuring the best possible levels of service quality and availability are maintained. Following figure provides deep dive into Incident Management 
-![CSMO Incident Management Architecture](static/imgs/Cloud_Service_Management_Incident_Management-03.png?raw=true)  
-
-For more details on this reference architecture visit the [Architecture Center for Incident Management](https://developer.ibm.com/architecture/gallery/incidentManagement)
-
-### Reference Tools Mapping 
-For this project we utilized a reference set of tools to showcase end-to-end incident management.
-
-**Monitoring** - uses [NewRelic](https://newrelic.com/) for resource monitoring and E2E monitoring of URLs <and IBM Bluemix Application Management (BAM) for synthetic monitoring of the hybrid application and components.>
-
-**Event Correlation** - uses the [IBM Netcool Operations Insights](http://www-03.ibm.com/software/products/en/netcool-operations-insight) to fulfill the event management and correlation activities.
-
-**Notification** - uses [IBM Alert Notification](http://www-03.ibm.com/software/products/en/ibm-alert-notification)
-
-**Dashboard** - uses open source [Grafana](http://grafana.org/)
-
-### Understanding System Context Flows for the Tools in CSMO Toolchain Connecting BlueCompute Application
-
-
-#### System Context Flow for New Relic
-
-<![System Context Flow NewRelic](static/imgs/???.png?raw=true)>
-
-The above figure shows the deep dive of NewRelic Ressource Monitoring and its various components and various integrated tools for incident management and their interactions. 
-
-1.	NewRelic offers the instrumenation of BlueCompute components like Node.js applications, nginx webserver/loadbalancers, java microservices and mysql databases and allows monitoring of key performance indicators for those ressources. It detects also Bluemix services used by various Bluemix applications. Both Public and SoftLayer instances are monitored. In Bluemix we will find native clound foundry applications as well as docker containers. 
-
-2.	The data will be transferred to NewRelic management system which is accessible with the UI and API calls.
-
-3.	If thresholds are exceeded based on defined alert policy settings one or more alerting channels can be used.
-
-4.	These channels actually forward the incident to external event correlation and/or a Dashboard solutions. In this scenario we are using NOI for event correlation and NewRelic forwards its events to a Netcool Omnibus message bus probe via a WebHook channel. 
-
-
-<!--- #### System Context Flow for BAM 
-
-![System Context Flow BAM](static/imgs/???.png?raw=true)
-
-The above figure shows the deep dive of IBM Bluemix Application Monitoring (BAM) and its various components and various integrated tools for incident management and their interactions. BAM monitors the status Bluemix application in two ways.
-
-1.	BAM will check base application URLs and also run Rest get/post calls against the BlueCompute Rest APIs.
-
-2.	Secondly we can record synthetic web transaction scripts with the Selennium IDE browser plugin, upload them into BAM and playback those scripts from different data centers around the world.
-
-3.	Both checks will provide status information and response time of the application components and sampled transaction use cases.
-
-4.	Based on threshold settings violations in terms of availability or performance can be reported to the IBM Alert Notification System (ANS) Bluemix Service.
-
-5.	ANS then will also forward these incidents to an external event correlation system via email. In this scenario we are using NOI as event correlation system.
---->
-
-
-#### System Context Flow for IBM Netcool Operations Insights (NOI)
-
-<![System Context Flow NOI](static/imgs/???.png?raw=true)>
-
-The above figure shows the deep dive of NOI and its various components and various integrated tools for incident management and their interactions. One of the key takeaways from the diagram is that the solution supports a heterogeneous mixture of products and solutions, each feeding or being fed by the central NOI solution.
-
-The following flow describes the setup and operations of this solution in an overall cloud service management space:
-
-1.	BlueCompute application components & infrastructure are monitored by 3rd party solution NewRelic for resource monitoring and URL response <and IBM BAM for synthetic monitoring (via ANS)>.
-
-2.	The probes normalize the events into a common format and send them to the central Omnibus system. The monitoring events sent to NOI via these probes are then correlated, de-duplicated, analyzed & enriched. Further action may be automated or performed by an first responder/incident Owner/runbook automated service. 
-
-3.	Impact has two roles. It extracts events from the BlueMix infrastructure and forwards events on to the collaboration and notification solutions. The analytics component of NOI enriches the events and finds correlations between events, limiting the number of alarms forwarded and making sure that important issues are prioritized. The dashboards are used both to display events and manually forward them if an operator decides to do so. Impact also enriches technical events with organizational and environmental context information like deployment location, service relationships or affected client. Here a MySQL configuration data source is leveraged.
-
-4.	The correlated events are forwarded to collaboration and notification tools. Action may be performed to solve the issues detected. NOI supports a variety of such solutions and in this document we will look at integration with Slack for collaboration and IBM Alert Notification System Duty for notification and escalation. NOI can publish events to generic targets (i.e. a single Slack channel which is used for all alerts) or specific ones (i.e. NOI will be automated to create a dedicated Slack channel for a single generated event ). 
-
-5. Runbooks connected to NOI are automated to update the event status based on the resolution of the issue. The status updates can also be manually handled within NOI. It also has capability to have bi-directional communication with notification tool so that event status update can take place in either tool. This updated status is then propagated.
-
-
-#### System Context Flow for Grafana
-
-<![System Context Flow Grafana](static/imgs/???.png?raw=true)>
-
-The above figure shows the deep dive of Grafana and its various components and various integrated tools for incident management and their interactions. 
-
-1.	A Perl Runtime collects on a regular scheduled basis data from various data sources which provide monitoring and status information for the BlueCompute application. In this scenario this includes the ressource monitoring data from NewRelic via a Rest API, the Bluemix Cloud Foundry information for applications and containers via the CF API and the NOI status information via the Netcool Rest API <and the synthetic monitoring results from BAM via a Rest API>.
-
-2.	Perl runtime also accesses a configuration data source on MySQL to read and enrich the monitoring data with environment context data like deployment location and service-relationships.
-
-3.	The perl runtime mashes up all relevant data and writes the consolidated data into the InfluxDB.
-
-4.	Grafana accesses the data via its defined data sources and displays the InfluxDB data inside the configured dashboard pages.
-
-5.	Grafana allows the launch of the event viewer page from NOI displaying events in context of a page item<as well as the launch og LogMet logfile search page in context of a page item>.
-
-
-### How to Use the toolchain
- 
-The following walkthrough guides you through how to use the toolchain for end-to-end monitoring of the hybrid application. You will learn how to implement basic incident management capabilities and how to build a more advanced, robust incident management solution.
-
-###Step 1: Installation prerequisites
-
-When deployed using an instant runtime, the solution for incident management requires the following items:
-
-  +  IBM Bluemix account
-  +  A hybrid application - [BlueCompute application set up instruction](https://github.com/ibm-cloud-architecture/refarch-cloudnative)
-    
-###Step 2: Incident Management walkthrough
-
-The cloud native Cloud Service Management and Operations [incident management walkthrough](https://developer.ibm.com/architecture/gallery/incidentManagement/walkthrough/Introduction) is provided with the tools in the toolchain.
-
-
-The following sections only focusses on updates needed to instrument or use a hybrid application and will defer to the published how-to documents for the selected tools of the toolchain.
-
-####Step 2a: How to Use New Relic for BlueCompute
-
 New Relic is a Software-as-a-Service (SaaS) offering, where agents are injected into Bluemix Runtimes,  IBM Bluemix Containers or SoftLayer Containers and automatically start reporting metrics back to the New Relic service over the internet.
 
-Please be aware that the instrumented components will need an active internet out-bound connection either directly or via various Gateway services.
+Please be aware that the instrumented components will need an active internet connection either directly or via various Gateway services.
 
-#####Step (i): Get a Newrelic account
+###Step 1: Get a Newrelic account
 You will need to get a licence for NewRelic in order to manage the BlueCompute components accordingly.
 
 See [How to NewRelic on Bluemix](https://developer.ibm.com/cloudarchitecture/docs/service-management/new-relic-bluemix-application)
 
-#####Step (ii). BlueCompute Instrumentation
+###Step 2: BlueCompute Instrumentation
 NewRelic code instrumentation has been added to the supported BlueCompute components which includes:
   + node.js,
   + java microservices
@@ -144,15 +25,15 @@ The covered environment for the BlueCompute application is described in the foll
 | nginx web server LB           | nginx plugin   |
 | bluecompute web app           | node.js agent  |
 | inventory bff app             | node.js agent  |
-| social review bff app         | node.js agent  |
-| API Connect                   | Not available  |
-| Social review microservice    | java agent     |
-| Inventory microservice (HA)   | java agent     |
-| Eureka                        | java agent     |
-| Zuul                          | java agent     |
-| VPN Service                   | Not available  |
-| Cloudant DB                   | Not available  |
-| Vyatta                        | Not available  |
+| socialreview bff app          | node.js agent  |
+| API Connect service           | Not available  |
+| social review microservice    | java agent     |
+| inventory microservice        | java agent     |
+| netflix eureka                | java agent     |
+| netflix zuul                  | java agent     |
+| VPN service                   | Not available  |
+| cloudant DB service           | Not available  |
+| yyatta on SL                  | Not available  |
 | mysql sql nodes               | mysql plugin   |
 | mysql data nodes              | Not available  |
 
@@ -164,15 +45,143 @@ The agents are pre-installed with the GitHub code and will be activated during a
 
     This is true for the cloud foundry applications:
 
-    + [BlueCompute web application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bluecompute-web)
+    + [BlueCompute Web Application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bluecompute-web)
     
-    + [Inventory BFF application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-inventory)
+    + [Inventory BFF Application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-inventory)
     
-    + [SocialReview BFF application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-socialreview)
+    + [SocialReview BFF Application](https://github.com/ibm-cloud-architecture/refarch-cloudnative-bff-socialreview)
     
 + Bluemix Container application
+    
+    For the Bluemix based containers running BlueCompute components the license key has to be added to the docker container during container start or creation of the bluemix   container group with the -e NEW_RELIC_LICENSE_KEY=your-license-key option, where “your-license-key” is your Newrelic license key.
+    
+    Additionally you have to define the application name for the NewRelic agent with the option -e CG_NAME=your-appname where “your-appname” is your  desried name for the application shown and used inside NewRelic. If you want to deploy the application to different regions or spaces, adding a flag to the name will allow to manage the applications more easily. If the same name is used, Newrelic will handle the application instances as a single application.
+
+    This is true for the Bluemix containers:
+    
+    + [Inventory Microservice](https://github.com/ibm-cloud-architecture/refarch-cloudnative-micro-inventory)
+    
+        When creating the container group add the options for NewRelic:
+        
+        `cf ic group create -p 8080 -m 512 --min 1 --auto --name micro-inventory-group -e NEW_RELIC_LICENSE_KEY=[YOUR_LICENSE_KEY] -e  "CG_NAME=microservice-inventory" -e "eureka.client.serviceUrl.defaultZone=https://eureka-cluster-dev.[YOUR_NAMESPACE]/eureka/" -e "spring.datasource.url=jdbc:mysql://[YOUR_MYSQL_IP1]:3306,[YOUR_MYSQL_IP2]:3306/inventorydb" -e "spring.datasource.username=[YOUR_DBUSER]" -e "spring.datasource.password=[YOUR_PASSWORD]" -n inventoryservice -d mybluemix.net registry.[YOUR REGION].bluemix.net/$(cf ic namespace get)/inventoryservice:cloudnative`
+    
+    + [Socialreview Microservice](https://github.com/ibm-cloud-architecture/refarch-cloudnative-micro-socialreview	)
+    
+    + [Netflix Zuul Edge Proxy](https://github.com/ibm-cloud-architecture/refarch-cloudnative-netflix-zuul)
+    
+        When deploying the container group with the `deploy-container-group.sh` script, change the call in the script to
+
+        `cf ic group create --name zuul_cluster \
+          --publish 8080 --memory 256 --auto \
+          --min 1 --max 3 --desired 1 \
+          --hostname ${PROXY_HOSTNAME} \
+          --domain ${ROUTES_DOMAIN} \
+          --env NEW_RELIC_LICENSE_KEY=[YOUR_LICENSE_KEY] \
+          --env CG_NAME=zuul-cluster \
+          --env eureka.client.serviceUrl.defaultZone="${REGISTRY_URL}" \
+          --env eureka.instance.hostname=${PROXY_HOSTNAME}.${ROUTES_DOMAIN} \
+          --env eureka.instance.nonSecurePort=80 \
+          --env eureka.instance.preferIpAddress=false \
+          --env spring.cloud.client.hostname=${PROXY_HOSTNAME}.${ROUTES_DOMAIN} \
+          ${BLUEMIX_REGISTRY_HOST}/${BLUEMIX_REGISTRY_NAMESPACE}/${PROXY_IMAGE}`
+    
+    + [Netflix Eureka Service Discovery](https://github.com/ibm-cloud-architecture/refarch-cloudnative-netflix-eureka)
+    
+        When deploying the container group with the `deploy-container-group.sh` script, change the call in the script to
+        
+        `cf ic group create --name zuul_cluster \
+         --publish 8080 --memory 256 --auto \
+         --min 1 --max 3 --desired 1 \
+         --hostname ${PROXY_HOSTNAME} \
+         --domain ${ROUTES_DOMAIN} \
+         --env NEW_RELIC_LICENSE_KEY=[YOUR_LICENSE_KEY] \
+         --env CG_NAME=eureka-cluster \
+         --env eureka.client.serviceUrl.defaultZone="${REGISTRY_URL}" \
+         --env eureka.instance.hostname=${PROXY_HOSTNAME}.${ROUTES_DOMAIN} \
+         --env eureka.instance.nonSecurePort=80 \
+         --env eureka.instance.preferIpAddress=false \
+         --env spring.cloud.client.hostname=${PROXY_HOSTNAME}.${ROUTES_DOMAIN} \
+         ${BLUEMIX_REGISTRY_HOST}/${BLUEMIX_REGISTRY_NAMESPACE}/${PROXY_IMAGE} `
+
 
 + SoftLayer Container application
+
+    For the softlayer based containers running BlueCompute components the license key has to be added to the environment with a variable
+
+    `export NEW_RELIC_LICENSE_KEY=your-license-key`
+
+    where “your-license-key” is your Newrelic license key. The subsequent setup scripts will capture the value and configure and start the New Relic Java Agent with the MySQL plugin as the SQL node containers are started.
+
+    This is true for the Softlayer containers:
+    
+    + [MySQL Cluster](https://github.com/ibm-cloud-architecture/refarch-cloudnative-resiliency/tree/master/mysql-cluster)
+    
+###Step 3: Add notification channel to Netcool Operations Insight (NOI)
+
+The Netcool Operations Insight (Omnibus) integration is done via webhook integration:
+
+Follow these steps to send alerts and notification to NOI. 
+
+#### Setup the Notification channel
+1. Create a new notification channel
+2. Select "WebHook" as the Channel Type
+3. Input Webhook name (e.g. NOI)
+4. Input Base URL of your NOI instance running the message bus probe. Please see [How to setup NOI for BlueCompute](http://to be added) for details about NOI and the message bus probe to receive events.
+5. Finish with “Create Channel”
+
+This channel can be used within the alerting policies which are described later on.
+
+#### Assign Notification channel to policies
+To assign a notification channel to an alert policy, you need to: 
+
+1. Open the policy
+2. Switch to the “Notification channel” tab
+3. Select “Add notification channel”
+4. Select channel type “Webhooks”
+5. Select the channel, you have created about (e.g. NOI)
+
+### Step 4: Define key transaction
+In order to defined key transaction which are most important for you in the BlueCopute environment, you can specify those from the list of discovered transactions.
+To create a key transaction follow the instructions on [https://docs.newrelic.com/docs/apm/transactions/key-transactions/creating-key-transactions](https://docs.newrelic.com/docs/apm/transactions/key-transactions/creating-key-transactions).
+
+Key transactions can be defined for NewRelic supported application types. We have defined one key transaction for each supported node.js and java microservice application of the 
+s with an initial Apdex target value.The Apdex value is a industry standard metric for rating the user satisfaction. See [https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction](https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction) for more details on the definition and measurement. The 
+
+| BlueCompute application component  | Key Transaction                    | Apdex |
+|:-----------------------------------|------------------------------------|-------|
+| bluecompute web app                | get%20/inventory                   | 0.45  |
+| inventory bff app                  | get /api/items                     | 0.76  |
+| socialreview bff app               | Get /reviews/list                  | 0.89  |
+| social review microservice         | get /reviews/list                  | 0.89  |
+| inventory microservice             | /inventory (GET)                   | 1.0   |
+| netflix eureka                     | /${eureka.dashboard.path:/} (GET)  | 0.99  |
+| netflix zuul                       | /dispatcherServlet                 | 1.0   |
+
+### Step 5: Setup Alert Policies
+When all components have been instrumented, you can start to setup alert policies for the components.
+Log into NewRelic UI with your account and chose “Alerts” and “Alert Polices” tab and select “Create alert policy” button:
+
+Here you will create policies for the various component types. If you prefer you can also define a single policy with all alert conditions for all the components types). We are preferring separate polices for the ease of management allowing component specific thresholds. The following policy setup has been chosen:
+
+- nginx instances
+- node.js instances
+- java instances
+- mysql instance
+
+Some recommended violation conditions for the policies are described in the following chapters. These might need to be adapted depending on the different workload configuration of the BlueCompute instance.
+
+#### Setup Alert Policy for Nginx
+
+1) Create an alert policy (sample name: CSMO nginx policy )
+2) Assign the nginx entities to the policy as desired
+3) Define one or more threshold conditions
+
+| Condition name                         | Product    | Plugin type      | Condition                                                          | Threshold base |                                              
+|:---------------------------------------|------------|------------------|--------------------------------------------------------------------|----------------|
+| Nginx Active client connections (High) | Plugins    | nginx web server | Critical:Active client connections > 700 units for at least 5 mins | On 1024 worker connections and 1 worker process|
+| Nginx Connections drop rate (High)     | Plugins    | nginx web server | Critical: Connections drop rate > 5 units for at least 5 mins ||
+
+For specific nginx entities separate policies can be setup to adopt individual load behavior for metrics like “response time”, “requests rate” or “accept rate”.
 
 <!--- ####Step 2b: How to Use for BAM for BlueCompute --->
 
