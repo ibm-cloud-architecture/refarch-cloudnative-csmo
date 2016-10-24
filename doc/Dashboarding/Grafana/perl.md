@@ -1,5 +1,5 @@
 #Prepare perl runtime
-Perl script [`grafana_collect.pl`](scripts/grafana_collect.pl) is an important part of dashboarding solution for BlueCompute.
+Perl script [`grafana_collect.pl`](scripts/grafana_collect.pl) is a data collection component of dashboarding solution for BlueCompute.
 It collects data from the following data sources:
 
 - Bluemix Clound Foundry API
@@ -9,7 +9,7 @@ It collects data from the following data sources:
 - pseudo-CMDB
 - BAM (planned)
 
-and store in the InfluxDB which is a primary data source for Grafana dashboard.
+and stores in the InfluxDB which is a primary data source for Grafana dashboard.
 Script is based on [Mojolicious](http://mojolicious.org) perl web framework and can be deployed on any operating system supported by perl and prerequisite perl modules and in Bluemix as a Cloud Foundry application. This document specify steps needed to deploy it and run on Centos 7 VM.    
 
 Use the following steps to install prerequisite system packages and perl modules required for data collection script.
