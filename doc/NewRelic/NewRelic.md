@@ -6,6 +6,9 @@ New Relic is a Software-as-a-Service (SaaS) offering, where agents are injected 
 
 Please be aware that the instrumented components will need an active internet connection either directly or via various Gateway services.
 
+NewRelic is operated though a web based GUI, login is https://rpm.newrelic.com.
+
+
 ###Step 1: Get a Newrelic account
 You will need to get a licence for NewRelic in order to manage the BlueCompute components accordingly.
 
