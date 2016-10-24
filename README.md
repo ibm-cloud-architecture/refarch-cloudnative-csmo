@@ -129,8 +129,17 @@ For detailed steps please continue with [How to setup NewRelic for BlueCompute](
 
 <!--- ####Step 2b: How to Use for BAM for BlueCompute --->
 
-###Step 3: How to use Netcool Operations Insight for BlueCompote
+###Step 3: How to use IBM Netcool Operations Insight for BlueCompute
 
+IBM Netcool Operations Insight accelerates the operations management lifecycle from problem detection to fix. It receives event from ressource monitoring solutions, enriches, correlates and escalates events based on rule automation.
+
+For detailed steps please continue with [How to setup NOI for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/NOI/NOI.md)
+
+###Step 4: How to use IBM Alert Notification System for BlueCompute
+(to be continued..)
+
+
+###Step 5: How to use Grafana Dashboarding for BlueCompute
 (to be continued..)
 
 
