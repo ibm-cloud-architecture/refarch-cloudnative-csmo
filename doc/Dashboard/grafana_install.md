@@ -46,7 +46,7 @@ directory and other variables.
 
 ### Logging
 
-By default Grafana will log to `/var/log/grafana`
+By default Grafana will log to `/var/log/grafana`.
 
 ### Database
 
@@ -60,12 +60,33 @@ The configuration file is located at `/etc/grafana/grafana.ini`.  Go the
 [Configuration](http://docs.grafana.org/installation/configuration) page for details on all
 those options.
 
-### Adding data sources
+### Configuring data sources
 
-- [InfluxDB]
+####InfluxDB
 
+InfluxDB Primary is the primary data source for the BlueCompute dashboard. It is installed by default in Grafana.
 
+**Configuration**
 
+Open the URL: `http://\<grafana_hostname>:3000/datasources` and enter the name of the data source, InfluxDB URL and database name. Select InfluxDB as Data Source type.
 
+![influxdb_datasource](images/influxdb_datasource.png) 
+
+Click Save & Test.
+
+####New Relic APM
+Detailed dashboards for BlueCompute components monitored by New Relic are rendered based on New Relic Data Source.
+
+**Installation**
+
+Download New Relic Data Source code from [GitHub project page](https://github.com/wevanscfi/grafana-newrelic-apm-datasource), and copy to the following subdirectory on Grafana server: `/var/lib/grafana/plugins/newrelic`
+
+**Configuration**
+
+Open the `URL: http://\<grafana_hostname>:3000/datasources` and enter the name of the data source (use the same name as the application name), New Relic API Key and application id. Select NewRelic as Data Source type.
+
+![newrelic_datasource](images/newrelic_datasource.png) 
+
+>Repeat it for every application monitored by New Relic.
 
 
