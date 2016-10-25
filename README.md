@@ -25,7 +25,7 @@ For this project we utilized a reference set of tools to showcase end-to-end inc
 
 **Event Correlation** - uses the [IBM Netcool Operations Insights](http://www-03.ibm.com/software/products/en/netcool-operations-insight) to fulfill the event management and correlation activities.
 
-**Alerting** - uses [IBM Alert Notification](http://www-03.ibm.com/software/products/en/ibm-alert-notification)
+**Notification** - uses [IBM Alert Notification](http://www-03.ibm.com/software/products/en/ibm-alert-notification)
 
 **Collaboration** - uses [Slack](https://slack.com)
 
@@ -131,7 +131,7 @@ Please be aware that the instrumented components will need an active internet ou
 
 For detailed steps please continue with [How to setup NewRelic for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/Monitoring/NewRelic/NewRelic.md)
 
-<!--- ####Step 2b: How to Use for BAM for BlueCompute --->
+<!--- ####Step 3b: How to Use for BAM for BlueCompute --->
 
 ### Step 4: Event Management
 
@@ -141,7 +141,7 @@ IBM Netcool Operations Insight accelerates the operations management lifecycle f
 
 For detailed steps please continue with [How to setup NOI for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/EventMgmt/NOI/NOI.md)
 
-###Step 5: Alerting
+###Step 5: Notification
 
 ####Step 5a: How to use IBM Alert Notification System for BlueCompute
 (to be continued..)
