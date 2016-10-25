@@ -1,5 +1,5 @@
 #Prepare perl runtime
-Perl script [`grafana_collect.pl`](scripts/grafana_collect.pl) is a data collection component of dashboarding solution for BlueCompute.
+Perl script [`grafana_collect.pl`](scripts/grafana_collect.pl) is an important part of dashboarding solution for BlueCompute.
 It collects data from the following data sources:
 
 - Bluemix Clound Foundry API
@@ -9,7 +9,7 @@ It collects data from the following data sources:
 - pseudo-CMDB
 - BAM (planned)
 
-and stores in the InfluxDB which is a primary data source for Grafana dashboard.
+and store in the InfluxDB which is a primary data source for Grafana dashboard.
 Script is based on [Mojolicious](http://mojolicious.org) perl web framework and can be deployed on any operating system supported by perl and prerequisite perl modules and in Bluemix as a Cloud Foundry application. This document specify steps needed to deploy it and run on Centos 7 VM.    
 
 Use the following steps to install prerequisite system packages and perl modules required for data collection script.
@@ -20,16 +20,16 @@ Use the following steps to install prerequisite system packages and perl modules
 
 **Install prerequisite perl modules**
 
-There are meny methods of installing perl modules - one of them is `cpanm`.
+There are meny methods of installing perl modules - we used `cpanm`.
 
-Install `cpanm` using command (_require internet connection_):
+Install `cpanm` _*require internet connection_. Using command:
 ```sh
 sudo curl -L http://cpanmin.us | perl - --sudo App::cpanminus
 ```
 
 Before installing perl modules, make sure that MySQL server or client is installed on the system. 
-In our environment, MySQL server with `cmdb` database was installed on the same Centos 7 VM as other dashboarding solution components: Grafana, InfluxDB and [`grafana_collect.pl`](scripts/grafana_collect.pl).
-Install the following perl modules using `cpanm` (_require internet connection_):
+In our environment, MySQL server with `cmdb` database was installed on the same Centos 7 VM as other dashboarding solution components: Grafana, InfluxDB and grafana_collect.pl.
+Install the following perl modules using `cpanm` (_require internet connection_)::
 
 - Mojolicious::Lite 
 - Data::Dumper 
