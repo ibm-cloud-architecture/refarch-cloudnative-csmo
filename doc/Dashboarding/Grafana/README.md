@@ -1,4 +1,26 @@
-[toc]
+
+- [Monitoring Dashboard solution for BlueCompute](#monitoring-dashboard-solution-for-bluecompute)
+- [Grafana](#grafana)
+	- [Installing Grafana on Centos 7](#installing-grafana-on-centos-7)
+	- [Grafana configuration](#grafana-configuration)
+		- [Configuring data sources](#configuring-data-sources)
+			- [InfluxDB](#influxdb)
+			- [New Relic APM](#new-relic-apm)
+- [InfluxDB](#influxdb)
+	- [Requirements](#requirements)
+	- [Installing InfluxDB on Centos 7](#installing-influxdb-on-centos-7)
+	- [Configure InfluxDB](#configure-influxdb)
+- [MySQL](#mysql)
+	- [Installing MySQL on Centos 7](#installing-mysql-on-centos-7)
+	- [Create a CMDB User and Database](#create-a-cmdb-user-and-database)
+	- [Create CMDB database schema and import example](#create-cmdb-database-schema-and-import-example)
+- [Data collection for Dashboard - grafana_collect.pl](#data-collection-for-dashboard-grafanacollectpl)
+	- [Install prerequisite Centos packages](#install-prerequisite-centos-packages)
+	- [Install prerequisite perl modules](#install-prerequisite-perl-modules)
+	- [Complete script configuration](#complete-script-configuration)
+	- [Configure perl script to start with the system](#configure-perl-script-to-start-with-the-system)
+	- [Schedule periodic API calls](#schedule-periodic-api-calls)
+
 # Monitoring Dashboard solution for BlueCompute
 text
 
@@ -6,7 +28,7 @@ Flowchart
 ![Flowchart](images/BlueCompute_dashboard_flowchart.png)
 
 # Grafana
-[Grafana](http://grafana.org) is one of the leading tools for querying and visualizing time series and metrics. In the CSMO project we used it to create dashboards for First Responder persona. 
+[Grafana](http://grafana.org) is one of the leading tools for querying and visualizing time series and metrics. In the CSMO project we used it to create dashboards for First Responder persona.
 Grafana features a variety of panels, including fully featured graph panels with rich visualization options. There is built in support for many of the time series data sources like InfluxDB or Graphite. We used InfluxDB - a time series database for metrics as a data source for Grafana and perl script to collect data from various APIs of BlueCompute CSMO infrastructure like New Relic, Bluemix, NOI or CMDB.
 
 ## Installing Grafana on Centos 7
@@ -60,7 +82,7 @@ By default Grafana will log to `/var/log/grafana`.
 
 The default configuration specifies a sqlite3 database located at
 `/var/lib/grafana/grafana.db`. Please backup this database before
-upgrades. 
+upgrades.
 
 **Grafana configuration file**
 
@@ -78,7 +100,7 @@ InfluxDB Primary is the primary data source for the BlueCompute dashboard. It is
 
 Open the URL: `http://\<grafana_hostname>:3000/datasources` and enter the name of the data source, InfluxDB URL and database name. Select InfluxDB as Data Source type.
 
-![influxdb_datasource](images/influxdb_datasource.png) 
+![influxdb_datasource](images/influxdb_datasource.png)
 
 Click Save & Test.
 
@@ -94,7 +116,7 @@ Download New Relic Data Source code from [GitHub project page](https://github.co
 
 Open the `URL: http://\<grafana_hostname>:3000/datasources` and enter the name of the data source (use the same name as the application name), New Relic API Key and application id. Select NewRelic as Data Source type.
 
-![newrelic_datasource](images/newrelic_datasource.png) 
+![newrelic_datasource](images/newrelic_datasource.png)
 
 >Repeat it for every application monitored by New Relic.
 
@@ -156,7 +178,7 @@ Once InfluxDB is up and running, connect to it using a web browser.
 
 To interact with your installation of InfluxDB (i.e. create users, databases, etc.) perform the following:
 
-1\.  SSH to your InfluxDB VM 
+1\.  SSH to your InfluxDB VM
 
 2\.  Change directory to `/usr/bin`
 
@@ -180,7 +202,7 @@ _Tip: Influx commands only return interactive messages on failure.  So after hit
 _For full details on Influx authentication:
 [https://docs.influxdata.com/influxdb/v0.11/administration/authentication_and_authorization/](https://docs.influxdata.com/influxdb/v0.11/administration/authentication_and_authorization/)_
 -->
-	
+
 **Create InfluxDB Database**
 
 Create a database called `service_status`.
@@ -189,7 +211,7 @@ Create a database called `service_status`.
 
 _Note: We will use this database in the next steps._
 
-#MySQL 
+#MySQL
 
 MySQL is a popular database management system used for web and server applications. CSMO solution for BlueCompute use MySQL as CMDB database, storing configuration information for CSMO solution components. Use the steps below to install MySQL on Centos 7.
 
@@ -265,17 +287,17 @@ Install `cpanm` using command (_require internet connection_):
 sudo curl -L http://cpanmin.us | perl - --sudo App::cpanminus
 ```
 
-Before installing perl modules, make sure that MySQL server or client is installed on the system. 
+Before installing perl modules, make sure that MySQL server or client is installed on the system.
 In our environment, MySQL server with `cmdb` database was installed on the same Centos 7 VM as other dashboarding solution components: Grafana, InfluxDB and [`grafana_collect.pl`](scripts/grafana_collect.pl).
 Install the following perl modules using `cpanm` (_require internet connection_):
 
-- Mojolicious::Lite 
-- Data::Dumper 
-- JSON 
-- Text::ASCIITable 
-- InfluxDB::LineProtocol 
-- Hijk 
-- HTML::Table 
+- Mojolicious::Lite
+- Data::Dumper
+- JSON
+- Text::ASCIITable
+- InfluxDB::LineProtocol
+- Hijk
+- HTML::Table
 - DBD::MySQL
 
 ```
@@ -356,7 +378,7 @@ Centos 7 uses `systemd` to initialize operating system components that must be s
 
 2. Enable new service to start with the system.
 
-```	
+```
 systemctl enable grafana_collect
 ```
 
@@ -449,5 +471,5 @@ time				app_name							highest_sev
 1477134023670493000	eureka-cluster-eu					5
 1477134023670522000	Python Application					0
 
-> exit 
+> exit
 ```
