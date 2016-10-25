@@ -138,9 +138,14 @@ For detailed steps please continue with [How to setup NOI for BlueCompute](https
 ###Step 4: How to use IBM Alert Notification System for BlueCompute
 (to be continued..)
 
-
-###Step 5: How to use Grafana Dashboarding for BlueCompute
+###Step 5: How to use Slack for BlueCompute
 (to be continued..)
+
+
+###Step 6: How to use Grafana Dashboarding for BlueCompute
+Grafana is one of the leading tools for querying and visualizing time series and metrics. In this project we used it to create dashboards for First Responder persona. Grafana features a variety of panels, including fully featured graph panels with rich visualization options. There is built in support for many of the time series data sources like InfluxDB or Graphite. We used InfluxDB - a time series database for metrics as a data source for Grafana and perl script to collect data from various APIs of BlueCompute CSMO infrastructure like NewRelic, Bluemix, NOI or CMDB. 
+
+For detailed steps please continue with [How to setup Grafana for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/doc/Dashboarding/Grafana/README.md)
 
 
 
