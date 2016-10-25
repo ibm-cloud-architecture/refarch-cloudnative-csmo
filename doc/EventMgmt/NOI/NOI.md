@@ -227,15 +227,15 @@ You need four Impact configuration file to achieve this:
 
 
 There are no specific steps, which are related to __BlueCompute__ hybrid application.
-Use the guide [Integrate Netcool Operations Insight into your Bluemix service management tool chain](https://developer.ibm.com/cloudarchitecture/docs/service-management/netcool-operations-insight) for a detailed description about defining this integration.
+Use the guide [Integrate Netcool Operations Insight into your Bluemix service management tool chain](https://developer.ibm.com/cloudarchitecture/docs/service-management/netcool-operations-insight) for a detailed description about defining this integration and using the configuration files.
 
 **Note**: the target documentation about the ANS integration is draft yet.
 
 ##Step 8: Forward events to collaboration tool
 
-Forwarding events to the collaboration tool Slack is done via the Netcool Impact policies. 
+Forwarding events to the collaboration tool Slack is done via Netcool Impact policies. 
 
-There are no specific steps, which are related to __BlueCompute__ hybrid application.e
+There are no specific steps, which are related to __BlueCompute__ hybrid application. 
 Use the guide [Integrate Netcool Operations Insight into your Bluemix service management tool chain](https://developer.ibm.com/cloudarchitecture/docs/service-management/netcool-operations-insight) for a detailed description about defining this integration.
 
  
