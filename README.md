@@ -25,9 +25,11 @@ For this project we utilized a reference set of tools to showcase end-to-end inc
 
 **Event Correlation** - uses the [IBM Netcool Operations Insights](http://www-03.ibm.com/software/products/en/netcool-operations-insight) to fulfill the event management and correlation activities.
 
-**Notification** - uses [IBM Alert Notification](http://www-03.ibm.com/software/products/en/ibm-alert-notification)
+**Alerting** - uses [IBM Alert Notification](http://www-03.ibm.com/software/products/en/ibm-alert-notification)
 
-**Dashboard** - uses open source [Grafana](http://grafana.org/)
+**Collaboration** - uses [Slack](https://slack.com)
+
+**Dashboard** - uses open source [Grafana](http://grafana.org)
 
 ### Understanding System Context Flows for the Tools in CSMO Toolchain Connecting BlueCompute Application
 
@@ -119,7 +121,9 @@ The cloud native Cloud Service Management and Operations [incident management wa
 
 The following sections only focusses on updates needed to instrument or use a hybrid application and will defer to the published how-to documents for the selected tools of the toolchain.
 
-####Step 2a: How to Use New Relic for BlueCompute
+###Step 3: Monitoring
+
+####Step 3a: How to Use New Relic for BlueCompute
 
 New Relic is a Software-as-a-Service (SaaS) offering, where agents are injected into Bluemix Runtimes,  IBM Bluemix Containers or SoftLayer Containers and automatically start reporting metrics back to the New Relic service over the internet.
 
@@ -129,20 +133,27 @@ For detailed steps please continue with [How to setup NewRelic for BlueCompute](
 
 <!--- ####Step 2b: How to Use for BAM for BlueCompute --->
 
-###Step 3: How to use IBM Netcool Operations Insight for BlueCompute
+### Step 4: Event Management
+
+#### Step 4a: How to use IBM Netcool Operations Insight for BlueCompute
 
 IBM Netcool Operations Insight accelerates the operations management lifecycle from problem detection to fix. It receives event from ressource monitoring solutions, enriches, correlates and escalates events based on rule automation.
 
 For detailed steps please continue with [How to setup NOI for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/EventMgmt/NOI/NOI.md)
 
-###Step 4: How to use IBM Alert Notification System for BlueCompute
+###Step 5: Alerting
+
+####Step 5a: How to use IBM Alert Notification System for BlueCompute
 (to be continued..)
 
-###Step 5: How to use Slack for BlueCompute
+### Step 6: Collaboration
+
+####Step 6a: How to use Slack for BlueCompute
 (to be continued..)
 
+### Step 7: Dashboarding
 
-###Step 6: How to use Grafana Dashboarding for BlueCompute
+#### Step 7a: How to use Grafana Dashboarding for BlueCompute
 Grafana is one of the leading tools for querying and visualizing time series and metrics. In this project we used it to create dashboards for First Responder persona. Grafana features a variety of panels, including fully featured graph panels with rich visualization options. There is built in support for many of the time series data sources like InfluxDB or Graphite. We used InfluxDB - a time series database for metrics as a data source for Grafana and perl script to collect data from various APIs of BlueCompute CSMO infrastructure like NewRelic, Bluemix, NOI or CMDB. 
 
 For detailed steps please continue with [How to setup Grafana for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/doc/Dashboarding/Grafana/README.md)
