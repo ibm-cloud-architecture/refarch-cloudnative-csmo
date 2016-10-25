@@ -21,10 +21,20 @@
 	- [Configure perl script to start with the system](#configure-perl-script-to-start-with-the-system)
 	- [Schedule periodic API calls](#schedule-periodic-api-calls)
 
-# Monitoring Dashboard solution for BlueCompute
-text
+# Monitoring Dashboard for BlueCompute
+Monitoring Dashboard is an entry point UI for First Responder persona who will react on alerts from Incident Management.
+It gives overall view on current status of all BlueCompute Hybrid application components. It allows also to contextually drill down to more detailed information about topology, performance metrics, log files and generated alerts.
 
-Flowchart
+Data collection component collects data from the following data sources:
+
+- Bluemix Clound Foundry API
+- Bluemix Container API
+- New Relic API
+- NOI (Omnibus ObjectServer) API
+- pseudo-CMDB
+- BAM (planned)
+
+Temporary Flowchart
 ![Flowchart](images/BlueCompute_dashboard_flowchart.png)
 
 # Grafana
