@@ -202,7 +202,7 @@ These fields have been enriched for each technical event coming from the monitor
 By this you can immediately see all affected services including the _BlueCompute_ application and sub-grouped by location. 
 In the following screenshot has two events with application components running on EU Bluemix region (bmx_eu-gb) and on Softlayer (SL).
 
-![BlueCompute event in NOI](NOI events for bluecompute.png?raw=true)  
+![BlueCompute event in NOI](NOI_events_for_bluecompute.png?raw=true)  
 
 
 With this view, you can also see which critical events have been forwarded to ANS, Slack and ICD trouble ticketing sytem. You can also see which Slack channel has been updated. Events may be forwarded automatically when they are first reported or manually by operators. 
@@ -210,7 +210,7 @@ For activities like forwarding events manually or automatically to a slack chann
 
 ##Step 7: Forward critical events to alert notification system
 
-Forwarding critical events to the IBM Alert Notification System (ANS) is done automatically Netcool Impact policies. Alerts will be send with ANS field `ApplicationsOrServices` set to value of NOI field `Service`.
+Forwarding critical events to the IBM Alert Notification System (ANS) is done _automatically_ with Netcool Impact policies. Alerts will be send with ANS field `ApplicationsOrServices` set to value of NOI field `Service`.
 
 
 You need four Impact configuration file to achieve this:
@@ -231,9 +231,29 @@ Use the guide [Integrate Netcool Operations Insight into your Bluemix service ma
 
 ##Step 8: Forward events to collaboration tool
 
-Forwarding events to the collaboration tool Slack is done via Netcool Impact policies. 
+Forwarding events to the collaboration tool Slack is done via Netcool Impact policies based on the event filter `severity >= critical`. Additionally an user can trigger a send-request via the NOI eventviewer context menu. 
 
-There are no specific steps, which are related to _BlueCompute_ hybrid application. 
+
+There are no specific steps, which are related to _BlueCompute_ hybrid application for integrating with Slack.
 Use the guide [Integrate Netcool Operations Insight into your Bluemix service management tool chain](https://developer.ibm.com/cloudarchitecture/docs/service-management/netcool-operations-insight) for a detailed description about defining this integration.
 
+### As a First Responder forward manually an event to a specific Slack channel:
+
+1. View the alert in the eventviewer
+
+2. Right-click on the event to open the context menue.
+
+3. Select the `Slack->Send to Specific Channel` entry 
+
+    ![SendToSpecificChannel](NOI_send_to_specific_channel.png?raw=true) 
+
+4. Enter the channel name, which should receive the BlueCompute event for further collaboration and click `Run` button. Example: `cloud-operations-mon`.
+
+    ![SelectChannelName](NOI_select_target_channel_name.png?raw=true) 
+
+    You can decide if you create a channel for all _BlueCompute_ events or for all critical monitoring events depending on the way you prefer to collaborate on those incidents.
+
+5. Select the `Slack->InviteToSlack` to invite persons to collaborate
+
+6. Enter the name of the slack user into the prompt and click `Run` button to invite.
  
