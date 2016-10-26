@@ -223,11 +223,11 @@ Create a database called `service_status`.
 
 _Note: We will use this database in the next steps._
 
-#MySQL
+# MySQL
 
 MySQL is a popular database management system used for web and server applications. CSMO solution for BlueCompute use MySQL as CMDB database, storing configuration information for CSMO solution components. Use the steps below to install MySQL on Centos 7.
 
-##Installing MySQL on Centos 7
+## Installing MySQL on Centos 7
 
 	sudo yum update
 	yum install mysql-server
@@ -268,7 +268,7 @@ Use provided sql [script](scripts/cmdb.sql) to create table and import example d
 
 When prompted, enter the `cmdb` user password you assigned when the `cmdb` user was created.
 
-#PHP
+# PHP
 
 PHP is an open source web scripting language that is widely used to build dynamic webpages. We will need it for UI that will allow to view, create, update and delete records in the MySQL CMDB database.
 
@@ -280,7 +280,7 @@ To install PHP on dashboard server, open terminal and type in this command:
 
 Once you answer yes to the PHP prompt, PHP will be installed.
 
-##CMDB UI configuration
+## CMDB UI configuration
 
 1. Download latest release of the prerequisite php application [phpMyEdit](http://opensource.platon.org/projects/release_list_page.php?project_id=5)
 2. Extract it in httpd server root directory (/var/www/html/phpmyedit by default on Centos 7), so the following path should be visible: `/var/www/html/phpmyeditphpMyEdit.class.php`.
