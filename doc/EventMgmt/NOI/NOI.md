@@ -239,6 +239,8 @@ Use the guide [Integrate Netcool Operations Insight into your Bluemix service ma
 
 ### As a First Responder forward manually an event to a specific Slack channel:
 
+In this case the FirstResponder uses an _existing_ channel which is reused for multiple purposes.
+
 1. View the alert in the eventviewer
 
 2. Right-click on the event to open the context menue.
@@ -253,7 +255,22 @@ Use the guide [Integrate Netcool Operations Insight into your Bluemix service ma
 
     You can decide if you create a channel for all _BlueCompute_ events or for all critical monitoring events depending on the way you prefer to collaborate on those incidents.
 
-5. Select the `Slack->InviteToSlack` to invite persons to collaborate
 
-6. Enter the name of the slack user into the prompt and click `Run` button to invite.
+### As a First Responder forward manually an event to an automatic Slack channel:
+
+In this case the FirstResponder creates automatically a _new_ channel for an individual event.
+
+1. View the alert in the eventviewer
+
+2. Right-click on the event to open the context menue.
+
+3. Select the `Slack->Send to Automatic Channel` entry 
+
+   This will create a new channel with channel name `inc_{serial}_{node}` replaced with the values of the event fields `Serial` and `Node`. Example: `inc_8635482_bluecompute-web-app`
+    
+    ![SelectChannelName](NOI_slack_channel_created.png?raw=true) 
+
+5. Select the `Slack->InviteToSlack` on the same event to invite persons to collaborate in the new channel.
+
+6. Enter the name of the slack user (yet internal id) into the prompt and click `Run` button to invite.
  
