@@ -270,9 +270,10 @@ When prompted, enter the `cmdb` user password you assigned when the `cmdb` user 
 
 #PHP
 
-PHP is an open source web scripting language that is widely used to build dynamic webpages. We will need it for UI that will allow to view, create, update and delete CMDB records in MySQL database.
+PHP is an open source web scripting language that is widely used to build dynamic webpages. We will need it for UI that will allow to view, create, update and delete records in the MySQL CMDB database.
 
-Before php installation make sure that httpd and mysql-server packages are installed.
+>Before php installation make sure that httpd and mysql-server packages are installed.
+
 To install PHP on dashboard server, open terminal and type in this command:
 
 	sudo yum install php php-mysql
