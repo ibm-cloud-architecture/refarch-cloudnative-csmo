@@ -506,4 +506,4 @@ time				app_name							highest_sev
 > exit
 ```
 
-![img](images/Grafana_first_responder_big.png)
+![img](images/Grafana_first_responder_big_desc.png)
