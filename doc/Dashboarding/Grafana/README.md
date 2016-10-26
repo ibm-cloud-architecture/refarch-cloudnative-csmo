@@ -262,6 +262,8 @@ Once you answer yes to the PHP prompt, PHP will be installed.
 4. Verify that you can access CMDB URL:
 `http://<dashboard_server_ip>/cmdb.php`
 
+![cmdb_ui](images/cmdb_ui1.png)
+
 #Data collection for Dashboard - grafana_collect.pl
 
 Perl script [`grafana_collect.pl`](scripts/grafana_collect.pl) is a data collection component of dashboarding solution for BlueCompute.
@@ -568,6 +570,16 @@ Dashboard includes several context links to more detailed information about spec
 
 ![img](images/Grafana_first_responder_big_desc.png)
 
-##First Responder - application details dashboard
+##First Responder - BlueCompute application details dashboard
+
+BlueCompute application details dashboard shows detailed graphs for BleuCompute components monitored. All metrics in this dashboard are collected using [New Relic Data Source](#new-relic-apm) that collects data directly from New Relic API.
+
+ - Web Transactions Total Time
+ - Average Response Time per minute for HttpDispatcher and WebFrontend/QueueTime
+ - Memory Used by the monitored application
+ - Error Rate
+ - Response Time for HttpDispatcher compared to Request volume
+ - Response Time for WebFrontend/QueueTime compared to Request volume
+
 
 ![img](images/Grafana_first_responder_detail_big.png)
