@@ -102,37 +102,6 @@ The configuration file is located at `/etc/grafana/grafana.ini`.  Go the
 [Configuration](http://docs.grafana.org/installation/configuration) page for details on all
 those options.
 
-### Configuring data sources
-
-####InfluxDB
-
-InfluxDB Primary is the primary data source for the BlueCompute dashboard. It is installed by default in Grafana.
-
-**Configuration**
-
-Open the URL: `http://\<grafana_hostname>:3000/datasources` and enter the name of the data source, InfluxDB URL and database name. Select InfluxDB as Data Source type.
-
-![influxdb_datasource](images/influxdb_datasource.png)
-
-Click Save & Test.
-
-####New Relic APM
-
-Detailed dashboards for BlueCompute components monitored by New Relic are rendered based on New Relic Data Source.
-
-**Installation**
-
-Download New Relic Data Source code from [GitHub project page](https://github.com/wevanscfi/grafana-newrelic-apm-datasource), and copy to the following subdirectory on Grafana server: `/var/lib/grafana/plugins/newrelic`
-
-**Configuration**
-
-Open the `URL: http://\<grafana_hostname>:3000/datasources` and enter the name of the data source (use the same name as the application name), New Relic API Key and application id. Select NewRelic as Data Source type.
-
-![newrelic_datasource](images/newrelic_datasource.png)
-
->Repeat it for every application monitored by New Relic.
-
-
 
 #InfluxDB
 [InfluxDB](https://www.influxdata.com/time-series-platform/influxdb/) is an open-source time series database developed by InfluxData as part of their time series platform. It is written in Go and optimized for fast, high-availability storage and retrieval of time series data in fields such as operations monitoring, application metrics, Internet of Things sensor data, and real-time analytics. Here InfluxDB is used as storage for metrics collected by perl runtime and primary data source for Grafana dashboard.
@@ -505,5 +474,95 @@ time				app_name							highest_sev
 
 > exit
 ```
+# Dashboard configuration
+After our data collection layer is up and runnig and data is coming to InfluxDB, we can start with Grafana dashboard configuration.
+
+## Configuring data sources
+
+###InfluxDB
+
+InfluxDB Primary is the primary data source for the BlueCompute dashboard. It is installed by default in Grafana.
+
+**Configuration**
+
+Open the URL: `http://\<grafana_hostname>:3000/datasources` in the browser and enter the name of the data source, InfluxDB URL and database name. Select InfluxDB as Data Source type.
+
+![influxdb_datasource](images/influxdb_datasource.png)
+
+Click Save & Test.
+
+###New Relic APM
+
+Detailed dashboards for BlueCompute components monitored by New Relic are rendered based on New Relic Data Source.
+
+**Installation**
+
+Download New Relic Data Source code from [GitHub project page](https://github.com/wevanscfi/grafana-newrelic-apm-datasource), and copy to the following subdirectory on Grafana server: `/var/lib/grafana/plugins/newrelic`
+
+**Configuration**
+
+Open the `URL: http://\<grafana_hostname>:3000/datasources` and enter the name of the data source (use the same name as the application name), New Relic API Key and application id. Select NewRelic as Data Source type.
+
+![newrelic_datasource](images/newrelic_datasource.png)
+
+>Repeat it for every application monitored by New Relic.
+
+## Import dashboards
+The following dashboards were developed by CSMO for BlueCompute:
+
+- [1 - BlueCompute Application Summary - First Responder](scripts/1 - BlueCompute Application Summary - First Responder.json)
+- [2 - BlueCompute Application Details](scripts/2 - BlueCompute Application Details.json)
+
+Click on the links above or clone this git repository to access dashboard definition json files.
+Dashboad json files can be imported using Grafana UI: click on the top-left menu and select Dashboards -> Import.
+
+![grafana_import](images/grafana_import.png)
+
+# CSMO dashboard for BlueCompute
+
+##First Responder dashboard
+First responder dashboard URL: 
+
+`http://<dashboard_server_ip>:3000/dashboard/db/1-bluecompute-application-summary-first-responder`
+
+Dashboard is divided into the following sections:
+- Key metrics (work in progress) for BlueCompute Hybrid Application.
+- Bluemix Cloud Foundry Applications
+- Bluemix Container Applications
+- Bluemix Containers
+- Nginx Load Balancer (work in progress)
+- IBM SoftLayer Databases
+
+Grafana singlestat panels:
+
+- Region (source: CMDB).
+- Language (source: New Relic API).
+- NR Status (application status in New Relic, source: New Relic API).
+- NOI Severity (highest severity for NOI alert for specific application, source: Omnibus OnjectServer API).
+- BMX status (status of the application or container, source Bluemix Cloud Foundry API or Bluemix IBM container API). 
+- BMX Instances (number of application instances, source: Bluemix Cloud Foundry API).
+- Response Time, Error Rate, APDEX score, APDEX target (source: New Relic API).
+- IC Type (IBM Container type: single container or container group, source: Bluemix IBM container API).
+- Instances (number of container instances within container group, source: Bluemix IBM container API).
+- Reads/s (MySQL Reads per second, source: New Relic API).
+- Writes/s (MySQL Writes per second, source: New Relic API).
+- Connections (MySQL number of connections, source: New Relic API).
+
+Dashboard includes several context links to more detailed information about specific solution components:
+
+1. Link to Bluemix Logmet service. It opens Logmet Kibana4 dashboard with all log records from BlueCompute collected by Logmet service.
+2. Link to New Relic Service Map for BlueCompute. It shows topology diagram for BlueCompute components monitored by New Relic.
+3. Click on the "NR Status" panel moves to New Relic console with list of monitored applications and more detailed information about application performance.
+4. Click on the "NOI Severity" panel moves to NOI Event Viewer console with the list of alerts generated for this application.
+5. Link to more detailed Grafana dashboard "BlueCompute Application Details" for specific application only.
+6. Link to Bluemix Logmet service. It opens Logmet Kibana4 dashboard with log records from specific application only.
+7. Link to more detailed Grafana dashboard "BlueCompute Application Details" for specific application only.
+8. Link to Logmet Grafana dashboard with metrics like CPU and Memory for specific container or container group.
+9. Link to New Relic console with list of monitored applications and more detailed information about monitored components.
+
 
 ![img](images/Grafana_first_responder_big_desc.png)
+
+##First Responder - application details dashboard
+
+![img](images/Grafana_first_responder_detail_big.png)

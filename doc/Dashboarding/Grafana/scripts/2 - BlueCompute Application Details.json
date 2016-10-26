@@ -1,0 +1,695 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_BLUECOMPUTE-WEB-APP",
+      "label": "bluecompute-web-app",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "newrelic",
+      "pluginName": "NewRelic"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "3.1.1"
+    },
+    {
+      "type": "datasource",
+      "id": "newrelic",
+      "name": "NewRelic",
+      "version": "1.0.0"
+    }
+  ],
+  "id": null,
+  "title": "2 - BlueCompute Application Details",
+  "tags": [],
+  "style": "dark",
+  "timezone": "browser",
+  "editable": true,
+  "hideControls": true,
+  "sharedCrosshair": false,
+  "rows": [
+    {
+      "collapse": false,
+      "editable": true,
+      "height": "250px",
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_BLUECOMPUTE-WEB-APP}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 11,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "WebTransactionTotalTime",
+              "refId": "A",
+              "target": "WebTransactionTotalTime",
+              "type": "applications",
+              "value": "average_response_time"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Web Transaction Total Time",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_BLUECOMPUTE-WEB-APP}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 9,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": null,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 12,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "HttpDispatcher",
+              "app_id": "31939678",
+              "refId": "A",
+              "target": "HttpDispatcher",
+              "type": "applications",
+              "value": "average_response_time"
+            },
+            {
+              "alias": "WebFrontend/QueueTime",
+              "refId": "B",
+              "target": "WebFrontend/QueueTime",
+              "type": "applications",
+              "value": "average_response_time"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Avg Response time per minute for $NRApp",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_BLUECOMPUTE-WEB-APP}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "height": "200px",
+          "id": 3,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "Memory Used",
+              "app_id": "23409742",
+              "refId": "A",
+              "target": "Memory/Physical",
+              "type": "applications",
+              "value": "used_bytes_by_host"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Memory/Physical",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "bytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_BLUECOMPUTE-WEB-APP}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "height": "200px",
+          "id": 10,
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "refId": "A",
+              "target": "Errors/all",
+              "type": "applications",
+              "value": "errors_per_minute"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Errors per minute",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": 0,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_BLUECOMPUTE-WEB-APP}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
+          },
+          "id": 2,
+          "interval": "1m",
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 100,
+            "total": false,
+            "values": true
+          },
+          "lines": false,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "calls_per_minute",
+              "bars": true,
+              "color": "#447EBC",
+              "yaxis": 2
+            },
+            {
+              "alias": "average_response_time",
+              "bars": false,
+              "fill": 4,
+              "lines": true,
+              "yaxis": 1
+            }
+          ],
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "calls_per_minute",
+              "app_id": "31939678",
+              "refId": "A",
+              "target": "HttpDispatcher",
+              "type": "applications",
+              "value": "calls_per_minute"
+            },
+            {
+              "alias": "average_response_time",
+              "app_id": "31939678",
+              "hide": false,
+              "refId": "B",
+              "target": "HttpDispatcher",
+              "type": "applications",
+              "value": "average_response_time"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "HttpDispatcher - response time and request volume",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": "Response Time",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": "Calls per Minute",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "title": "New row"
+    },
+    {
+      "collapse": false,
+      "editable": true,
+      "height": "200px",
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": true,
+          "datasource": "${DS_BLUECOMPUTE-WEB-APP}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 5,
+          "interval": "1m",
+          "isNew": true,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 100,
+            "total": false,
+            "values": true
+          },
+          "lines": false,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "calls_per_minute",
+              "bars": true,
+              "color": "#447EBC",
+              "yaxis": 2
+            },
+            {
+              "alias": "average_response_time",
+              "bars": false,
+              "fill": 4,
+              "lines": true,
+              "yaxis": 1
+            }
+          ],
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "calls_per_minute",
+              "app_id": "31939678",
+              "refId": "A",
+              "target": "WebFrontend/QueueTime",
+              "type": "applications",
+              "value": "calls_per_minute"
+            },
+            {
+              "alias": "average_response_time",
+              "app_id": "31939678",
+              "hide": false,
+              "refId": "B",
+              "target": "WebFrontend/QueueTime",
+              "type": "applications",
+              "value": "average_response_time"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "WebFrontend/QueueTime - response time and request volume",
+          "tooltip": {
+            "msResolution": true,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": "Response Time",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": "Calls per Minute",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "title": "New row"
+    }
+  ],
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "bluecompute-web-app",
+          "value": "bluecompute-web-app"
+        },
+        "datasource": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Application (New Relic)",
+        "multi": false,
+        "name": "NRApp",
+        "options": [
+          {
+            "text": "bluecompute-web-app",
+            "value": "bluecompute-web-app",
+            "selected": true
+          },
+          {
+            "text": "eureka-cluster-eu",
+            "value": "eureka-cluster-eu",
+            "selected": false
+          },
+          {
+            "text": "inventory-bff-app-dev",
+            "value": "inventory-bff-app-dev",
+            "selected": false
+          },
+          {
+            "text": "micro-inventory-cloudnative-qa",
+            "value": "micro-inventory-cloudnative-qa",
+            "selected": false
+          },
+          {
+            "text": "micro-socialreview-cloudnative-qa",
+            "value": "micro-socialreview-cloudnative-qa",
+            "selected": false
+          },
+          {
+            "text": "microservice-inventory-eu",
+            "value": "microservice-inventory-eu",
+            "selected": false
+          },
+          {
+            "text": "socialreview-bff-app",
+            "value": "socialreview-bff-app",
+            "selected": false
+          },
+          {
+            "text": "zuul-cluster-eu",
+            "value": "zuul-cluster-eu",
+            "selected": false
+          }
+        ],
+        "query": "newrelic",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      }
+    ]
+  },
+  "annotations": {
+    "list": []
+  },
+  "refresh": false,
+  "schemaVersion": 12,
+  "version": 29,
+  "links": [],
+  "gnetId": null
+}
