@@ -26,7 +26,7 @@
 	- [Import dashboards](#import-dashboards)
 - [CSMO dashboard for BlueCompute](#csmo-dashboard-for-bluecompute)
 	- [First Responder dashboard](#first-responder-dashboard)
-	- [First Responder - application details dashboard](#first-responder-application-details-dashboard)
+	- [First Responder - application details dashboard](#first-responder---bluecompute-application-details-dashboard)
 
 # Monitoring Dashboard for BlueCompute
 Monitoring Dashboard is an entry point UI for First Responder persona who will react on alerts from Incident Management.
@@ -571,7 +571,7 @@ Dashboard includes several context links to more detailed information about spec
 
 ##First Responder - BlueCompute application details dashboard
 
-BlueCompute application details dashboard shows detailed graphs for BleuCompute components monitored. All metrics in this dashboard are collected using [New Relic Data Source](#first-responder---bluecompute-application-details-dashboard) that collects data directly from New Relic API.
+BlueCompute application details dashboard shows detailed graphs for BleuCompute components monitored. All metrics in this dashboard are collected using [New Relic Data Source](#new-relic-apm) that collects data directly from New Relic API.
 
  - Web Transactions Total Time
  - Average Response Time per minute for HttpDispatcher and WebFrontend/QueueTime
