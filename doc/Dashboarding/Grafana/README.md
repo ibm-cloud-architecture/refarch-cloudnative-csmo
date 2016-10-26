@@ -14,6 +14,8 @@
 	- [Installing MySQL on Centos 7](#installing-mysql-on-centos-7)
 	- [Create a CMDB User and Database](#create-a-cmdb-user-and-database)
 	- [Create CMDB database schema and import example](#create-cmdb-database-schema-and-import-example)
+- [PHP](#php)
+	- [CMDB UI configuration](#cmdb-ui-configuration)
 - [Data collection for Dashboard - grafana_collect.pl](#data-collection-for-dashboard-grafanacollectpl)
 	- [Install prerequisite Centos packages](#install-prerequisite-centos-packages)
 	- [Install prerequisite perl modules](#install-prerequisite-perl-modules)
