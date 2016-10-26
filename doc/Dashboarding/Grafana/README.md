@@ -41,7 +41,6 @@ Data collection component collects data from the following data sources:
 - pseudo-CMDB
 - BAM (planned)
 
-Temporary Flowchart
 ![Flowchart](images/BlueCompute_dashboard_flowchart.png)
 
 # Grafana
@@ -572,7 +571,7 @@ Dashboard includes several context links to more detailed information about spec
 
 ##First Responder - BlueCompute application details dashboard
 
-BlueCompute application details dashboard shows detailed graphs for BleuCompute components monitored. All metrics in this dashboard are collected using [New Relic Data Source](#new-relic-apm) that collects data directly from New Relic API.
+BlueCompute application details dashboard shows detailed graphs for BleuCompute components monitored. All metrics in this dashboard are collected using [New Relic Data Source](#first-responder---bluecompute-application-details-dashboard) that collects data directly from New Relic API.
 
  - Web Transactions Total Time
  - Average Response Time per minute for HttpDispatcher and WebFrontend/QueueTime
