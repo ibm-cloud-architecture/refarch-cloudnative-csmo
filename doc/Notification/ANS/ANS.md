@@ -1,7 +1,5 @@
 # IBM Alert Notification System notification for Hybrid application
 
-(Draft: In Progress....)
-
 It is IBM Bluemix®	service environment that instantly	delivers notifications	of problem occurrences in your	Bluemix	environment	using automated email, Short Message Service (SMS), and voice	messaging.
 IBM Alert Notification System allows you to 
 
@@ -82,7 +80,7 @@ The policy can rely on the settings which have been prepared during the posting 
 
 4. Click on the "Acknowledge this alert" icon to change the state of the alert from `Notified` to `Acknowledged`.
 
-5. Click on the "View alert details" icon to see the details about the event, including the setting for `Application or Service Name`
+5. Click on the "View alert details" icon to see the details about the event, including the setting for `Application or Services`
 
 ![View alert details](ANS_alert_details.png?raw=true) 
 

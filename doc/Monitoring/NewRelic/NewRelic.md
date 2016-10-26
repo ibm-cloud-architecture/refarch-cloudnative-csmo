@@ -10,18 +10,18 @@ NewRelic is operated though a web based GUI, login is https://rpm.newrelic.com.
 
 
 ###Step 1: Get a Newrelic account
-You will need to get a licence for NewRelic in order to manage the BlueCompute components accordingly.
+You will need to get a licence for NewRelic in order to manage the _BlueCompute_ components accordingly.
 
 See [How to NewRelic on Bluemix](https://developer.ibm.com/cloudarchitecture/docs/service-management/new-relic-bluemix-application)
 
 ###Step 2: BlueCompute Instrumentation
-NewRelic code instrumentation has been added to the supported BlueCompute components which includes:
+NewRelic code instrumentation has been added to the supported _BlueCompute_ components which includes:
   + node.js,
   + java microservices
   + nginx web server
   + mysql sqlnodes 
 
-The covered environment for the BlueCompute application is described in the following table:
+The covered environment for the _BlueCompute_ application is described in the following table:
 
 | Component                     | NewRelic agent |
 |:------------------------------|----------------|
@@ -56,7 +56,7 @@ The agents are pre-installed with the GitHub code and will be activated during a
     
 + Bluemix Container application
     
-    For the Bluemix based containers running BlueCompute components the license key has to be added to the docker container during container start or creation of the bluemix   container group with the -e NEW_RELIC_LICENSE_KEY=your-license-key option, where “your-license-key” is your Newrelic license key.
+    For the Bluemix based containers running _BlueCompute_ components the license key has to be added to the docker container during container start or creation of the bluemix   container group with the -e NEW_RELIC_LICENSE_KEY=your-license-key option, where “your-license-key” is your Newrelic license key.
     
     Additionally you have to define the application name for the NewRelic agent with the option -e CG_NAME=your-appname where “your-appname” is your  desried name for the application shown and used inside NewRelic. If you want to deploy the application to different regions or spaces, adding a flag to the name will allow to manage the applications more easily. If the same name is used, Newrelic will handle the application instances as a single application.
 
@@ -109,7 +109,7 @@ The agents are pre-installed with the GitHub code and will be activated during a
 
 + SoftLayer Container application
 
-    For the softlayer based containers running BlueCompute components the license key has to be added to the environment with a variable
+    For the softlayer based containers running _BlueCompute_ components the license key has to be added to the environment with a variable
 
     `export NEW_RELIC_LICENSE_KEY=your-license-key`
 
@@ -152,7 +152,7 @@ This channel can be used within the alerting policies which are described later 
 
 
 ### Step 4: Define key transactions
-In order to defined key transaction which are most important for you in the BlueCopute environment, you can specify those from the list of discovered transactions.
+In order to defined key transaction which are most important for you in the _BlueCompute_ environment, you can specify those from the list of discovered transactions.
 To create a key transaction follow the instructions on [https://docs.newrelic.com/docs/apm/transactions/key-transactions/creating-key-transactions](https://docs.newrelic.com/docs/apm/transactions/key-transactions/creating-key-transactions).
 
 Key transactions can be defined for NewRelic supported application types. We have defined one key transaction for each supported node.js and java microservice application of the 
@@ -179,7 +179,7 @@ Here you will create policies for the various component types. If you prefer you
 - java instances
 - mysql instance
 
-Some recommended violation conditions for the policies are described in the following chapters. These might need to be adapted depending on the different workload configuration of the BlueCompute instance.
+Some recommended violation conditions for the policies are described in the following chapters. These might need to be adapted depending on the different workload configuration of the _BlueCompute_ instance.
 
 
 
@@ -313,16 +313,16 @@ By means of the new alert policies you can create also policies for plugins like
 10. Select "by incident and entity" to get an event for every violation.
 
 ### Step 6: Configure Service MAP
-For BlueCompute you can create a service map containing all the instrumented components.
+For _BlueCompute_ you can create a service map containing all the instrumented components.
 See details see [https://docs.newrelic.com/docs/data-analysis/service-maps/get-started/customize-your-service-maps](https://docs.newrelic.com/docs/data-analysis/service-maps/get-started/customize-your-service-maps	)
 	
-For a BlueCompute service map do:
+For a _BlueCompute_ service map do:
 
 - Login into NewRelic UI
 - Select “APM” and “Service maps” and “Map List”  from the menu bars
 - Select “Create new map”
     1. Select the “application” button and
-        - Select the application components from BlueCompute and add them to the map by clicking the “+” sign
+        - Select the application components from _BlueCompute_ and add them to the map by clicking the “+” sign
             + eureka-cluster
             + zuul-cluster
             + inventory-bff-app

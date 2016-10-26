@@ -1,7 +1,5 @@
 # Netcool Operations Insight event management for Hybrid application
 
-(Draft: In Progress....)
-
 IBM Netcool Operations Insight accelerates the operations management lifecycle from problem detection to fix. It receives events from ressource monitoring solutions, enriches, correlates and escalates those based on automation rules.
 
 ![System Context Flow](NOI system context flow.png?raw=true)  
@@ -79,7 +77,7 @@ your local standards for rules files.
 
 
 ##Step 3: Install and Setup enrichment database 
-Incoming events will be enriched with information about their business service and location to allow an easier view on business services likes __BlueCompute__ and the source of the hybrid application. This additional information is important as other tools of the tool chain will need this kind of information for better aligned operation. For example the Runbook automation will need the information about where the component is hosted to use the correct execution route for running the runbook.
+Incoming events will be enriched with information about their business service and location to allow an easier view on business services likes _BlueCompute_ and the source of the hybrid application. This additional information is important as other tools of the tool chain will need this kind of information for better aligned operation. For example the Runbook automation will need the information about where the component is hosted to use the correct execution route for running the runbook.
 
 The enrichment data source has been prepared as a MySQL database, which will be accessed by NOI. Incoming events are retrieved, enriched with the information from the database before escalation and other automations will be triggered.
 
@@ -94,7 +92,7 @@ The database can be exchanged by any other existing configuration data source wh
 
     For detailed steps please continue with [Installing PHP](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/Dashboarding/Grafana#php)
     
-3. Add application instances for your __BlueCompute__ environment into the database
+3. Add application instances for your _BlueCompute_ environment into the database
 
     + Either add them manually via the PHP UI for MySQL:
 
@@ -127,7 +125,7 @@ The Impact component of NOI will use this enrichment database to enrich incoming
 
 + Impact DataSource `BMXCMDB` accessing the MySQL database 
 
-+ Impact Policy `EnrichEventWithBMXCMDB` to find a match in the database for the node name of an incoming event and updating the fields __Service__,__Location__,__ScopeId__ and __CASE_Client__ accordingly.
++ Impact Policy `EnrichEventWithBMXCMDB` to find a match in the database for the node name of an incoming event and updating the fields _Service_,_Location_,_ScopeId_ and _CASE_Client_ accordingly.
 
 + Impact Service `CASE_Omnibus_BMX_Enrich` which runs with Netcool Omnibus start, triggering the policy above for each newly reveiced event having set `CASE_BMX_CMDB=1`. For New Relic events this will be set on the probe level when parsing the incoming incident event.
 
@@ -162,9 +160,9 @@ The configuration can be imported into your Netcool Impact instance.
     + Database Failure Policy=Disable Backup
 
 
-##Step 5: Create View and Filter for __BlueCompute__
+##Step 5: Create View and Filter for _BlueCompute_
 
-When the events are enriched with the data from the enrichment database, event viewer __views__ and __filters__ can be defined to use the enrichment information accordingly.
+When the events are enriched with the data from the enrichment database, event viewer _views_ and _filters_ can be defined to use the enrichment information accordingly.
 
 
  
@@ -187,13 +185,13 @@ The configuration can be imported into your NOI DASH instance. For additional de
     This will create a WebGui view `CASE_Integrations` and a filter `BlueCompute`.
    
 
-##Step 6: View application events for __BlueCompute__
+##Step 6: View application events for _BlueCompute_
 
 Upon login into your DASH instance, you access the list of active events through the "Incident -> Event Viewer" menu.
 
 The list of events displayed is controlled by a filter. You may, for example, wish to see only events related to a specific application or you may wish to see all the events which occurred in the last 10 minutes.
 
-+ The imported filter "BlueCompute" displays all events for the __BlueCompute__ business service based on the event field setting "Service=BlueCompute".
++ The imported filter "BlueCompute" displays all events for the _BlueCompute_ business service based on the event field setting "Service=BlueCompute".
  
 The format of the list is controlled by the View. 
 
@@ -201,7 +199,7 @@ The format of the list is controlled by the View.
     
 These fields have been enriched for each technical event coming from the monitoring sources based on a configuration data source.
 
-By this you can immediately see all affected services including the __BlueCompute__ application and sub-grouped by location. 
+By this you can immediately see all affected services including the _BlueCompute_ application and sub-grouped by location. 
 In the following screenshot has two events with application components running on EU Bluemix region (bmx_eu-gb) and on Softlayer (SL).
 
 ![BlueCompute event in NOI](NOI events for bluecompute.png?raw=true)  
@@ -226,7 +224,7 @@ You need four Impact configuration file to achieve this:
 + Impact Service `AlertNotificationService` which runs with Netcool Omnibus start, triggering the policies above for each newly received or changed events. 
 
 
-There are no specific steps, which are related to __BlueCompute__ hybrid application.
+There are no specific steps, which are related to _BlueCompute_ hybrid application.
 Use the guide [Integrate Netcool Operations Insight into your Bluemix service management tool chain](https://developer.ibm.com/cloudarchitecture/docs/service-management/netcool-operations-insight) for a detailed description about defining this integration and using the configuration files.
 
 **Note**: the target documentation about the ANS integration is draft yet.
@@ -235,7 +233,7 @@ Use the guide [Integrate Netcool Operations Insight into your Bluemix service ma
 
 Forwarding events to the collaboration tool Slack is done via Netcool Impact policies. 
 
-There are no specific steps, which are related to __BlueCompute__ hybrid application. 
+There are no specific steps, which are related to _BlueCompute_ hybrid application. 
 Use the guide [Integrate Netcool Operations Insight into your Bluemix service management tool chain](https://developer.ibm.com/cloudarchitecture/docs/service-management/netcool-operations-insight) for a detailed description about defining this integration.
 
  
