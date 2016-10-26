@@ -57,7 +57,7 @@ The policy can rely on the settings which have been prepared during the posting 
     + Operator  = Contains
     + Value     = BlueCompute
     
-    ![Add rule](ANS_alert_policy_rule_for_BlueCompute.png =250)  
+    ![Add rule](ANS_alert_policy_rule_for_BlueCompute.png?raw=true)  
 3. Add another rule, which will trigger only on critical alerts by selecting the Pre-defined rule `Severity of alerts is critical or above`
 4. Assure you select `Match all rules` to get both rules validated together
 5. Add the recipient users and/or groups which should be notified based on the schedules
@@ -67,7 +67,9 @@ The policy can rely on the settings which have been prepared during the posting 
 
 ##Step 4: View and manage Alerts for BlueCompute
 
-1. Open the ANS AlertViewer directly on https://{servicename}.mybluemix.net/index?subscriptionId={subscription-id}&dashboard=ans.dashboard.alertviewer
+1. Open the ANS AlertViewer directly on 
+
+    https://{servicename}.mybluemix.net/index?subscriptionId={subscription-id}&dashboard=ans.dashboard.alertviewer
 
     Replace {servicename} and {subscription-id} with the address/subscription.id of your ANS instance.
     
