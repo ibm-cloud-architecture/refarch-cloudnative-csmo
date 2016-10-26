@@ -57,13 +57,13 @@ The policy can rely on the settings which have been prepared during the posting 
     + Operator  = Contains
     + Value     = BlueCompute
     
-    ![Add rule](ANS notification policy for BlueCompute.png?raw=true)  
+    ![Add rule](ANS_alert_policy_rule_for_BlueCompute.png?raw=true)  
 3. Add another rule, which will trigger only on critical alerts by selecting the Pre-defined rule `Severity of alerts is critical or above`
 4. Assure you select `Match all rules` to get both rules validated together
 5. Add the recipient users and/or groups which should be notified based on the schedules
 6. Optionally: add escalations and exceptions as appropriate
 
-![Add policy](ANS alert policy rule for BlueCompute.png?raw=true) 
+![Add policy](ANS_notification_policy_for_BlueCompute.png?raw=true) 
 
 ##Step 4: View and manage Alerts for BlueCompute
 
@@ -76,13 +76,13 @@ The policy can rely on the settings which have been prepared during the posting 
 
 3. Selecting an alert will update the "Alert History` section with information about when the alert has been received and which notifications have been triggered.
 
-![View alert history](ANS alert history.png?raw=true) 
+![View alert history](ANS_alert_history.png?raw=true) 
 
 4. Click on the "Acknowledge this alert" icon to change the state of the alert from `Notified` to `Acknowledged`.
 
 5. Click on the "View alert details" icon to see the details about the event, including the setting for `Application or Service Name`
 
-![View alert details](ANS alert details.png?raw=true) 
+![View alert details](ANS_alert_details.png?raw=true) 
 
 
 
