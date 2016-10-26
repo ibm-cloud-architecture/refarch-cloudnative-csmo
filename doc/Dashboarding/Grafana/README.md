@@ -266,8 +266,27 @@ Use provided sql [script](scripts/cmdb.sql) to create table and import example d
 
 When prompted, enter the `cmdb` user password you assigned when the `cmdb` user was created.
 
+#PHP
+
+PHP is an open source web scripting language that is widely used to build dynamic webpages. We will need it for UI that will allow to view, create, update and delete CMDB records in MySQL database.
+
+Before php installation make sure that httpd and mysql-server packages are installed.
+To install PHP on dashboard server, open terminal and type in this command:
+
+	sudo yum install php php-mysql
+
+Once you answer yes to the PHP prompt, PHP will be installed.
+
+##CMDB UI configuration
+
+1. Download latest release of the prerequisite php application [phpMyEdit](http://opensource.platon.org/projects/release_list_page.php?project_id=5)
+2. Extract it in httpd server root directory (/var/www/html/phpmyedit by default on Centos 7), so the following path should be visible: `/var/www/html/phpmyeditphpMyEdit.class.php`.
+3. Copy script [cmdb.php](scripts/cmdb.php) to httpd (Apache Http Server) root directory (/var/www/html by default on Centos 7).
+4. Verify that you can access CMDB URL:
+`http://<dashboard_server_ip>/cmdb.php`
 
 #Data collection for Dashboard - grafana_collect.pl
+
 Perl script [`grafana_collect.pl`](scripts/grafana_collect.pl) is a data collection component of dashboarding solution for BlueCompute.
 It collects data from the following data sources:
 
