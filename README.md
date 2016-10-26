@@ -85,6 +85,14 @@ The following flow describes the setup and operations of this solution in an ove
 
 5. Runbooks connected to NOI are automated to update the event status based on the resolution of the issue. The status updates can also be manually handled within NOI. It also has capability to have bi-directional communication with notification tool so that event status update can take place in either tool. This updated status is then propagated.
 
+#### System Context Flow for IBM Alert Notification System
+
+<![System Context Flow Grafana](static/imgs/???.png?raw=true)>
+
+The above figure shows the deep dive of ANS and its various components and various integrated tools for incident management and their interactions. 
+
+1.	to be done
+
 
 #### System Context Flow for Grafana
 
@@ -96,7 +104,7 @@ The above figure shows the deep dive of Grafana and its various components and v
 
 2.	Perl runtime also accesses a configuration data source on MySQL to read and enrich the monitoring data with environment context data like deployment location and service-relationships.
 
-3.	The perl runtime mashes up all relevant data and writes the consolidated data into the InfluxDB.
+3.	The perl runtime mashes up all relevant data and writes the consolidated data into the Grafana database based on InfluxDB.
 
 4.	Grafana accesses the data via its defined data sources and displays the InfluxDB data inside the configured dashboard pages.
 
@@ -135,7 +143,7 @@ For detailed steps please continue with [How to setup NewRelic for BlueCompute](
 
 ### Step 4: Event Management
 
-#### Step 4a: How to use IBM Netcool Operations Insight for BlueCompute
+#### Tool option a: How to use IBM Netcool Operations Insight for BlueCompute
 
 IBM Netcool Operations Insight accelerates the operations management lifecycle from problem detection to fix. It receives event from ressource monitoring solutions, enriches, correlates and escalates events based on rule automation.
 
@@ -143,17 +151,19 @@ For detailed steps please continue with [How to setup NOI for BlueCompute](https
 
 ###Step 5: Notification
 
-####Step 5a: How to use IBM Alert Notification System for BlueCompute
-(to be continued..)
+#### Tool option a: How to use IBM Alert Notification System for BlueCompute
+IBM Alert Notification System is IBM Bluemix®	service environment that instantly	delivers notifications	of problem occurrences in your	Bluemix	environment	using automated email, Short Message Service (SMS), and voice	messaging.
+
+For detailed steps please continue with [How to setup ANS for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/Notification/ANS/ANS.md)
 
 ### Step 6: Collaboration
 
-####Step 6a: How to use Slack for BlueCompute
+#### Tool option a: How to use Slack for BlueCompute
 (to be continued..)
 
 ### Step 7: Dashboarding
 
-#### Step 7a: How to use Grafana Dashboarding for BlueCompute
+#### Tool option a: How to use Grafana Dashboarding for BlueCompute
 Grafana is one of the leading tools for querying and visualizing time series and metrics. In this project we used it to create dashboards for First Responder persona. Grafana features a variety of panels, including fully featured graph panels with rich visualization options. There is built in support for many of the time series data sources like InfluxDB or Graphite. We used InfluxDB - a time series database for metrics as a data source for Grafana and perl script to collect data from various APIs of BlueCompute CSMO infrastructure like NewRelic, Bluemix, NOI or CMDB. 
 
 For detailed steps please continue with [How to setup Grafana for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/doc/Dashboarding/Grafana/README.md)
