@@ -256,8 +256,8 @@ Once you answer yes to the PHP prompt, PHP will be installed.
 ## CMDB UI configuration
 
 1. Download latest release of the prerequisite php application [phpMyEdit](http://opensource.platon.org/projects/release_list_page.php?project_id=5).
-2. Extract it in httpd server root directory (/var/www/html/phpmyedit by default on Centos 7), so the following path should be visible: `/var/www/html/phpmyeditphpMyEdit.class.php`.
-3. Copy script [cmdb.php](scripts/cmdb.php) to httpd (Apache Http Server) root directory (/var/www/html by default on Centos 7).
+2. Extract it in httpd server root directory (/var/www/html by default on Centos 7), so the following path should be visible: `/var/www/html/phpmyedit/phpMyEdit.class.php` (rename directories if needed).
+3. Copy script [cmdb.php](scripts/cmdb.php) to httpd (Apache Http Server) root directory (/var/www/html).
 4. Verify that you can access CMDB URL:
 `http://<dashboard_server_ip>/cmdb.php`
 
