@@ -4,7 +4,7 @@ Slack is an instant messaging and collaboration system on steroids. Slack’s ch
   
 
 
-Additionaly events can be send manually from the NOI User Interface. Tools have been added to the eventviewer context menu, which allows to send the event to a standard, a specific or automatic channel, which is described in [How to setup NOI for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/EventMgmt/NOI/NOI.md).
+Additionaly events can be send manually from the NOI User Interface. Tools have been added to the eventviewer context menu, which allows to send the event to a standard, a specific or automatic channel. Details for using Slack from NOI can be found in [How to setup NOI for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/EventMgmt/NOI/NOI.md).
 
 ##Step 1: Setup Slack
 
