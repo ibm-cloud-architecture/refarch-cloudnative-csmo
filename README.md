@@ -131,7 +131,7 @@ The following sections only focusses on updates needed to instrument or use a hy
 
 ###Step 3: Monitoring
 
-####Step 3a: How to Use New Relic for BlueCompute
+#### Tool option a: How to Use New Relic for BlueCompute
 
 New Relic is a Software-as-a-Service (SaaS) offering, where agents are injected into Bluemix Runtimes,  IBM Bluemix Containers or SoftLayer Containers and automatically start reporting metrics back to the New Relic service over the internet.
 
