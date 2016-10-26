@@ -159,7 +159,9 @@ For detailed steps please continue with [How to setup ANS for BlueCompute](https
 ### Step 6: Collaboration
 
 #### Tool option a: How to use Slack for BlueCompute
-(to be continued..)
+Slack is an instant messaging and collaboration system on steroids. Slack’s channels help you focus by enabling you to separate messages, discussions and notifications by purpose, department or topic. For incidents which occur in a BlueCompute environment, channels can be used to collobarate on the remediation of the incident with various users like the First Responder, Subject Matter experts, Incident Owner as well as with a numerous number of tools via prebuild integrations.
+
+For detailed steps please continue with [How to setup Slack for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/Collaboration/Slack/Slack.md)
 
 ### Step 7: Dashboarding
 
