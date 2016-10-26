@@ -12,14 +12,16 @@ IBM Alert Notification System allows you to
 + Customize	filters	for	alerting different users based	on incident type and severity.	
   
 
-![System Context Flow](ANS system context flow.png?raw=true)  
+![System Context Flow](static/imgs/ANS system context flow.png?raw=true)  
 
-In this document you will understand how to setup IBM Alert Notification System (ANS) as part of the service management tool chain and demonstrate the interaction of ANS with the other tool chain components of the toolchain for operating the BlueCompute hybrid application.
+In this document you will understand how to setup IBM Alert Notification System (ANS) as part of the service management tool chain and demonstrate the interaction of ANS with the other tool chain components of the toolchain for operating the _BlueCompute_ hybrid application.
 
-Any event recived by NOI for BlueCompute, regardless of its origin like Bluemix or Softlayer platform, has been enriched with the business service name __BlueCompute__. A single alert policies can here be used to alert any kind of BlueCompute related incidents to the FirstResponder on call.
+Any event recived by NOI for BlueCompute, regardless of its origin like Bluemix or Softlayer platform, has been enriched with the business service name _BlueCompute_. A single alert policies can here be used to alert any kind of BlueCompute related incidents to the FirstResponder on call.
 
 
-IBM Alert Notification System is operated though a web based GUI called ANS UI, login is https://{servicename}.mybluemix.net/index?subscriptionId={subscription-id}&dashboard=ans.dashboard.alertviewer.
+IBM Alert Notification System is operated though a web based GUI called ANS UI, login is 
+
+    https://{servicename}.mybluemix.net/index?subscriptionId={subscription-id}&dashboard=ans.dashboard.alertviewer 
 
 Replace {servicename} and {subscription-id} with the address/subscription.id of your ANS instance.
 
@@ -30,9 +32,9 @@ For base setup of an ANS instance in your Bluemix environment, please follow the
 
 ##Step 2: Define FirstResponder Users and Group for BlueCompute
 
-For creating one or more FirstResponder user, their schedules and notification details to respond to ANS alerts around the business service __BlueCompute__, please follow the information of guide [Get started with the IBM Alert Notification Service](https://developer.ibm.com/cloudarchitecture/docs/service-management/ibm-alert-notification-service/) for "Adding Users, Groups and Schedules to ANS".
+For creating one or more FirstResponder users, their schedules and notification details to respond to ANS alerts around the business service _BlueCompute_, please follow the information of guide [Get started with the IBM Alert Notification Service](https://developer.ibm.com/cloudarchitecture/docs/service-management/ibm-alert-notification-service/) for "Adding Users, Groups and Schedules to ANS".
 
-+ Create one or more users as FirstResponder for business service __BlueCompute__
++ Create one or more users as FirstResponder for business service _BlueCompute_
     + Set User Name 
     + Define Working hours
     + Define Notification cases and means (email, SMS,..)
@@ -46,21 +48,22 @@ For creating one or more FirstResponder user, their schedules and notification d
 
 For creating an alert policy, which defines which ANS alerts should be notified to which user and groups, please follow the information of guide [Get started with the IBM Alert Notification Service](https://developer.ibm.com/cloudarchitecture/docs/service-management/ibm-alert-notification-service/) for "Notification and Escalation Policies".
 
-### Setup a new Alert Policy for business service __BlueCompute__ 
-The policy can rely on the settings which have been prepared during the posting of the event from NOI to ANS. The business service name __BlueCompute__ is always included in the ANS alert attribute `Application or ServiceName`. 
+### Setup a new Alert Policy for business service _BlueCompute_
+The policy can rely on the settings which have been prepared during the posting of the event from NOI to ANS. The business service name _BlueCompute_ is always included in the ANS alert attribute `Application or ServiceName`. 
 
 1. Create a new Alert Policy with name `BlueCompute`
-2. Add a new rule, which will trigger on alerts for __BlueCompute__ with the following filter criterias:
+2. Add a new rule, which will trigger on alerts for _BlueCompute_ with the following filter criterias:
     + Attribute = Application or ServiceName 
     + Operator  = Contains
     + Value     = BlueCompute
-    ![Add rule](static/imgs/ANS notification policy for BlueCompute.png?raw=true)  
+    
+    ![Add rule](ANS notification policy for BlueCompute.png?raw=true)  
 3. Add another rule, which will trigger only on critical alerts by selecting the Pre-defined rule `Severity of alerts is critical or above`
 4. Assure you select `Match all rules` to get both rules validated together
 5. Add the recipient users and/or groups which should be notified based on the schedules
 6. Optionally: add escalations and exceptions as appropriate
 
-![Add policy](static/imgs/ANS alert policy rule for BlueCompute.png?raw=true) 
+![Add policy](ANS alert policy rule for BlueCompute.png?raw=true) 
 
 ##Step 4: View and manage Alerts for BlueCompute
 
@@ -73,13 +76,13 @@ The policy can rely on the settings which have been prepared during the posting 
 
 3. Selecting an alert will update the "Alert History` section with information about when the alert has been received and which notifications have been triggered.
 
-![View alert history](static/imgs/ANS alert history.png?raw=true) 
+![View alert history](ANS alert history.png?raw=true) 
 
 4. Click on the "Acknowledge this alert" icon to change the state of the alert from `Notified` to `Acknowledged`.
 
 5. Click on the "View alert details" icon to see the details about the event, including the setting for `Application or Service Name`
 
-![View alert details](static/imgs/ANS alert details.png?raw=true) 
+![View alert details](ANS alert details.png?raw=true) 
 
 
 
