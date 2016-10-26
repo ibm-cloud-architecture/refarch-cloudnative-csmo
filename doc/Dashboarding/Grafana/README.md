@@ -1,11 +1,8 @@
 
-- [Monitoring Dashboard solution for BlueCompute](#monitoring-dashboard-solution-for-bluecompute)
+- [Monitoring Dashboard for BlueCompute](#monitoring-dashboard-for-bluecompute)
 - [Grafana](#grafana)
 	- [Installing Grafana on Centos 7](#installing-grafana-on-centos-7)
 	- [Grafana configuration](#grafana-configuration)
-		- [Configuring data sources](#configuring-data-sources)
-			- [InfluxDB](#influxdb)
-			- [New Relic APM](#new-relic-apm)
 - [InfluxDB](#influxdb)
 	- [Requirements](#requirements)
 	- [Installing InfluxDB on Centos 7](#installing-influxdb-on-centos-7)
@@ -22,6 +19,14 @@
 	- [Complete script configuration](#complete-script-configuration)
 	- [Configure perl script to start with the system](#configure-perl-script-to-start-with-the-system)
 	- [Schedule periodic API calls](#schedule-periodic-api-calls)
+- [Dashboard configuration](#dashboard-configuration)
+	- [Configuring data sources](#configuring-data-sources)
+		- [InfluxDB](#influxdb)
+		- [New Relic APM](#new-relic-apm)
+	- [Import dashboards](#import-dashboards)
+- [CSMO dashboard for BlueCompute](#csmo-dashboard-for-bluecompute)
+	- [First Responder dashboard](#first-responder-dashboard)
+	- [First Responder - application details dashboard](#first-responder-application-details-dashboard)
 
 # Monitoring Dashboard for BlueCompute
 Monitoring Dashboard is an entry point UI for First Responder persona who will react on alerts from Incident Management.
@@ -521,7 +526,7 @@ Dashboad json files can be imported using Grafana UI: click on the top-left menu
 # CSMO dashboard for BlueCompute
 
 ##First Responder dashboard
-First responder dashboard URL: 
+First responder dashboard URL:
 
 `http://<dashboard_server_ip>:3000/dashboard/db/1-bluecompute-application-summary-first-responder`
 
@@ -539,7 +544,7 @@ Grafana singlestat panels:
 - Language (source: New Relic API).
 - NR Status (application status in New Relic, source: New Relic API).
 - NOI Severity (highest severity for NOI alert for specific application, source: Omnibus OnjectServer API).
-- BMX status (status of the application or container, source Bluemix Cloud Foundry API or Bluemix IBM container API). 
+- BMX status (status of the application or container, source Bluemix Cloud Foundry API or Bluemix IBM container API).
 - BMX Instances (number of application instances, source: Bluemix Cloud Foundry API).
 - Response Time, Error Rate, APDEX score, APDEX target (source: New Relic API).
 - IC Type (IBM Container type: single container or container group, source: Bluemix IBM container API).
