@@ -1,4 +1,8 @@
-# An Implementation of Cloud Service Management and Operation for Hybrid Application
+# A Sample Tools Implementation of Incident Management Solution
+
+The tools in the Incident Management solution are implemented to provide an end-to-end view of application. You may choose to use multiple tools to handle different functionality of the application. The below picture shows multiple tools that manages cloud native as well as hybrid application.
+
+(static/imgs/Cloud_Service_Management-Incident_Management_with_Tools)
 
 
 ### Reference Tools Mapping 

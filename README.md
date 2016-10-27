@@ -18,7 +18,9 @@ Incident management and its operations are key to cloud service management. Inci
 For more details on this reference architecture visit the [Architecture Center for Incident Management](https://developer.ibm.com/architecture/gallery/incidentManagement)
 
 
-Sample [Tools Implementation](doc) of Incident Management solution for hybrid application
+## Sample Tools Implementation
+
+See sample [Tools Implementation Guide](doc) of Incident Management solution for a hybrid application
  
 
 
