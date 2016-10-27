@@ -1,21 +1,5 @@
-# Cloud Service Management and Operation for Hybrid application
+# An Implementation of Cloud Service Management and Operation for Hybrid Application
 
-
-## Architecture Overview
-This project provides is a reference implementation for managing a BlueCompute Application that is hybrid in nature.
-Cloud based applications need to be available all the time. Proper processes need to be put in place to assure availability and performance. This includes Incident and Problem management to respond to outages, but also Release Management to assure a seamless deployment and release of new versions.
-
-  The Logical Architecture for overall Cloud Service Management and Operations is shown in the picture below.
-   ![CSMO Architecture](static/imgs/Cloud_Service_Management_Overview.png?raw=true)  
-
-For more details on this reference architecture visit the [Architecture Center for Service Management](https://developer.ibm.com/architecture/serviceManagement)
-
-## Incident Management Architecture Overview
-
-Incident management and its operations are key to cloud service management. Incident management is optimized to restore the normal service operations as quickly as, thus ensuring the best possible levels of service quality and availability are maintained. Following figure provides deep dive into Incident Management 
-![CSMO Incident Management Architecture](static/imgs/Cloud_Service_Management-Incident_Management.png?raw=true)  
-
-For more details on this reference architecture visit the [Architecture Center for Incident Management](https://developer.ibm.com/architecture/gallery/incidentManagement)
 
 ### Reference Tools Mapping 
 For this project we utilized a reference set of tools to showcase end-to-end incident management.
@@ -168,6 +152,5 @@ For detailed steps please continue with [How to setup Slack for BlueCompute](htt
 Grafana is one of the leading tools for querying and visualizing time series and metrics. In this project we used it to create dashboards for First Responder persona. Grafana features a variety of panels, including fully featured graph panels with rich visualization options. There is built in support for many of the time series data sources like InfluxDB or Graphite. We used InfluxDB - a time series database for metrics as a data source for Grafana and perl script to collect data from various APIs of BlueCompute CSMO infrastructure like NewRelic, Bluemix, NOI or CMDB. 
 
 For detailed steps please continue with [How to setup Grafana for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/doc/Dashboarding/Grafana/README.md)
-
 
 
