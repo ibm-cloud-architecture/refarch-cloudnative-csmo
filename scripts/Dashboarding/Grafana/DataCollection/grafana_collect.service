@@ -1,0 +1,12 @@
+[Unit]
+Description=CASE project app for Grafana
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/case/grafana_collect.pl prefork -m production -l http://*:3001
+ExecStop=/usr/bin/pkill -f grafana_collect
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

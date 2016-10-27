@@ -314,7 +314,7 @@ cpanm Mojolicious::Lite Data::Dumper JSON Text::ASCIITable InfluxDB::LineProtoco
 Copy [`grafana_collect.pl`](scripts/grafana_collect.pl) to the server (_I used /case directory_) and make it executable.
 List routes defined by the script to check if it starts correctly:
 
-	./grafana.pl routes
+	./grafana_collect.pl routes
 
 The output should be similar to the following:
 
