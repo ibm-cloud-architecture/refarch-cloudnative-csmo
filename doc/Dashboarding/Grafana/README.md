@@ -142,12 +142,11 @@ which is located at `/etc/influxdb/influxdb.conf` for default installations.
 
 RedHat and CentOS users can install the latest stable version of InfluxDB using the `yum` package manager:
 
-```bash
-# wget https://dl.influxdata.com/influxdb/releases/influxdb-1.0.0.x86_64.rpm
-# sudo yum localinstall influxdb-1.0.0.x86_64.rpm
-# sudo systemctl start influxdb
-# sudo systemctl status influxdb
-```
+    # wget https://dl.influxdata.com/influxdb/releases/influxdb-1.0.0.x86_64.rpm
+    # sudo yum localinstall influxdb-1.0.0.x86_64.rpm
+    # sudo systemctl start influxdb
+    # sudo systemctl status influxdb
+
 
 ## Step 2: Configure InfluxDB
 
@@ -159,17 +158,19 @@ __Note__: You can then use the `-config` parameter to launch InfluxDB.  For exam
 
 **Configure InfluxDB for Automatic start-up**
 
-    systemctl enable influxdb.service
+    # systemctl enable influxdb.service
 
 **Start InfluxDB**
 
-    sudo service influxdb start
+    # sudo service influxdb start
 
 **The InfluxDB Web Interface**
 
 Once InfluxDB is up and running, connect to it using a web browser.
 
     http://{ip address}:8083
+    
+where {ip address} is the address of your database.
 
 **Using the `influx` CLI**
 
@@ -177,10 +178,13 @@ To interact with your installation of InfluxDB (i.e. create users, databases, et
 
 1\.  SSH to your InfluxDB VM
 
-2\.  Change directory to `/usr/bin`
+2\. Run
 
-3\.  Type `# influx` and hit enter
-
+    # cd /usr/bin
+    # influx
+    
+    Example: 
+    
 	[ibmcloud@rscase2 ~]# influx
 	Visit https://enterprise.influxdata.com to register for updates, InfluxDB server management, and monitoring.
 	Connected to http://localhost:8086 version 1.0.0
@@ -275,6 +279,8 @@ Once you answer yes to the PHP prompt, PHP will be installed.
 4. Verify that you can access CMDB URL:
 `http://{dashboard_server_ip}/cmdb.php`
 
+where {dashboard_server_ip} is the address of your dashboard server.
+
 ![cmdb_ui](images/cmdb_ui1.png)
 
 #Data collection for Dashboard - grafana_collect.pl
@@ -302,11 +308,9 @@ Use the following steps to install prerequisite system packages and perl modules
 
 There are meny methods of installing perl modules - one of them is `cpanm`.
 
-Install `cpanm` using command (_require internet connection_):
+Install `cpanm` using command (_requires internet connection_)
 
-```sh
     # sudo curl -L http://cpanmin.us | perl - --sudo App::cpanminus
-```
 
 Before installing perl modules, make sure that MySQL server or client is installed on the system.
 In our environment, MySQL server with `cmdb` database was installed on the same Centos 7 VM as other dashboarding solution components: Grafana, InfluxDB and [`grafana_collect.pl`](scripts/grafana_collect.pl).
@@ -369,7 +373,7 @@ my $pwd = 'cmdb';                                          # MySQL user password
 ##########################################################################################
 ```
 
-Start the script. It will automatically start buil-in web server.
+Start the script. It will automatically start build-in web server.
 
 	# ./grafana_collect.pl daemon -l http://*:3002
 
@@ -432,6 +436,8 @@ Expected output:
 	           ├─15277 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
 	           └─15347 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
 ```
+
+5. Check service
 
 	# curl http://localhost:3001/list
 
@@ -506,7 +512,9 @@ InfluxDB Primary is the primary data source for the _BlueCompute_ dashboard. It 
 
 **Configuration**
 
-Open the URL: `http://\{grafana_hostname}:3000/datasources` in the browser and enter the name of the data source, InfluxDB URL and database name. Select InfluxDB as Data Source type.
+Open the URL: `http://\{dashboard_server_ip}:3000/datasources` in the browser and enter the name of the data source, InfluxDB URL and database name. Select InfluxDB as Data Source type.
+
+where {dashboard_server_ip} is the address of your grafana server.
 
 ![influxdb_datasource](images/influxdb_datasource.png)
 
@@ -545,6 +553,8 @@ Dashboad json files can be imported using Grafana UI: click on the top-left menu
 First responder dashboard URL:
 
 `http://{dashboard_server_ip}:3000/dashboard/db/1-bluecompute-application-summary-first-responder`
+
+where {dashboard_server_ip} is the address of your grafana server.
 
 Dashboard is divided into the following sections:
 - Key metrics (work in progress) for _BlueCompute_ Hybrid Application.
@@ -588,7 +598,7 @@ Dashboard is divided into the following sections:
 |Total Request Rate  |Request rate per second   |New Relic API   |
 |Connection Drop Rate   |Connection Drop Rate per second   |New Relic API   |
 
-- IBM SolftLayer Databases
+- IBM SoftLayer Databases
 
 |Panel   |Description   |Source   |
 |---|---|---|
