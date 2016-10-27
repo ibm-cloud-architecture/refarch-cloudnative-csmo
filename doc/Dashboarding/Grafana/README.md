@@ -404,15 +404,15 @@ Centos 7 uses `systemd` to initialize operating system components that must be s
 
 2. Enable new service to start with the system.
 
-    # systemctl enable grafana_collect
+# systemctl enable grafana_collect
 
 3. Start the `grafana_collect` service.
 
-	# systemctl start grafana_collect
+# systemctl start grafana_collect
 
 4. Verify that the script started correctly.
 
-	# systemctl status grafana_collect
+# systemctl status grafana_collect
 
 
 Expected output:
