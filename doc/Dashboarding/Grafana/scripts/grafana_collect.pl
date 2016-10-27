@@ -1,4 +1,7 @@
 #!/usr/bin/env perl
+#Data Collection layer for CASE/CSMO Grafana dashboard for BlueCompute
+#Author: Rafal Szypulka (rafal.szypulka@pl.ibm.com)
+
 use Mojolicious::Lite;
 use Data::Dumper;
 use JSON;

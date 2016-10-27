@@ -26,22 +26,28 @@
 	- [Import dashboards](#import-dashboards)
 - [CSMO dashboard for BlueCompute](#csmo-dashboard-for-bluecompute)
 	- [First Responder dashboard](#first-responder-dashboard)
-	- [First Responder - application details dashboard](#first-responder---bluecompute-application-details-dashboard)
+	- [BlueCompute application details dashboard](#first-responder---bluecompute-application-details-dashboard)
 
 # Monitoring Dashboard for BlueCompute
-Monitoring Dashboard is an entry point UI for First Responder persona who will react on alerts from Incident Management.
-It gives overall view on current status of all BlueCompute Hybrid application components. It allows also to contextually drill down to more detailed information about topology, performance metrics, log files and generated alerts.
+Author: Rafał Szypułka (rafal.szypulka@pl.ibm.com)
 
-Data collection component collects data from the following data sources:
+Monitoring Dashboard is an entry point UI for First Responder persona who will react on alerts from Incident Management.
+It gives an overall view on current status of all BlueCompute Hybrid application components. It allows also to contextually drill down to more detailed information about topology, performance metrics, log files and generated alerts.
+This document will describe, how to deploy whole dashboarding solution on single Centos 7 server.
+
+Diagram below explains the data flow for the dashboard.
+[Data collection component]() collects data from the following data sources:
 
 - Bluemix Clound Foundry API
 - Bluemix Container API
 - New Relic API
 - NOI (Omnibus ObjectServer) API
-- pseudo-CMDB
+- CMDB database
 - BAM (planned)
 
-![Flowchart](images/BlueCompute_dashboard_flowchart.png)
+Collected data is stored in [InfluxDB](#influxdb) timeseries database, which is the primary data source for [Grafana](#grafana) dashboarding engine.
+
+![Flowchart](images/BlueCompute_dashboard_flowchart1.png)
 
 # Grafana
 [Grafana](http://grafana.org) is one of the leading tools for querying and visualizing time series and metrics. In the CSMO project we used it to create dashboards for First Responder persona.
@@ -536,25 +542,56 @@ Dashboard is divided into the following sections:
 - Bluemix Cloud Foundry Applications
 - Bluemix Container Applications
 - Bluemix Containers
-- Nginx Load Balancer (work in progress)
+- Nginx Load Balancer
 - IBM SoftLayer Databases
 
-Grafana singlestat panels:
+**Grafana panels:**
 
-- Region (source: CMDB).
-- Language (source: New Relic API).
-- NR Status (application status in New Relic, source: New Relic API).
-- NOI Severity (highest severity for NOI alert for specific application, source: Omnibus OnjectServer API).
-- BMX status (status of the application or container, source Bluemix Cloud Foundry API or Bluemix IBM container API).
-- BMX Instances (number of application instances, source: Bluemix Cloud Foundry API).
-- Response Time, Error Rate, APDEX score, APDEX target (source: New Relic API).
-- IC Type (IBM Container type: single container or container group, source: Bluemix IBM container API).
-- Instances (number of container instances within container group, source: Bluemix IBM container API).
-- Reads/s (MySQL Reads per second, source: New Relic API).
-- Writes/s (MySQL Writes per second, source: New Relic API).
-- Connections (MySQL number of connections, source: New Relic API).
+- Bluemix Cloud Foundry Applications and Bluemix Container Applications
 
-Dashboard includes several context links to more detailed information about specific solution components:
+|Panel   |Description   |Source   |
+|---|---|---|
+|Region   |Location of the application   | CMDB   |
+|Language   |Programming language of the application   |New Relic API   |
+|NR Status   |Application status in New Relic   |New Relic API   |
+|NOI Severity   |Highest severity for NOI alert for specific application   |Omnibus ObjectServer API   |
+|BMX status   |Status of the CF application in Bluemix   |Bluemix Cloud Foundry API   |
+|BMX Instances   |Number of CF Application instances   |Bluemix Cloud Foundry API   |
+|Response Time <br/>Error Rate<br/>APDEX score<br/>APDEX target|Key application metrics |New Relic API
+- Bluemix Containers
+
+|Panel   |Description   |Source   |
+|---|---|---|
+|Region   |Location of the application   | CMDB   |
+|BMX status   |Status of the IBM Container in Bluemix   |Bluemix IBM Container API   |
+|NOI Status   |Highest severity for NOI alert for specific container   |Omnibus ObjectServer API   |
+|IC Type   |IBM Container type: single container or container group   |Bluemix IBM container API   |
+|Instances  |Highest severity for NOI alert for specific application   |Bluemix IBM container API   |
+|IC instances status   |Number of CF Application instances   |Bluemix IBM container API   |
+
+- Nginx Load Balancer
+
+|Panel   |Description   |Source   |
+|---|---|---|
+|Region   |Location of the Nginx Load Balancer   | CMDB   |
+|NOI Status   |Highest severity for NOI alert for Load Balancer   |Omnibus ObjectServer API   |
+|Active Connections  |Number of active connections to Load Balancer   |New Relic API   |
+|Total Request Rate  |Request rate per second   |New Relic API   |
+|Connection Drop Rate   |Connection Drop Rate per second   |New Relic API   |
+
+- IBM SolftLayer Databases
+
+|Panel   |Description   |Source   |
+|---|---|---|
+|Region   |Location of the MySQL Database   | CMDB   |
+|NOI Status   |Highest severity for NOI alert for MySQL   |Omnibus ObjectServer API   |
+|Reads/s  |MySQL Reads per second   |New Relic API   |
+|Writes/s  |MySQL Writes per second  |New Relic API   |
+|Connections   |MySQL number of connections  |New Relic API   |
+
+**Drill down entry points**
+
+First Responder Dashboard includes several context entry point to more detailed information about specific solution components:
 
 1. Link to Bluemix Logmet service. It opens Logmet Kibana4 dashboard with all log records from BlueCompute collected by Logmet service.
 2. Link to New Relic Service Map for BlueCompute. It shows topology diagram for BlueCompute components monitored by New Relic.
@@ -564,12 +601,12 @@ Dashboard includes several context links to more detailed information about spec
 6. Link to Bluemix Logmet service. It opens Logmet Kibana4 dashboard with log records from specific application only.
 7. Link to more detailed Grafana dashboard "BlueCompute Application Details" for specific application only.
 8. Link to Logmet Grafana dashboard with metrics like CPU and Memory for specific container or container group.
-9. Link to New Relic console with list of monitored applications and more detailed information about monitored components.
+9. 10. Links to New Relic console with list of monitored applications and more detailed information about monitored components.
 
 
-![img](images/Grafana_first_responder_big_desc.png)
+![img](images/Grafana_first_responder_big_desc1.png)
 
-##First Responder - BlueCompute application details dashboard
+##BlueCompute application details dashboard
 
 BlueCompute application details dashboard shows detailed graphs for BleuCompute components monitored. All metrics in this dashboard are collected using [New Relic Data Source](#new-relic-apm) that collects data directly from New Relic API.
 
