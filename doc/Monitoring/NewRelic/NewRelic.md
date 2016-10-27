@@ -1,6 +1,5 @@
 # NewRelic resource monitoring for Hybrid application
-
-(In Progress....)
+Author: Detlef Kleinfelder (detlef.kleinfelder@de.ibm.com)
 
 New Relic is a Software-as-a-Service (SaaS) offering, where agents are injected into Bluemix Runtimes,  IBM Bluemix Containers or SoftLayer Containers and automatically start reporting metrics back to the New Relic service over the internet.
 

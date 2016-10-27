@@ -32,7 +32,7 @@
 Author: Rafał Szypułka (rafal.szypulka@pl.ibm.com)
 
 Monitoring Dashboard is an entry point UI for First Responder persona who will react on alerts from Incident Management.
-It gives an overall view on current status of all BlueCompute Hybrid application components. It allows also to contextually drill down to more detailed information about topology, performance metrics, log files and generated alerts.
+It gives an overall view on current status of all _BlueCompute_ Hybrid application components. It allows also to contextually drill down to more detailed information about topology, performance metrics, log files and generated alerts.
 This document will describe, how to deploy whole dashboarding solution on a single Centos 7 server.
 
 Diagram below explains the data flow for the dashboard.
@@ -43,7 +43,8 @@ Diagram below explains the data flow for the dashboard.
 - New Relic API
 - NOI (Omnibus ObjectServer) API
 - CMDB database
-- BAM (planned)
+
+<BAM (planned)>
 
 Collected data is stored in [InfluxDB](#influxdb) timeseries database, which is the primary data source for [Grafana](#grafana) dashboarding engine.
 
@@ -51,21 +52,21 @@ Collected data is stored in [InfluxDB](#influxdb) timeseries database, which is 
 
 # Grafana
 [Grafana](http://grafana.org) is one of the leading tools for querying and visualizing time series and metrics. In the CSMO project we used it to create dashboards for First Responder persona.
-Grafana features a variety of panels, including fully featured graph panels with rich visualization options. There is built in support for many of the time series data sources like InfluxDB or Graphite. We used InfluxDB - a time series database for metrics as a data source for Grafana and perl script to collect data from various APIs of BlueCompute CSMO infrastructure like New Relic, Bluemix, NOI or CMDB.
+Grafana features a variety of panels, including fully featured graph panels with rich visualization options. There is built in support for many of the time series data sources like InfluxDB or Graphite. We used InfluxDB - a time series database for metrics as a data source for Grafana and perl script to collect data from various APIs of _BlueCompute_ CSMO tool chain solution and infrastructure New Relic, Bluemix, NOI or CMDB.
 
-## Installing Grafana on Centos 7
+## Step 1: Installing Grafana on Centos 7
 
-**Download**
+### Download
 
 Description | Download
 ------------ | -------------
 Stable .RPM for CentOS | [3.1.1 (x86-64 rpm)](https://grafanarel.s3.amazonaws.com/builds/grafana-3.1.1-1470047149.x86_64.rpm)
 
-**Installation**
+### Installation
 
 You can install Grafana using Yum directly.
 
-    $ sudo yum install https://grafanarel.s3.amazonaws.com/builds/grafana-3.1.1-1470047149.x86_64.rpm
+    # sudo yum install https://grafanarel.s3.amazonaws.com/builds/grafana-3.1.1-1470047149.x86_64.rpm
 
 **Package details**
 
@@ -78,16 +79,19 @@ You can install Grafana using Yum directly.
 - The default configuration specifies an sqlite3 database at `/var/lib/grafana/grafana.db`
 
 
-## Grafana configuration
+## Step 2: Grafana configuration
+
+### Start service
+
 **Start the server (via systemd)**
 
-    $ sudo systemctl daemon-reload
-    $ sudo systemctl start grafana-server
-    $ sudo systemctl status grafana-server
+    # sudo systemctl daemon-reload
+    # sudo systemctl start grafana-server
+    # sudo systemctl status grafana-server
 
 **Enable the systemd service to start at boot**
 
-    sudo systemctl enable grafana-server.service
+    # sudo systemctl enable grafana-server.service
 
 **Environment file**
 
@@ -116,7 +120,9 @@ those options.
 #InfluxDB
 [InfluxDB](https://www.influxdata.com/time-series-platform/influxdb/) is an open-source time series database developed by InfluxData as part of their time series platform. It is written in Go and optimized for fast, high-availability storage and retrieval of time series data in fields such as operations monitoring, application metrics, Internet of Things sensor data, and real-time analytics. Here InfluxDB is used as storage for metrics collected by perl runtime and primary data source for Grafana dashboard.
 
-## Requirements
+## Step 1: Installing InfluxDB on Centos 7
+
+**Requirements**
 
 Installation of the InfluxDB package may require `root` privileges in order to complete successfully.
 
@@ -132,24 +138,24 @@ require custom ports.
 All port mappings can be modified through the [configuration file](docs.influxdata.com/influxdb/v1.0/administration/config),
 which is located at `/etc/influxdb/influxdb.conf` for default installations.
 
-## Installing InfluxDB on Centos 7
+**Installation**
 
 RedHat and CentOS users can install the latest stable version of InfluxDB using the `yum` package manager:
 
 ```bash
-wget https://dl.influxdata.com/influxdb/releases/influxdb-1.0.0.x86_64.rpm
-sudo yum localinstall influxdb-1.0.0.x86_64.rpm
-sudo systemctl start influxdb
-sudo systemctl status influxdb
+# wget https://dl.influxdata.com/influxdb/releases/influxdb-1.0.0.x86_64.rpm
+# sudo yum localinstall influxdb-1.0.0.x86_64.rpm
+# sudo systemctl start influxdb
+# sudo systemctl status influxdb
 ```
 
-##Configure InfluxDB
+## Step 2: Configure InfluxDB
 
 By default your config file will be at `/etc/influxdb/influxdb.conf`.  However, you can create a new config file to modify if desired.
 
     influx config > influxdb.generated.conf
 
-_Note: You can then use the `-config` parameter to launch InfluxDB.  For example, `influxd -config influxdb.conf`_
+__Note__: You can then use the `-config` parameter to launch InfluxDB.  For example, `influxd -config influxdb.conf`
 
 **Configure InfluxDB for Automatic start-up**
 
@@ -163,7 +169,7 @@ _Note: You can then use the `-config` parameter to launch InfluxDB.  For example
 
 Once InfluxDB is up and running, connect to it using a web browser.
 
-    http://<ip address>:8083
+    http://{ip address}:8083
 
 **Using the `influx` CLI**
 
@@ -173,9 +179,9 @@ To interact with your installation of InfluxDB (i.e. create users, databases, et
 
 2\.  Change directory to `/usr/bin`
 
-3\.  Type `influx` and hit enter
+3\.  Type `# influx` and hit enter
 
-	[ibmcloud@rscase2 ~]$ influx
+	[ibmcloud@rscase2 ~]# influx
 	Visit https://enterprise.influxdata.com to register for updates, InfluxDB server management, and monitoring.
 	Connected to http://localhost:8086 version 1.0.0
 	InfluxDB shell version: 1.0.0
@@ -200,21 +206,21 @@ Create a database called `service_status`.
 
     CREATE DATABASE service_status
 
-_Note: We will use this database in the next steps._
+__Note__: We will use this database in the next steps.
 
 # MySQL
 
-MySQL is a popular database management system used for web and server applications. CSMO solution for BlueCompute use MySQL as CMDB database, storing configuration information for CSMO solution components. Use the steps below to install MySQL on Centos 7.
+MySQL is a popular database management system used for web and server applications. CSMO solution for _BlueCompute_ use MySQL as CMDB database, storing configuration information for CSMO solution components. Use the steps below to install MySQL on Centos 7.
 
-## Installing MySQL on Centos 7
+## Step 1: Installing MySQL on Centos 7
 
-	sudo yum update
-	yum install mysql-server
-	systemctl start mysqld
+	# sudo yum update
+	# yum install mysql-server
+	# systemctl start mysqld
 
 After installation, run interactive configuration program and specify configuration settings according to prompts.
 
-	sudo mysql_secure_installation
+	# sudo mysql_secure_installation
 
 You will be given the choice to change the MySQL root password, remove anonymous user accounts, disable root logins outside of localhost, and remove test databases. It is recommended that you answer yes to these options. You can read more about the script in the MySQL Reference Manual.
 
@@ -223,14 +229,14 @@ The standard tool for interacting with MySQL is the mysql client which installs 
 Log in to MySQL as the root user:
 
 
-	mysql -u root -p
+	# mysql -u root -p
 
 When prompted, enter the root password you assigned when the mysql_secure_installation script was run.
 You’ll then be presented with a welcome header and the MySQL prompt as shown below:
 
-	mysql>
+	# mysql>
 
-##Create a CMDB User and Database
+## Step 2: Create a CMDB User and Database
 In the example below, `cmdb` is the name of the database, `cmdb` is the user, and `cmdb` is the user’s password.
 
 ```sql
@@ -243,7 +249,7 @@ grant all on cmdb.* to 'cmdb' identified by 'cmdb';
 ##Create CMDB database schema and import example
 Use provided sql [script](scripts/cmdb.sql) to create table and import example data.
 
-	mysql -u cmdb -p cmdb < cmdb.sql
+	# mysql -u cmdb -p cmdb < cmdb.sql
 
 When prompted, enter the `cmdb` user password you assigned when the `cmdb` user was created.
 
@@ -251,27 +257,29 @@ When prompted, enter the `cmdb` user password you assigned when the `cmdb` user 
 
 PHP is an open source web scripting language that is widely used to build dynamic webpages. We will need it for UI that will allow to view, create, update and delete records in the MySQL CMDB database.
 
->Before php installation make sure that httpd and mysql-server packages are installed.
+## Step 1: Installing PHP
+
+Before php installation make sure that httpd and mysql-server packages are installed.
 
 To install PHP on dashboard server, open terminal and type in this command:
 
-	sudo yum install php php-mysql
+	# sudo yum install php php-mysql
 
 Once you answer yes to the PHP prompt, PHP will be installed.
 
-## CMDB UI configuration
+## Step 2: CMDB UI configuration
 
 1. Download latest release of the prerequisite php application [phpMyEdit](http://opensource.platon.org/projects/release_list_page.php?project_id=5).
 2. Extract it in httpd server root directory (/var/www/html by default on Centos 7), so the following path should be visible: `/var/www/html/phpmyedit/phpMyEdit.class.php` (rename directories if needed).
-3. Copy script [cmdb.php](scripts/cmdb.php) to httpd (Apache Http Server) root directory (/var/www/html).
+3. Copy script [cmdb.php](scripts/cmdb.php) to httpd (Apache Http Server) root directory `/var/www/html`.
 4. Verify that you can access CMDB URL:
-`http://<dashboard_server_ip>/cmdb.php`
+`http://{dashboard_server_ip}/cmdb.php`
 
 ![cmdb_ui](images/cmdb_ui1.png)
 
 #Data collection for Dashboard - grafana_collect.pl
 
-Perl script [`grafana_collect.pl`](scripts/grafana_collect.pl) is a data collection component of dashboarding solution for BlueCompute.
+Perl script [`grafana_collect.pl`](scripts/grafana_collect.pl) is a data collection component of dashboarding solution for _BlueCompute_.
 It collects data from the following data sources:
 
 - Bluemix Clound Foundry API
@@ -279,25 +287,25 @@ It collects data from the following data sources:
 - New Relic API
 - NOI (Omnibus ObjectServer) API
 - pseudo-CMDB
-- BAM (planned)
+<BAM (planned)>
 
 and stores in the InfluxDB which is a primary data source for Grafana dashboard.
 Script is based on [Mojolicious](http://mojolicious.org) perl web framework and can be deployed on any operating system supported by perl and prerequisite perl modules and in Bluemix as a Cloud Foundry application. This document specify steps needed to deploy it and run on Centos 7 VM.    
 
 Use the following steps to install prerequisite system packages and perl modules required for data collection script.
 
-##Install prerequisite Centos packages
+## Step 1: Install prerequisite Centos packages
 
-	sudo yum install perl-devel perl-CPAN gcc
+	# sudo yum install perl-devel perl-CPAN gcc
 
-##Install prerequisite perl modules
+## Step 2: Install prerequisite perl modules
 
 There are meny methods of installing perl modules - one of them is `cpanm`.
 
 Install `cpanm` using command (_require internet connection_):
 
 ```sh
-sudo curl -L http://cpanmin.us | perl - --sudo App::cpanminus
+    # sudo curl -L http://cpanmin.us | perl - --sudo App::cpanminus
 ```
 
 Before installing perl modules, make sure that MySQL server or client is installed on the system.
@@ -316,11 +324,12 @@ Install the following perl modules using `cpanm` (_require internet connection_)
 ```
 cpanm Mojolicious::Lite Data::Dumper JSON Text::ASCIITable InfluxDB::LineProtocol Hijk HTML::Table DBD::MySQL
 ```
-##Complete script configuration
-Copy [`grafana_collect.pl`](scripts/grafana_collect.pl) to the server (_I used /case directory_) and make it executable.
+## Step 3: Complete script configuration
+Copy [`grafana_collect.pl`](scripts/grafana_collect.pl) to the server, for example `/case` directory, and make it executable.
 List routes defined by the script to check if it starts correctly:
 
-	./grafana_collect.pl routes
+    # cd /case
+	# ./grafana_collect.pl routes
 
 The output should be similar to the following:
 
@@ -355,18 +364,18 @@ my $bmx_username = 'xxxxxxxxxxxxxxxx';                     # Bluemix user id
 my $bmx_password = 'xxxxxxxx';                             # Bluemix user password
 my $influx_host  = 'localhost';                            # change is InfluxDB is installed remotely
 my $influx_port  = '8086';                                 # change is Inlfux DB port is non-default
-my $uid = "cmdb";                                          # MySQL user for CMDB database
+my $uid = "cmdb;                                          # MySQL user for CMDB database
 my $pwd = 'cmdb';                                          # MySQL user password
 ##########################################################################################
 ```
 
 Start the script. It will automatically start buil-in web server.
 
-	./grafana_collect.pl daemon -l http://*:3002
+	# ./grafana_collect.pl daemon -l http://*:3002
 
 In the separate shell session on the same server execute:
 
-	curl http://localhost:3002/list
+	# curl http://localhost:3002/list
 
 If the script is configured correctly (proper credentials, proper API keys, CMDB properly set up, etc.), you should see the similar output:
 
@@ -383,7 +392,7 @@ If the script is configured correctly (proper credentials, proper API keys, CMDB
 
 Stop the script using `CTRL-c`.
 
-##Configure perl script to start with the system
+##  Step 4: Configure perl script to start with the system
 
 Centos 7 uses `systemd` to initialize operating system components that must be started after Linux kernel is booted. Configure `systemd` to start grafana_collect.pl as a daemon together with the Operating System.
 
@@ -392,19 +401,19 @@ Centos 7 uses `systemd` to initialize operating system components that must be s
 2. Enable new service to start with the system.
 
 ```
-systemctl enable grafana_collect
+    # systemctl enable grafana_collect
 ```
 
 3. Start the `grafana_collect` service.
 
 ```
-	systemctl start grafana_collect
+	# systemctl start grafana_collect
 ```
 
 4. Verify that the script started correctly.
 
 ```
-	systemctl status grafana_collect
+	# systemctl status grafana_collect
 ```
 
 Expected output:
@@ -424,7 +433,7 @@ Expected output:
 	           └─15347 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
 ```
 
-	curl http://localhost:3001/list
+	# curl http://localhost:3001/list
 
 Expected output:
 
@@ -439,7 +448,7 @@ Expected output:
 	| socialreview-bff-app              | 32528997 | bmx_eu-gb    | BlueCompute    | CASE-DEV | nodejs   | green  |            64 | -          |
 	'-----------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------'
 
-##Schedule periodic API calls
+## Step 5: Schedule periodic API calls
 
 API calls done by [`grafana_collect.pl`](scripts/grafana_collect.pl) are activated by external HTTP GET requests to perl runtime web server, listening on port `3001` by default. One of the ways to schedule periodic API calls is to create short shell script that will do the HTTP GET requests and schedule it by cron.
 Below are the configuration steps:
@@ -489,15 +498,15 @@ time				app_name							highest_sev
 # Dashboard configuration
 Having a data collection layer up and runnig and data coming to InfluxDB, we can start with Grafana dashboard configuration.
 
-## Configuring data sources
+## Step 1: Configuring data sources
 
 ###InfluxDB
 
-InfluxDB Primary is the primary data source for the BlueCompute dashboard. It is installed by default in Grafana.
+InfluxDB Primary is the primary data source for the _BlueCompute_ dashboard. It is installed by default in Grafana.
 
 **Configuration**
 
-Open the URL: `http://\<grafana_hostname>:3000/datasources` in the browser and enter the name of the data source, InfluxDB URL and database name. Select InfluxDB as Data Source type.
+Open the URL: `http://\{grafana_hostname}:3000/datasources` in the browser and enter the name of the data source, InfluxDB URL and database name. Select InfluxDB as Data Source type.
 
 ![influxdb_datasource](images/influxdb_datasource.png)
 
@@ -505,7 +514,7 @@ Click Save & Test.
 
 ###New Relic APM
 
-Detailed dashboards for BlueCompute components monitored by New Relic are rendered based on New Relic Data Source.
+Detailed dashboards for _BlueCompute_ components monitored by New Relic are rendered based on New Relic Data Source.
 
 **Installation**
 
@@ -513,14 +522,14 @@ Download New Relic Data Source code from [GitHub project page](https://github.co
 
 **Configuration**
 
-Open the `URL: http://\<grafana_hostname>:3000/datasources` and enter the name of the data source (use the same name as the application name), New Relic API Key and application id. Select NewRelic as Data Source type.
+Open the `URL: http://\{grafana_hostname}:3000/datasources` and enter the name of the data source (use the same name as the application name), New Relic API Key and application id. Select NewRelic as Data Source type.
 
 ![newrelic_datasource](images/newrelic_datasource.png)
 
 >Repeat it for every application monitored by New Relic.
 
-## Import dashboards
-The following dashboards were developed by CSMO for BlueCompute:
+## Step 2: Import dashboards
+The following dashboards were developed by CSMO for _BlueCompute_:
 
 - [1 - BlueCompute Application Summary - First Responder](scripts/1 - BlueCompute Application Summary - First Responder.json)
 - [2 - BlueCompute Application Details](scripts/2 - BlueCompute Application Details.json)
@@ -532,13 +541,13 @@ Dashboad json files can be imported using Grafana UI: click on the top-left menu
 
 # CSMO dashboard for BlueCompute
 
-##First Responder dashboard
+## Step 1: First Responder dashboard
 First responder dashboard URL:
 
-`http://<dashboard_server_ip>:3000/dashboard/db/1-bluecompute-application-summary-first-responder`
+`http://{dashboard_server_ip}:3000/dashboard/db/1-bluecompute-application-summary-first-responder`
 
 Dashboard is divided into the following sections:
-- Key metrics (work in progress) for BlueCompute Hybrid Application.
+- Key metrics (work in progress) for _BlueCompute_ Hybrid Application.
 - Bluemix Cloud Foundry Applications
 - Bluemix Container Applications
 - Bluemix Containers
@@ -593,22 +602,22 @@ Dashboard is divided into the following sections:
 
 First Responder Dashboard includes several context entry point to more detailed information about specific solution components:
 
-1. Link to Bluemix Logmet service. It opens Logmet Kibana4 dashboard with all log records from BlueCompute collected by Logmet service.
-2. Link to New Relic Service Map for BlueCompute. It shows topology diagram for BlueCompute components monitored by New Relic.
-3. Click on the "NR Status" panel moves to New Relic console with list of monitored applications and more detailed information about application performance.
-4. Click on the "NOI Severity" panel moves to NOI Event Viewer console with the list of alerts generated for this application.
-5. Link to more detailed Grafana dashboard "BlueCompute Application Details" for specific application only.
+1. Link to Bluemix Logmet service. It opens Logmet Kibana4 dashboard with all log records from _BlueCompute_ collected by Logmet service.
+2. Link to New Relic Service Map for _BlueCompute_. It shows topology diagram for _BlueCompute_ components monitored by New Relic.
+3. Click on the `NR Status` panel moves to New Relic console with list of monitored applications and more detailed information about application performance.
+4. Click on the `NOI Severity` panel moves to NOI Event Viewer console with the list of alerts generated for this application.
+5. Link to more detailed Grafana dashboard `BlueCompute Application Details` for specific application only.
 6. Link to Bluemix Logmet service. It opens Logmet Kibana4 dashboard with log records from specific application only.
-7. Link to more detailed Grafana dashboard "BlueCompute Application Details" for specific application only.
+7. Link to more detailed Grafana dashboard `BlueCompute Application Details` for specific application only.
 8. Link to Logmet Grafana dashboard with metrics like CPU and Memory for specific container or container group.
 9. 10. Links to New Relic console with list of monitored applications and more detailed information about monitored components.
 
 
 ![img](images/Grafana_first_responder_big_desc1.png)
 
-##BlueCompute application details dashboard
+## Step 2: BlueCompute application details dashboard
 
-BlueCompute application details dashboard shows detailed graphs for BleuCompute components monitored. All metrics in this dashboard are collected using [New Relic Data Source](#new-relic-apm) that collects data directly from New Relic API.
+BlueCompute application details dashboard shows detailed graphs for _BlueCompute_ components monitored. All metrics in this dashboard are collected using [New Relic Data Source](#new-relic-apm) that collects data directly from New Relic API.
 
  - Web Transactions Total Time
  - Average Response Time per minute for HttpDispatcher and WebFrontend/QueueTime

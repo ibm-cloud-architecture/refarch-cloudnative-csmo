@@ -1,4 +1,5 @@
 # Netcool Operations Insight event management for Hybrid application
+Author: Detlef Kleinfelder (detlef.kleinfelder@de.ibm.com)
 
 IBM Netcool Operations Insight accelerates the operations management lifecycle from problem detection to fix. It receives events from ressource monitoring solutions, enriches, correlates and escalates those based on automation rules.
 

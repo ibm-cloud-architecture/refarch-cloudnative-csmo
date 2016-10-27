@@ -1,4 +1,5 @@
 # Cloud Service Management and Operation for Hybrid application
+Author: Detlef Kleinfelder (detlef.kleinfelder@de.ibm.com)
 
 (In Progress....)
 
