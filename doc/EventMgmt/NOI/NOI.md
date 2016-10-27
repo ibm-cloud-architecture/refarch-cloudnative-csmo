@@ -50,27 +50,27 @@ included configuration files follow this format, but you are free to change them
 standards.
 
 #### Setup of messagebus_newrelic.props:    
-1. Copy the included file [`scripts/EventMgmt/NOI/probes/arch/message_bus_newrelic.props`](/scripts/EventMgmt/NOI/probes/arch/message_bus_newrelic.props) to `$OMNIHOME/probes/{arch}/message_bus_newrelic.props` on your probe server. 
+1. Copy the included file [`message_bus_newrelic.props`](/scripts/EventMgmt/NOI/probes/arch/message_bus_newrelic.props) to `$OMNIHOME/probes/{arch}/message_bus_newrelic.props` on your probe server. 
 
-    Replace the {arch} with your platform type running the probe. For example `$OMNIHOME/probes/linux2x86/message_bus_newrelic.props`
+    Replace the {arch} with your platform type running the probe. For example 
+    
+    `$OMNIHOME/probes/linux2x86/message_bus_newrelic.props`
 
-    Make any necessary changes to the file, such as matching the ObjectServer name to your local ObjectServer. 
+    Make any necessary changes to the file, such as matching the ObjectServer name to your local ObjectServer (Attribute: `Server`). 
     
 2. Remember to restart the probe after changing the props files. 
     
 #### Setup of httpTransport_newrelic.properties:
-1. Copy the included file `scripts/EventMgmt/NOI/java/conf/httpTransport_newrelic.properties` to `$OMNIHOME/java/conf/httpTransport_newrelic.properties` on your probe server.
+1. Copy the included file [`httpTransport_newrelic.properties`](/scripts/EventMgmt/NOI/java/conf/httpTransport_newrelic.properties) to `$OMNIHOME/java/conf/httpTransport_newrelic.properties` on your probe server.
 
     Make any necessary changes to the `httpTransport_newrelic.properties` file, such as choosing a suitable 
-port and define security settings.  
-    Since New Relic sends url-encoded data, the line   
-    `expectedMIMEType=application/x-www-form-urlencoded`  
-    is mandatory. 
+port and define sfurther ecurity settings.  
+    
     
 2. Remember to restart the probe after changing the properties files.
 
 #### Setup of messagebus_newrelic.rules:    
-1. Copy the included file `scripts/EventMgmt/NOI/probes/arch/message_bus_newrelic.rules` to `$OMNIHOME/probes/{arch}/message_bus_newrelic.rules` on your probe server.
+1. Copy the included file [`message_bus_newrelic.rules`](/scripts/EventMgmt/NOI/probes/arch/message_bus_newrelic.rules) to `$OMNIHOME/probes/{arch}/message_bus_newrelic.rules` on your probe server.
 
     Replace the {arch} with your platform type running the probe. For example `$OMNIHOME/probes/linux2x86/message_bus_newrelic.rules `
 
@@ -100,7 +100,9 @@ The database can be exchanged by any other existing configuration data source wh
 
     + Either add them manually via the PHP UI for MySQL:
 
-         i) Connect to the maintenande UI (php) for managing the database content at `http://{your-serrver}/cmdb.php`
+         i) Connect to the maintenande UI (php) for managing the database content at 
+         
+            `http://{your-serrver}/cmdb.php`
         
             Replace the {your-server} with the address of your enrichment database server running the PHP ui.
         
@@ -135,7 +137,7 @@ The Impact component of NOI will use this enrichment database to enrich incoming
 
 The configuration can be imported into your Netcool Impact instance.
 
-1. Copy the included file `scripts/EventMgmt/NOI/impact/case_impact_enrichment_project.tgz` to `/tmp` on your impact server.
+1. Copy the included file [`case_impact_enrichment_project.tgz`](/scripts/EventMgmt/NOI/impact/case_impact_enrichment_project.tgz) to `/tmp` on your impact server.
 
 2. Extract project on your impact server
 
@@ -172,11 +174,11 @@ When the events are enriched with the data from the enrichment database, event v
  
 The configuration can be imported into your NOI DASH instance. For additional details refer to the [product information](https://www.ibm.com/support/knowledgecenter/SSSHTQ_8.1.0/com.ibm.netcool_OMNIbus.doc_8.1.0/webtop/wip/task/web_adm_expimpimportdata.html).
 
-1. Copy the included file `scripts/EventMgmt/NOI/webgui/case_webgui_filter_and_views.zip` to `$JazzSM_HOME/ui/input/data.zip` on your NOI DASH server.
+1. Copy the included file [`case_webgui_filter_and_views.zip`](/scripts/EventMgmt/NOI/webgui/case_webgui_filter_and_views.zip) to `$JazzSM_HOME/ui/input/data.zip` on your NOI DASH server.
 
     where $JazzSM_HOME is the home directory of your DASH installation, like `/opt/IBM/JazzSM`.
     
-    Note: If you have changed the `import.importFile` statement in the `$WEBGUI_HOME/integration/importexport_tool/etc/OMNIbusWebGUI_settings.properties` configuration file, move the `data.zip` accordingly to the specified directory.
+    __Note:__ If you have changed the `import.importFile` statement in the `$WEBGUI_HOME/integration/importexport_tool/etc/OMNIbusWebGUI_settings.properties` configuration file, move the `data.zip` to the specified directory accordingly.
 
 2. Import filter and view into your NOI DASH server
 
@@ -193,28 +195,28 @@ The configuration can be imported into your NOI DASH instance. For additional de
 
 Upon login into your DASH instance, you access the list of active events through the "Incident -> Event Viewer" menu.
 
-The list of events displayed is controlled by a filter. You may, for example, wish to see only events related to a specific application or you may wish to see all the events which occurred in the last 10 minutes.
+The list of events displayed is controlled by a _filter_. You may, for example, wish to see only events related to a specific application or you may wish to see all the events which occurred in the last 10 minutes.
 
-+ The imported filter "BlueCompute" displays all events for the _BlueCompute_ business service based on the event field setting "Service=BlueCompute".
++ The imported filter `BlueCompute` displays all events for the _BlueCompute_ business service based on the event field setting "Service=BlueCompute".
  
-The format of the list is controlled by the View. 
+The format of the event viewer list is controlled by the assigned _view_. 
 
-+ The view "Case_Integrations" displays all events in a grouping form, where the first level is “Service” and the second level “Location”.  
++ The view `Case_Integrations` displays all events in a tree grouping form, where the first tree level is “Service” and the second tree level “Location”.  
     
-These fields have been enriched for each technical event coming from the monitoring sources based on a configuration data source.
+As a result of step 3 and 4, these used fields have been enriched for each technical event based on the enrichment data source.
 
 By this you can immediately see all affected services including the _BlueCompute_ application and sub-grouped by location. 
-In the following screenshot has two events with application components running on EU Bluemix region (bmx_eu-gb) and on Softlayer (SL).
+In the following screenshot There are two events with _BlueCompute_ application components running on EU Bluemix region (bmx_eu-gb) and on Softlayer (SL).
 
 ![BlueCompute event in NOI](NOI_events_for_bluecompute.png?raw=true)  
 
 
-With this view, you can also see which critical events have been forwarded to ANS, Slack and ICD trouble ticketing sytem. You can also see which Slack channel has been updated. Events may be forwarded automatically when they are first reported or manually by operators. 
+With this view, you can also see which critical events have been forwarded to ANS, Slack and/or ICD trouble ticketing sytem. You can also see which Slack channel has been updated. Events can either be forwarded automatically when they are first reported or manually through operator intervention. 
 For activities like forwarding events manually or automatically to a slack channel, see the [Integrate Netcool Operations Insight into your Bluemix service management tool chain](https://developer.ibm.com/cloudarchitecture/docs/service-management/netcool-operations-insight).
 
 ##Step 7: Forward critical events to alert notification system
 
-Forwarding critical events to the IBM Alert Notification System (ANS) is done _automatically_ with Netcool Impact policies. Alerts will be send with ANS field `ApplicationsOrServices` set to value of NOI field `Service`.
+Forwarding critical events to the IBM Alert Notification System (ANS) is done **automatically** with Netcool Impact policies. Alerts will be send with ANS field `ApplicationsOrServices` set to value of NOI field `Service`. Users can manually send events to ANS by means of the event context menu.
 
 
 You need four Impact configuration file to achieve this:
@@ -229,17 +231,17 @@ You need four Impact configuration file to achieve this:
 
 
 There are no specific steps, which are related to _BlueCompute_ hybrid application.
-Use the guide [Integrate Netcool Operations Insight into your Bluemix service management tool chain](https://developer.ibm.com/cloudarchitecture/docs/service-management/netcool-operations-insight) for a detailed description about defining this integration and using the configuration files.
+Use the guide [Integrate Netcool Operations Insight into your Bluemix service management tool chain](https://developer.ibm.com/cloudarchitecture/docs/service-management/netcool-operations-insight) for a detailed description about defining this ANS integration and using the configuration files.
 
-**Note**: the target documentation about the ANS integration is draft yet.
+**Note**: the target documentation about the ANS integration is in progress.
 
 ##Step 8: Forward events to collaboration tool
 
-Forwarding events to the collaboration tool Slack is done via Netcool Impact policies based on the event filter `severity >= critical`. Additionally an user can trigger a send-request via the NOI eventviewer context menu. 
-
+Forwarding events to the collaboration tool Slack is done via Netcool Impact policies, when triggered by an user via a send-request from the NOI eventviewer context menu. 
 
 There are no specific steps, which are related to _BlueCompute_ hybrid application for integrating with Slack.
 Use the guide [Integrate Netcool Operations Insight into your Bluemix service management tool chain](https://developer.ibm.com/cloudarchitecture/docs/service-management/netcool-operations-insight) for a detailed description about defining this integration.
+
 
 ### As a First Responder forward manually an event to a specific Slack channel:
 
@@ -247,7 +249,7 @@ In this case the FirstResponder uses an _existing_ channel which is reused for m
 
 1. View the alert in the eventviewer
 
-2. Right-click on the event to open the context menue.
+2. Right-click on the event to open the context menu.
 
 3. Select the `Slack->Send to Specific Channel` entry 
 
@@ -262,19 +264,19 @@ In this case the FirstResponder uses an _existing_ channel which is reused for m
 
 ### As a First Responder forward manually an event to an automatic Slack channel:
 
-In this case the FirstResponder creates automatically a _new_ channel for an individual event.
+In this case the FirstResponder creates automatically a _new_ channel for an individual event and invites subject matter experts and incident owners into the channel to start collaboration.
 
 1. View the alert in the eventviewer
 
-2. Right-click on the event to open the context menue.
+2. Right-click on the event to open the context menu.
 
 3. Select the `Slack->Send to Automatic Channel` entry 
 
-   This will create a new channel with channel name `inc_{serial}_{node}` replaced with the values of the event fields `Serial` and `Node`. Example: `inc_8635482_bluecompute-web-app`
+   This will create a new channel with channel name `inc_{serial}_{node}` where the values of the event fields `Serial` and `Node` are replaced with the values from the event. Example: `inc_86335482_bluecompute-web-app`
     
     ![SelectChannelName](NOI_slack_channel_created.png?raw=true) 
 
-5. Select the `Slack->InviteToSlack` on the same event to invite persons to collaborate in the new channel.
+5. Select the `Slack->InviteToSlack` on the same event to invite a person to collaborate in the new channel.
 
 6. Enter the name of the slack user (yet internal id) into the prompt and click `Run` button to invite.
  
