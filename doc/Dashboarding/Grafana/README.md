@@ -414,8 +414,7 @@ Verify that the script started correctly.
 
     # systemctl status grafana_collect
 
-
-    Expected output:
+Expected output:
 
 
 	[root@rscase ~]# systemctl status grafana_nr
@@ -435,7 +434,7 @@ Check service functionality
 
 	# curl http://localhost:3001/list
 
-    Expected output:
+Expected output:
 
 	[root@rscase case]# curl localhost:3001/list
 	.------------------------------------------------------------------------------------------------------------------------------------------.
@@ -506,13 +505,15 @@ InfluxDB Primary is the primary data source for the _BlueCompute_ dashboard. It 
 
 **Configuration**
 
-Open the URL: `http://\{dashboard_server_ip}:3000/datasources` in the browser and enter the name of the data source, InfluxDB URL and database name. Select InfluxDB as Data Source type.
+- Open the URL: `http://\{dashboard_server_ip}:3000/datasources` in the browser, where {dashboard_server_ip} is the address of your grafana server.
 
-where {dashboard_server_ip} is the address of your grafana server.
+- Enter the name of the data source, InfluxDB URL and database name. 
+
+- Select InfluxDB as Data Source type.
 
 ![influxdb_datasource](images/influxdb_datasource.png)
 
-Click Save & Test.
+- Click `Save & Test`.
 
 ###New Relic APM
 
