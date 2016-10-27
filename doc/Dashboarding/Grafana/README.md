@@ -402,17 +402,17 @@ Centos 7 uses `systemd` to initialize operating system components that must be s
 
 1. Copy service definition [grafana_collect.service](scripts/grafana_collect.service) to /etc/systemd/system directory. Note that provided service definition assumes that perl script is located in `/case` directory. Edit `grafana_collect.service` if you want to change script location or listening port (it uses port 3001 by default).
 
-2. Enable new service to start with the system.
+2. Enable new service to start with the system. 
 
-# systemctl enable grafana_collect
+    # systemctl enable grafana_collect
 
-3. Start the `grafana_collect` service.
+3. Start the `grafana_collect` service. 
 
-# systemctl start grafana_collect
+    # systemctl start grafana_collect
 
-4. Verify that the script started correctly.
+4. Verify that the script started correctly. 
 
-# systemctl status grafana_collect
+    # systemctl status grafana_collect
 
 
 Expected output:
