@@ -19,12 +19,15 @@ For this project we utilized following set of tools to showcase end-to-end incid
 
 **Dashboard** - [Grafana](Dashboarding/Grafana/README.md)
 
+
 ### Understanding System Context Flows for the Tools in CSMO Toolchain Connecting BlueCompute Application
+
+Here is the view to system context of each these tools to give you deeper and broader perspective of the flow and integration.
 
 
 #### System Context Flow for New Relic
 
-<![System Context Flow NewRelic](../static/imgs/Monitoring/NewRelic/Cloud_Service_Management-NewRelic_Hybrid.png?raw=true)>
+![System Context Flow NewRelic](../static/imgs/Monitoring/NewRelic/Cloud_Service_Management-NewRelic_Hybrid.png?raw=true)
 
 The above figure shows the deep dive of NewRelic Ressource Monitoring and its various components and various integrated tools for incident management and their interactions. 
 
@@ -57,7 +60,7 @@ The above figure shows the deep dive of IBM Bluemix Application Monitoring (BAM)
 
 #### System Context Flow for IBM Netcool Operations Insights (NOI)
 
-<![System Context Flow NOI](../static/imgs/Eventing/NOI/Cloud_Service_Management-NOI_Hybrid.png?raw=true)>
+![System Context Flow NOI](../static/imgs/Eventing/NOI/Cloud_Service_Management-NOI_Hybrid.png?raw=true)
 
 The above figure shows the deep dive of NOI and its various components and various integrated tools for incident management and their interactions. One of the key takeaways from the diagram is that the solution supports a heterogeneous mixture of products and solutions, each feeding or being fed by the central NOI solution.
 
@@ -75,7 +78,7 @@ The following flow describes the setup and operations of this solution in an ove
 
 #### System Context Flow for IBM Alert Notification System
 
-<![System Context Flow Grafana](../static/imgs/Notification/ANS/Cloud_Service_Management-AlertNotification.png?raw=true)>
+![System Context Flow Grafana](../static/imgs/Notification/ANS/Cloud_Service_Management-AlertNotification.png?raw=true)
 
 The above figure shows the deep dive of ANS and its various components and various integrated tools for incident management and their interactions. 
 
@@ -84,7 +87,7 @@ The above figure shows the deep dive of ANS and its various components and vario
 
 #### System Context Flow for Grafana
 
-<![System Context Flow Grafana](../static/imgs/Dashboarding/Grafana/Cloud_Service_Management-Grafana_Hybrid.png?raw=true)>
+![System Context Flow Grafana](../static/imgs/Dashboarding/Grafana/Cloud_Service_Management-Grafana_Hybrid.png?raw=true)
 
 The above figure shows the deep dive of Grafana and its various components and various integrated tools for incident management and their interactions. 
 
