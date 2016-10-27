@@ -36,7 +36,7 @@ It gives an overall view on current status of all BlueCompute Hybrid application
 This document will describe, how to deploy whole dashboarding solution on single Centos 7 server.
 
 Diagram below explains the data flow for the dashboard.
-[Data collection component]() collects data from the following data sources:
+[Data collection component](#data-collection-for-dashboard-grafanacollectpl) collects data from the following data sources:
 
 - Bluemix Clound Foundry API
 - Bluemix Container API
