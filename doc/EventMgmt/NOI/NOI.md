@@ -10,11 +10,15 @@ In this document you will understand how to setup IBM Netcool® Operations Insig
 We will also link to the guide [Integrate Netcool Operations Insight into your Bluemix service management tool chain](https://developer.ibm.com/cloudarchitecture/docs/service-management/netcool-operations-insight) for details about the integration with Bluemix.
 
 
-Netcool Operations Insight is operated though a web based GUI called DASH, login is https://{yourServer}:{port}/ibm/console.
+Netcool Operations Insight is operated though a web based GUI called DASH, login is 
+
+    https://{yourServer}:{port}/ibm/console.
 
     Replace {yourServer} and {port} with the address/port of your NOI DASH instance.
 
-Netcool Operations Insight Impact is administered though a web based GUI called Impact-UI, login typically is https://{yourServer}:{port}/ibm/console.
+Netcool Operations Insight Impact is administered though a web based GUI called Impact-UI, login is 
+
+    https://{yourServer}:{port}/ibm/console.
 
     Replace {yourServer} and {port} with the address/port of your NOI Impact instance.
 
@@ -30,7 +34,7 @@ The integration is based on New Relic's webhook capabilities. The New Relic even
 
 1. Install the message bus probe per the [standard IBM instructions](https://www.ibm.com/support/knowledgecenter/SSSHTQ/omnibus/probes/message_bus/wip/concept/messbuspr_intro.html) and adjust by any local requirements (mail server considerations, H/A considerations, etc.) 
 
-    Note that the lowest version of the probe that supports New Relic integration is 1.3. For integrating the new Alerts webhooks, you need to use the message bus probe version 1.3.0.5.
+    __Note:__ the lowest version of the probe that supports New Relic integration is 1.3. For integrating the new Alerts webhooks, you need to use the message bus probe version 1.3.0.5 or higher.
 
     [Learn more about the probe for message bus.](http://www-01.ibm.com/support/docview.wss?uid=swg21970413)
 
@@ -46,7 +50,7 @@ included configuration files follow this format, but you are free to change them
 standards.
 
 #### Setup of messagebus_newrelic.props:    
-1. Copy the included file `scripts/EventMgmt/NOI/probes/arch/message_bus_newrelic.props` to `$OMNIHOME/probes/{arch}/message_bus_newrelic.props` on your probe server. 
+1. Copy the included file [`scripts/EventMgmt/NOI/probes/arch/message_bus_newrelic.props`](scripts/EventMgmt/NOI/probes/arch/message_bus_newrelic.props) to `$OMNIHOME/probes/{arch}/message_bus_newrelic.props` on your probe server. 
 
     Replace the {arch} with your platform type running the probe. For example `$OMNIHOME/probes/linux2x86/message_bus_newrelic.props`
 
