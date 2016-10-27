@@ -273,6 +273,8 @@ In this case the FirstResponder creates automatically a _new_ channel for an ind
 3. Select the `Slack->Send to Automatic Channel` entry 
 
    This will create a new channel with channel name `inc_{serial}_{node}` where the values of the event fields `Serial` and `Node` are replaced with the values from the event. Example: `inc_86335482_bluecompute-web-app`
+   
+   The event field `SlackChannel` will be updated with the channel name.
     
     ![SelectChannelName](NOI_slack_channel_created.png?raw=true) 
 

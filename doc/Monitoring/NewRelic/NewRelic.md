@@ -125,27 +125,27 @@ The Netcool Operations Insight (Omnibus) integration is done via webhook integra
 
 Follow these steps to send alerts and notification to NOI. 
 
-#### Step 3a: Setup the Alert (New) Notification channel
+#### Step 3a: Setup the Alert (new) Notification channel
 1. Select Alerts(New) from the top menu
-2. Select "Alert notification channel" tab
-3. Create a new notification channel by clicking on "New notification channel"
-4. Select "WebHook" as the Channel Type
+2. Select `Alert notification channel` tab
+3. Create a new notification channel by clicking on `New notification channel`
+4. Select `WebHook` as the Channel Type
 5. Input Webhook name (e.g. NOI)
 6. Input Base URL of your NOI instance running the message bus probe. Please see [How to setup NOI for BlueCompute](http://to be added) for details about NOI and the message bus probe to receive events.
-7. Finish with “Create Channel”
+7. Finish with `Create Channel`
 
 This channel can be used within the alerting policies which are described later on.
 
 #### Step 3b: Setup the Alert (old) Notification channel
-1. Select "APM" from the top menu
-2. Select "Alerts" from the submenu
-3. Select "Channel and groups" tab from the tree menu on the left
-4. Create a new notification channel by clicking on "Create channel"
-5. Select "WebHook" as the Channel Type from the drop-down list
+1. Select `APM` from the top menu
+2. Select `Alerts` from the submenu
+3. Select `Channel and groups` tab from the tree menu on the left
+4. Create a new notification channel by clicking on `Create channel`
+5. Select `WebHook` as the Channel Type from the drop-down list
 6. Input Webhook name (e.g. NOI)
 7. Input Webhook URL of your NOI instance running the message bus probe. Please see [How to setup NOI for BlueCompute](http://to be added) for details about NOI and the message bus probe to receive events.
-8. Switch to "All critical events" from the Notification level drop down list   
-9. Finish with “Integrate with webhooks”
+8. Switch to `All critical events` from the Notification level drop down list   
+9. Finish with `Integrate with webhooks`
 
 This channel can be used within the alerting policies which are described later on.
 
@@ -191,12 +191,12 @@ The older Alert Policies technology of NewRelic allows to define the monitor of 
 
 
 - Login into NewRelic UI
-- Select “APM” -> "Alerts” from the top menu bar (please do not use directly "Alerts" from the top menu).
-- Select "Application policies" from the left menu tree.
-- Create a new policy called "BlueCompute" by creating the "Create application policy" button, enter the name "BlueCompute" and select "Create" button.
-- Enter 2 minutes for "Downtime Alert when any ping URL is unresponsive for x minutes" and select the chechbox to activate the settings.
-- Click on the "Assign Application" button to select your application
-- Select each application for this policy under step 1 "Select applications to move" by ticking the checkbox
+- Select `APM -> Alerts` from the top menu bar (please do not use directly `Alerts` from the top menu).
+- Select `Application policies` from the left menu tree.
+- Create a new policy called `BlueCompute` by creating the `Create application policy` button, enter the name `BlueCompute` and select `Create` button.
+- Enter 2 minutes for `Downtime Alert when any ping URL is unresponsive for x minutes` and select the chechbox to activate the settings.
+- Click on the `Assign Application` button to select your application
+- Select each application for this policy under step 1 `Select applications to move` by ticking the checkbox
       + eureka-cluster
       + zuul-cluster
       + inventory-bff-app
@@ -204,11 +204,11 @@ The older Alert Policies technology of NewRelic allows to define the monitor of 
       + bluecompute-web-app
       + microservice-inventory
       + microservice-socialreview
-- Choose "Move to BlueCompute" under step 2 "Choose destination"  
-- Click the "Assign Application" button to add these applications to your policy
+- Choose `Move to BlueCompute` under step 2 `Choose destination`  
+- Click the `Assign Application` button to add these applications to your policy
 - For each application do
-    + click on the "Ping URL icon" 
-    + add the "URL to monitor" under the Availability URL section. Use the following URLs or adopt them if you use different routes.
+    + click on the `Ping URL icon` 
+    + add the `URL to monitor` under the Availability URL section. Use the following URLs or adopt them if you use different routes.
  
         | Application                   | URL to monitor                                    |
         |:------------------------------|:--------------------------------------------------|
@@ -216,11 +216,11 @@ The older Alert Policies technology of NewRelic allows to define the monitor of 
         | eureka-cluster                | https://eureka-cluster-dev.eu-gb.mybluemix.net    |
         | zuul-cluster                  | https://zuul-cluster-dev.eu-gb.mybluemix.net/info |
 
-    + Save settting with "Save your changes" button
-- Switch to the "Alert Channels" tab
-- Click on "Select channels" button
-- Select "NOI" channel under the Webhooks section
-- Click "Save now"
+    + Save settting with `Save your changes` button
+- Switch to the `Alert Channels` tab
+- Click on `Select channels` button
+- Select `NOI` channel under the Webhooks section
+- Click `Save now`
 
 
 #### Setup Alert (new) Policies
@@ -239,13 +239,13 @@ By means of the new alert policies you can create also policies for plugins like
 
     For specific nginx entities separate policies can be setup to adopt individual load behavior for metrics like “response time”, “requests rate” or “accept rate”.
 
-4. Switch to the tab "Notification channels"
-5. Click on "Add notification channel"
+4. Switch to the tab `Notification channels`
+5. Click on `Add notification channel`
 6. Select the Webhooks folder
-7. Select "NOI" from the available webhook channels
-8. Click "Update policy" to finish
-9. Click on "Incident preference"
-10. Select "by incident and entity" to get an event for every violation.
+7. Select `NOI` from the available webhook channels
+8. Click `Update policy` to finish
+9. Click on `Incident preference`
+10. Select `by incident and entity` to get an event for every violation.
 
 ##### Alert (New) Policy for node.js
 
@@ -261,13 +261,13 @@ By means of the new alert policies you can create also policies for plugins like
 
     For specific node.js entities and key transactions separate policies can be setup to adopt individual load behavior for metrics like “response time”, “apdex”, “throughput” or “web transaction times”.
 
-4. Switch to the tab "Notification channels"
-5. Click on "Add notification channel"
+4. Switch to the tab `Notification channels`
+5. Click on `Add notification channel`
 6. Select the Webhooks folder
-7. Select "NOI" from the available webhook channels
-8. Click "Update policy" to finish
-9. Click on "Incident preference"
-10. Select "by incident and entity" to get an event for every violation.
+7. Select `NOI` from the available webhook channels
+8. Click `Update policy` to finish
+9. Click on `Incident preference`
+10. Select `by incident and entity` to get an event for every violation.
 
 ##### Alert (New) Policy for java microservices
 
@@ -283,13 +283,13 @@ By means of the new alert policies you can create also policies for plugins like
 
     For specific java entities and key transactions separate policies can be setup to adopt individual load behavior for metrics like “response time”, “apdex”, “throughput” or “web transaction times”.
 
-4. Switch to the tab "Notification channels"
-5. Click on "Add notification channel"
+4. Switch to the tab `Notification channels`
+5. Click on `Add notification channel`
 6. Select the Webhooks folder
-7. Select "NOI" from the available webhook channels
-8. Click "Update policy" to finish
-9. Click on "Incident preference"
-10. Select "by incident and entity" to get an event for every violation.
+7. Select `NOI` from the available webhook channels
+8. Click `Update policy` to finish
+9. Click on `Incident preference`
+10. Select `by incident and entity` to get an event for every violation.
 ##### Alert (New) Policy for mysql sqlnodes
 
 1. Create an alert policy (sample name: 	CSMO mysql policy )
@@ -304,13 +304,13 @@ By means of the new alert policies you can create also policies for plugins like
 
     For specific MySQL entities separate policies can be setup to adopt individual load behavior for metrics like “reads/sec”, write/sec” and “connections”.
 
-4. Switch to the tab "Notification channels"
-5. Click on "Add notification channel"
+4. Switch to the tab `Notification channels`
+5. Click on `Add notification channel`
 6. Select the Webhooks folder
-7. Select "NOI" from the available webhook channels
-8. Click "Update policy" to finish
-9. Click on "Incident preference"
-10. Select "by incident and entity" to get an event for every violation.
+7. Select `NOI` from the available webhook channels
+8. Click `Update policy` to finish
+9. Click on `Incident preference`
+10. Select `by incident and entity` to get an event for every violation.
 
 ### Step 6: Configure Service MAP
 For _BlueCompute_ you can create a service map containing all the instrumented components.
