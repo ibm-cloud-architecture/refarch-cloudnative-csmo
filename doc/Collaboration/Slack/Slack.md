@@ -22,9 +22,9 @@ For base setup of a Slack instance, please follow the information of guide [!!!I
     
     Example: https://ibmcase.slack.com/messages/BlueCompute
 
-+ Watch for the channel information which have been provided and flowing in.
++ Watch for the channel information which have been provided and is constantly flowing in.
 
-    ToBeAdded: Screenshot for channel
+    !!!ToBeAdded: Screenshot for channel
 
 + Various activities and commands can be used for the collaboration as required for the remediation case by case, please follow the information of guide [!!!InProgess](InProgess) for a detailed description.
 
