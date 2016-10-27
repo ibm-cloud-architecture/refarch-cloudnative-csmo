@@ -21,6 +21,8 @@ For more details on this reference architecture visit the [Architecture Center f
 ## Sample Tools Implementation
 
 See sample [Tools Implementation Guide](doc) of Incident Management solution for a hybrid application
+
+![CSMO IM Implementation](static/imgs/Cloud_Service_Management-Incident_Management_with_Tools.png?raw=true) 
  
 
 
