@@ -400,22 +400,22 @@ Stop the script using `CTRL-c`.
 
 Centos 7 uses `systemd` to initialize operating system components that must be started after Linux kernel is booted. Configure `systemd` to start grafana_collect.pl as a daemon together with the Operating System.
 
-1. Copy service definition [grafana_collect.service](scripts/grafana_collect.service) to /etc/systemd/system directory. Note that provided service definition assumes that perl script is located in `/case` directory. Edit `grafana_collect.service` if you want to change script location or listening port (it uses port 3001 by default).
+Copy service definition [grafana_collect.service](scripts/grafana_collect.service) to /etc/systemd/system directory. Note that provided service definition assumes that perl script is located in `/case` directory. Edit `grafana_collect.service` if you want to change script location or listening port (it uses port 3001 by default).
 
-2. Enable new service to start with the system. 
+Enable new service to start with the system. 
 
     # systemctl enable grafana_collect
 
-3. Start the `grafana_collect` service. 
+Start the `grafana_collect` service. 
 
     # systemctl start grafana_collect
 
-4. Verify that the script started correctly. 
+Verify that the script started correctly. 
 
     # systemctl status grafana_collect
 
 
-Expected output:
+    Expected output:
 
 
 	[root@rscase ~]# systemctl status grafana_nr
@@ -431,11 +431,11 @@ Expected output:
 	           ├─15277 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
 	           └─15347 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
 
-5. Check service
+Check service functionality
 
 	# curl http://localhost:3001/list
 
-Expected output:
+    Expected output:
 
 	[root@rscase case]# curl localhost:3001/list
 	.------------------------------------------------------------------------------------------------------------------------------------------.
