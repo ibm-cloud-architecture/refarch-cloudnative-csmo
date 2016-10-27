@@ -33,7 +33,7 @@ Author: Rafał Szypułka (rafal.szypulka@pl.ibm.com)
 
 Monitoring Dashboard is an entry point UI for First Responder persona who will react on alerts from Incident Management.
 It gives an overall view on current status of all BlueCompute Hybrid application components. It allows also to contextually drill down to more detailed information about topology, performance metrics, log files and generated alerts.
-This document will describe, how to deploy whole dashboarding solution on single Centos 7 server.
+This document will describe, how to deploy whole dashboarding solution on a single Centos 7 server.
 
 Diagram below explains the data flow for the dashboard.
 [Data collection component](#data-collection-for-dashboard---grafana_collectpl) collects data from the following data sources:
@@ -487,7 +487,7 @@ time				app_name							highest_sev
 > exit
 ```
 # Dashboard configuration
-After our data collection layer is up and runnig and data is coming to InfluxDB, we can start with Grafana dashboard configuration.
+Having a data collection layer up and runnig and data coming to InfluxDB, we can start with Grafana dashboard configuration.
 
 ## Configuring data sources
 
