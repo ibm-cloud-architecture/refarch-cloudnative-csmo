@@ -404,25 +404,20 @@ Centos 7 uses `systemd` to initialize operating system components that must be s
 
 2. Enable new service to start with the system.
 
-```
     # systemctl enable grafana_collect
-```
 
 3. Start the `grafana_collect` service.
 
-```
 	# systemctl start grafana_collect
-```
 
 4. Verify that the script started correctly.
 
-```
 	# systemctl status grafana_collect
-```
+
 
 Expected output:
 
-```
+
 	[root@rscase ~]# systemctl status grafana_nr
 	● grafana_nr.service - CASE project app for Grafana
 	   Loaded: loaded (/etc/systemd/system/grafana_nr.service; enabled; vendor preset: disabled)
@@ -435,7 +430,6 @@ Expected output:
 	           ├─15076 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
 	           ├─15277 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
 	           └─15347 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
-```
 
 5. Check service
 
