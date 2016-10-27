@@ -10,7 +10,7 @@ Authors:
 
 The tools in the Incident Management solution are implemented to provide an end-to-end view of application. You may choose to use multiple tools to handle different functionality of the application. The below picture shows multiple tools that manages cloud native as well as hybrid application.
 
-![CSMO Incident Management Implementation](../static/imgs/Cloud_Service_Management-Incident_Management_with_Tools.png?raw=true)  
+![CSMO Incident Management Implementation](../static/imgs/Cloud_Service_Management_Incident_with_Tools_BLUE_IBM.png?raw=true)  
 
 ### Reference Tools Mapping 
 
