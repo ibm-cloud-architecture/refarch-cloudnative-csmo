@@ -5,17 +5,19 @@ The tools in the Incident Management solution are implemented to provide an end-
 ![CSMO Incident Management Implementation](../static/imgs/Cloud_Service_Management-Incident_Management_with_Tools.png?raw=true)  
 
 ### Reference Tools Mapping 
-For this project we utilized a reference set of tools to showcase end-to-end incident management.
 
-**Monitoring** - uses [NewRelic](https://newrelic.com/) for resource monitoring and E2E monitoring of URLs <and IBM Bluemix Application Management (BAM) for synthetic monitoring of the hybrid application and components.>
+For this project we utilized following set of tools to showcase end-to-end incident management of [BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative) application that is hybrid in nature.  
 
-**Event Correlation** - uses the [IBM Netcool Operations Insights](http://www-03.ibm.com/software/products/en/netcool-operations-insight) to fulfill the event management and correlation activities.
 
-**Notification** - uses [IBM Alert Notification](http://www-03.ibm.com/software/products/en/ibm-alert-notification)
+**Monitoring** - [NewRelic](Monitoring/NewRelic/NewRelic.md) for resource monitoring and E2E monitoring of URLs <and IBM Bluemix Application Management (BAM) for synthetic monitoring of the hybrid application and components.>
 
-**Collaboration** - uses [Slack](https://slack.com)
+**Event Correlation** - [IBM Netcool Operations Insights](EventMgmt/NOI/NOI.md) to fulfill the event management and correlation activities.
 
-**Dashboard** - uses open source [Grafana](http://grafana.org)
+**Notification** - [IBM Alert Notification](Notification/ANS/ANS.md)
+
+**Collaboration** - [Slack](Collaboration/Slack/Slack.md)
+
+**Dashboard** - [Grafana](Dashboarding/Grafana/README.md)
 
 ### Understanding System Context Flows for the Tools in CSMO Toolchain Connecting BlueCompute Application
 
@@ -157,3 +159,14 @@ Grafana is one of the leading tools for querying and visualizing time series and
 For detailed steps please continue with [How to setup Grafana for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/doc/Dashboarding/Grafana/README.md)
 
 
+## Reference Product Links
+
+[IBM Netcool Operations Insights](http://www-03.ibm.com/software/products/en/netcool-operations-insight)
+
+[IBM Alert Notification](http://www-03.ibm.com/software/products/en/ibm-alert-notification)
+ 
+[NewRelic](https://newrelic.com/) 
+
+[Slack](https://slack.com)
+
+[Grafana](http://grafana.org)
