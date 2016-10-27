@@ -14,13 +14,13 @@ Netcool Operations Insight is operated though a web based GUI called DASH, login
 
     https://{yourServer}:{port}/ibm/console.
 
-    Replace {yourServer} and {port} with the address/port of your NOI DASH instance.
+Replace {yourServer} and {port} with the address/port of your NOI DASH instance.
 
 Netcool Operations Insight Impact is administered though a web based GUI called Impact-UI, login is 
 
     https://{yourServer}:{port}/ibm/console.
 
-    Replace {yourServer} and {port} with the address/port of your NOI Impact instance.
+Replace {yourServer} and {port} with the address/port of your NOI Impact instance.
 
 ##Step 1: Install and Setup IBM Netcool Operations Insight
 
@@ -50,7 +50,7 @@ included configuration files follow this format, but you are free to change them
 standards.
 
 #### Setup of messagebus_newrelic.props:    
-1. Copy the included file [`scripts/EventMgmt/NOI/probes/arch/message_bus_newrelic.props`](scripts/EventMgmt/NOI/probes/arch/message_bus_newrelic.props) to `$OMNIHOME/probes/{arch}/message_bus_newrelic.props` on your probe server. 
+1. Copy the included file [`scripts/EventMgmt/NOI/probes/arch/message_bus_newrelic.props`](/scripts/EventMgmt/NOI/probes/arch/message_bus_newrelic.props) to `$OMNIHOME/probes/{arch}/message_bus_newrelic.props` on your probe server. 
 
     Replace the {arch} with your platform type running the probe. For example `$OMNIHOME/probes/linux2x86/message_bus_newrelic.props`
 
