@@ -13,7 +13,7 @@
 	- [Create CMDB database schema and import example](#create-cmdb-database-schema-and-import-example)
 - [PHP](#php)
 	- [CMDB UI configuration](#cmdb-ui-configuration)
-- [Data collection for Dashboard - grafana_collect.pl](#data-collection-for-dashboard-grafanacollectpl)
+- [Data collection for Dashboard - grafana_collect.pl](#data-collection-for-dashboard---grafana_collectpl)
 	- [Install prerequisite Centos packages](#install-prerequisite-centos-packages)
 	- [Install prerequisite perl modules](#install-prerequisite-perl-modules)
 	- [Complete script configuration](#complete-script-configuration)
@@ -36,7 +36,7 @@ It gives an overall view on current status of all BlueCompute Hybrid application
 This document will describe, how to deploy whole dashboarding solution on single Centos 7 server.
 
 Diagram below explains the data flow for the dashboard.
-[Data collection component](#data-collection-for-dashboard-grafanacollectpl) collects data from the following data sources:
+[Data collection component](#data-collection-for-dashboard---grafana_collectpl) collects data from the following data sources:
 
 - Bluemix Clound Foundry API
 - Bluemix Container API
