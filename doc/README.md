@@ -136,7 +136,6 @@ The above figure shows the deep dive of Grafana and its various components and v
 Grafana allows also the launch of external URL pages in new browser tabs as part of the use case scenarios. The includes the launch of 
 
     + the event viewer page from NOI displaying events in context of a page item displaying the associated events via an ad-hoc filter for the selected item
-    
     + the _BlueCompute_ Service Map from New Relic
 <the LogMet logfile search page in context of a page item filled with the appropriate search query for the selected item>.
 

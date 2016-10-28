@@ -1,20 +1,19 @@
-# NewRelic resource monitoring for Hybrid application
-Author: Detlef Kleinfelder (detlef.kleinfelder@de.ibm.com)
+# New Relic resource monitoring for Hybrid application
 
 New Relic is a Software-as-a-Service (SaaS) offering, where agents are injected into Bluemix Runtimes,  IBM Bluemix Containers or SoftLayer Containers and automatically start reporting metrics back to the New Relic service over the internet.
 
 Please be aware that the instrumented components will need an active internet connection either directly or via various Gateway services.
 
-NewRelic is operated though a web based GUI, login is https://rpm.newrelic.com.
+New Relic is operated though a web based GUI, login is https://rpm.newrelic.com.
 
 
-###Step 1: Get a Newrelic account
-You will need to get a licence for NewRelic in order to manage the _BlueCompute_ components accordingly.
+###Step 1: Get a New Relic account
+You will need to get a licence for New Relic in order to manage the _BlueCompute_ components accordingly.
 
-See [How to NewRelic on Bluemix](https://developer.ibm.com/cloudarchitecture/docs/service-management/new-relic-bluemix-application)
+See [How to New Relic on Bluemix](https://developer.ibm.com/cloudarchitecture/docs/service-management/new-relic-bluemix-application)
 
 ###Step 2: BlueCompute Instrumentation
-NewRelic code instrumentation has been added to the supported _BlueCompute_ components which includes:
+New Relic code instrumentation has been added to the supported _BlueCompute_ components which includes:
   + node.js,
   + java microservices
   + nginx web server
@@ -22,7 +21,7 @@ NewRelic code instrumentation has been added to the supported _BlueCompute_ comp
 
 The covered environment for the _BlueCompute_ application is described in the following table:
 
-| Component                     | NewRelic agent |
+| Component                     | New Relic agent |
 |:------------------------------|----------------|
 | nginx web server LB           | nginx plugin   |
 | bluecompute web app           | node.js agent  |
@@ -39,11 +38,11 @@ The covered environment for the _BlueCompute_ application is described in the fo
 | mysql sql nodes               | mysql plugin   |
 | mysql data nodes              | Not available  |
 
-The agents are pre-installed with the GitHub code and will be activated during application start only if a valid NewRelic license is provided. The mechanisms for activation are different based on the deployment type. 
+The agents are pre-installed with the GitHub code and will be activated during application start only if a valid New Relic license is provided. The mechanisms for activation are different based on the deployment type. 
 
 + Bluemix Cloud Foundry application
 
-    For cloud foundry applications the configuration of the NewRelic license is retrieved from a custom user provided service (cups) which shall be called NewRelic. If the application does find the service and the settings for the license key during push, it will activate and start the agent automatically.
+    For cloud foundry applications the configuration of the New Relic license is retrieved from a custom user provided service (cups) which shall be called New Relic. If the application does find the service and the settings for the license key during push, it will activate and start the agent automatically.
 
     This is true for the cloud foundry applications:
 
@@ -55,19 +54,23 @@ The agents are pre-installed with the GitHub code and will be activated during a
     
 + Bluemix Container application
     
-    For the Bluemix based containers running _BlueCompute_ components the license key has to be added to the docker container during container start or creation of the bluemix   container group with the -e NEW_RELIC_LICENSE_KEY=your-license-key option, where “your-license-key” is your Newrelic license key.
+    For the Bluemix based containers running _BlueCompute_ components the license key has to be added to the docker container during container start or creation of the bluemix   container group with the -e NEW_RELIC_LICENSE_KEY=your-license-key option, where “your-license-key” is your New Relic license key.
     
-    Additionally you have to define the application name for the NewRelic agent with the option -e CG_NAME=your-appname where “your-appname” is your  desried name for the application shown and used inside NewRelic. If you want to deploy the application to different regions or spaces, adding a flag to the name will allow to manage the applications more easily. If the same name is used, Newrelic will handle the application instances as a single application.
+    Additionally you have to define the application name for the New Relic agent with the option -e CG_NAME=your-appname where “your-appname” is your  desried name for the application shown and used inside New Relic. If you want to deploy the application to different regions or spaces, adding a flag to the name will allow to manage the applications more easily. If the same name is used, New Relic will handle the application instances as a single application.
 
     This is true for the Bluemix containers:
     
     + [Inventory Microservice](https://github.com/ibm-cloud-architecture/refarch-cloudnative-micro-inventory)
     
-        When creating the container group add the options for NewRelic:
+        When creating the container group add the options for New Relic:
         
         `cf ic group create -p 8080 -m 512 --min 1 --auto --name micro-inventory-group -e NEW_RELIC_LICENSE_KEY=[YOUR_LICENSE_KEY] -e  "CG_NAME=microservice-inventory" -e "eureka.client.serviceUrl.defaultZone=https://eureka-cluster-dev.[YOUR_NAMESPACE]/eureka/" -e "spring.datasource.url=jdbc:mysql://[YOUR_MYSQL_IP1]:3306,[YOUR_MYSQL_IP2]:3306/inventorydb" -e "spring.datasource.username=[YOUR_DBUSER]" -e "spring.datasource.password=[YOUR_PASSWORD]" -n inventoryservice -d mybluemix.net registry.[YOUR REGION].bluemix.net/$(cf ic namespace get)/inventoryservice:cloudnative`
     
     + [Socialreview Microservice](https://github.com/ibm-cloud-architecture/refarch-cloudnative-micro-socialreview	)
+    
+        When creating the container group add the options for New Relic: 
+        
+        `cf ic group create -p 8080 -m 512 --min 1 --auto --name micro-socialreview-group -e NEW_RELIC_LICENSE_KEY=[YOUR_LICENSE_KEY] -e  "CG_NAME=microservice-socialreview" -n socialreviewservice -d mybluemix.net registry.ng.bluemix.net/{yournamespace}/socialreviewservice`
     
     + [Netflix Zuul Edge Proxy](https://github.com/ibm-cloud-architecture/refarch-cloudnative-netflix-zuul)
     
@@ -112,7 +115,7 @@ The agents are pre-installed with the GitHub code and will be activated during a
 
     `export NEW_RELIC_LICENSE_KEY=your-license-key`
 
-    where “your-license-key” is your Newrelic license key. The subsequent setup scripts will capture the value and configure and start the New Relic Java Agent with the MySQL plugin as the SQL node containers are started.
+    where “your-license-key” is your New Relic license key. The subsequent setup scripts will capture the value and configure and start the New Relic Java Agent with the MySQL plugin as the SQL node containers are started.
 
     This is true for the Softlayer containers:
     
@@ -120,7 +123,7 @@ The agents are pre-installed with the GitHub code and will be activated during a
     
 ###Step 3: Add notification channel to Netcool Operations Insight (NOI)
 
-The Netcool Operations Insight (Omnibus) integration is done via webhook integration. There are yet two alert notification technologies for NewRelic in place which will both needed.
+The Netcool Operations Insight (Omnibus) integration is done via webhook integration. There are yet two alert notification technologies for New Relic in place which will both needed.
 
 Follow these steps to send alerts and notification to NOI. 
 
@@ -154,7 +157,7 @@ This channel can be used within the alerting policies which are described later 
 In order to defined key transaction which are most important for you in the _BlueCompute_ environment, you can specify those from the list of discovered transactions.
 To create a key transaction follow the instructions on [https://docs.newrelic.com/docs/apm/transactions/key-transactions/creating-key-transactions](https://docs.newrelic.com/docs/apm/transactions/key-transactions/creating-key-transactions).
 
-Key transactions can be defined for NewRelic supported application types. We have defined one key transaction for each supported node.js and java microservice application of the 
+Key transactions can be defined for New Relic supported application types. We have defined one key transaction for each supported node.js and java microservice application of the 
 s with an initial Apdex target value.The Apdex value is a industry standard metric for rating the user satisfaction. See [https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction](https://docs.newrelic.com/docs/apm/new-relic-apm/apdex/apdex-measuring-user-satisfaction) for more details on the definition and measurement. The 
 
 | BlueCompute application component  | Key Transaction                    | Apdex |
@@ -169,7 +172,7 @@ s with an initial Apdex target value.The Apdex value is a industry standard metr
 
 ### Step 5: Setup Alert Policies
 When all components have been instrumented, you can start to setup alert policies for the components.
-Log into NewRelic UI with your account and chose “Alerts” and “Alert Polices” tab and select “Create alert policy” button:
+Log into New Relic UI with your account and chose “Alerts” and “Alert Polices” tab and select “Create alert policy” button:
 
 Here you will create policies for the various component types. If you prefer you can also define a single policy with all alert conditions for all the components types). We are preferring separate polices for the ease of management allowing component specific thresholds. The following policy setup has been chosen:
 
@@ -184,12 +187,12 @@ Some recommended violation conditions for the policies are described in the foll
 
 #### Setup Alert (Old) Policy 
 
-The older Alert Policies technology of NewRelic allows to define the monitor of URLs for application availability/Downtime while the new ones yet do not support this. Therefore a old Policy type is needed at this stage.
+The older Alert Policies technology of New Relic allows to define the monitor of URLs for application availability/Downtime while the new ones yet do not support this. Therefore a old Policy type is needed at this stage.
 
 #####  Alert (Old) Policy for Applications Availability
 
 
-- Login into NewRelic UI
+- Login into New Relic UI
 - Select `APM -> Alerts` from the top menu bar (please do not use directly `Alerts` from the top menu).
 - Select `Application policies` from the left menu tree.
 - Create a new policy called `BlueCompute` by creating the `Create application policy` button, enter the name `BlueCompute` and select `Create` button.
@@ -317,7 +320,7 @@ See details see [https://docs.newrelic.com/docs/data-analysis/service-maps/get-s
 	
 For a _BlueCompute_ service map do:
 
-- Login into NewRelic UI
+- Login into New Relic UI
 - Select “APM” and “Service maps” and “Map List”  from the menu bars
 - Select “Create new map”
     1. Select the “application” button and
@@ -344,7 +347,7 @@ For a _BlueCompute_ service map do:
 - Finish the map with the “Save” button
 
 A final service map can look like this:
-![BlueCompute Service Map in NewRelic](NR service map.png?raw=true)  
+![BlueCompute Service Map in New Relic](NR service map.png?raw=true)  
 
 
 
