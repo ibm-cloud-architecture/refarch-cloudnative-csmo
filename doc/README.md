@@ -133,7 +133,7 @@ The above figure shows the deep dive of Grafana and its various components and v
 3. The perl runtime mashes up all relevant data and writes the consolidated data into the Grafana database based on InfluxDB.
 
 4.	Grafana accesses the data via its defined data sources and displays the mashed-up data from the InfluxDB and individual New Relic data inside the configured dashboard pages.
-Grafana allows also the launch of external URL pages in new browser tabs as part of the use case scenarios. The includes the launch of 
+Grafana allows also the launch of external URL pages in new browser tabs as part of the use case scenarios. This includes the launch of 
 
     + the event viewer page from NOI displaying events in context of a page item displaying the associated events via an ad-hoc filter for the selected item
     + the _BlueCompute_ Service Map from New Relic
