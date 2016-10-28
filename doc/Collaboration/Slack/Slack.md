@@ -1,5 +1,4 @@
 # Slack collaboration for Hybrid application
-Author: Detlef Kleinfelder (detlef.kleinfelder@de.ibm.com)
 
 Slack is an instant messaging and collaboration system on steroids. Slack’s channels help you focus by enabling you to separate messages, discussions and notifications by purpose, department or topic. For incidents which occur in a _BlueCompute_ environment, channels can be used to collobarate on the remediation of the incident with various users like the First Responder, Subject Matter experts, Incident Owner as well as with a numerous number of tools via prebuild integrations.
   
@@ -23,11 +22,21 @@ For base setup of a Slack instance, please follow the information of guide [!!!I
     
     Example: https://ibmcase.slack.com/messages/BlueCompute
 
-+ Watch for the channel information which have been provided and is constantly flowing in.
++ Watch for the channel information which have been provided and is constantly flowing in during collaboration.
 
-    !!!ToBeAdded: Screenshot for channel
+    [Slack Channel](Slack_378563_channel.gif)
 
-+ Various activities and commands can be used for the collaboration as required for the remediation case by case, please follow the information of guide [!!!InProgess](InProgess) for a detailed description.
++ Beside user posted messages various activities and commands can be used for the collaboration as required for the remediation case by case, please follow the information of guide [!!!InProgess](InProgess) for a detailed description. 
+
+This includes acknowledging 
+
+    `noi ack {serialnumber}`
+
+and resolving 
+
+    `noi resolve {serialnumber}`
+
+the NOI event by means of a Slackbot, where {serialnumber} is the serial number of the event inside NOI.
 
 
 
