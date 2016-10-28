@@ -21,12 +21,12 @@ For this project we utilized following set of tools to showcase end-to-end incid
 
 **Event Correlation** - [IBM Netcool Operations Insights](EventMgmt/NOI/NOI.md) to fulfill the event management and correlation activities.
 
-**Notification** - [IBM Alert Notification](Notification/ANS/ANS.md) for notifying First responder on call via preferred notification mean.
+**Notification** - [IBM Alert Notification](Notification/ANS/ANS.md) for notifying first responders on call via their preferred notification mean.
 
-**Collaboration** - [Slack](Collaboration/Slack/Slack.md) for collaborating on the incidents with various personas of the reolution process.
+**Collaboration** - [Slack](Collaboration/Slack/Slack.md) for collaborating on the incidents with various personas of the resolution process.
 
 
-**Dashboard** - [Grafana](Dashboarding/Grafana/README.md) to display an overall status with key performance metrics, allowing to drill down in to detailed pages or launch details of the source tools like New Relic and NOI.
+**Dashboard** - [Grafana](Dashboarding/Grafana/README.md) to display an overall status of the _BlueCompute_ business service with key performance metrics, allowing to drill down into detailed pages or launch additionals details of the other tools of the toolchain like New Relic and NOI.
 
 
 ### Understanding System Context Flows for the Tools in CSMO Toolchain Connecting BlueCompute Application
@@ -99,10 +99,13 @@ The following flow describes the setup and operations of this solution in an ove
 
 The above figure shows the deep dive of ANS and its various components and various integrated tools for incident management and their interactions. 
 
-1. An alert is raised via NOI or the POST API and sent to the Alert Notification Service (API). 
-2) Alert Notification process the alerts via Notification Policies and delivers the alert as specified in the policy (Email, SMS, Slack or Voice)
-3) Alert is delivered via one or more options, email, SMS, Slack or Voice to external targets.
-4) First Responder, Development and the Incident owner use Collaboration tools for alert resolution.
+1. An alert is raised via NOI or the POST API and sent to the Alert Notification Service (API).
+ 
+2. Alert Notification process the alerts via Notification Policies and delivers the alert as specified in the policy (Email, SMS, Slack or Voice)
+
+3. Alert is delivered via one or more options, email, SMS, Slack or Voice to external targets.
+
+4. First Responder, Development and the Incident owner use Collaboration tools for alert resolution.
 
 
 #### System Context Flow for Grafana
@@ -113,26 +116,28 @@ The above figure shows the deep dive of Grafana and its various components and v
 
 1. The Dashboard relies on data from various data sources which are accessed via various interfaces. 
 
-+ The configuration management data is read from the database with the help of sql client tools. 
-+ Status and key performance metrics from New Relic APM system is collected via the Rest APIs. 
-+ Event information is read from the Netcool Omnibus system by means of a Rest API.
-+ Status and configuration information for Bluemix applications and containers are also retrieved view the Bluemix API/CLI.
+    + The configuration management data is read from the database with the help of sql client tools. 
+    + Status and key performance metrics from New Relic APM system is collected via the Rest APIs. 
+    + Event information is read from the Netcool Omnibus system by means of a Rest API. 
+    + Status and configuration information for Bluemix applications and containers are also retrieved view the Bluemix API/CLI. 
 
-Data can be accessed either directly from the Dashboard Rest API data provider or from a separate runtime instance.
+    Data can be accessed either directly from the Dashboard Rest API data provider or from a separate runtime instance.
 
 2.	A Perl Runtime collects on a regular scheduled basis data from various data sources which provide monitoring and status information for the BlueCompute application. In this scenario this includes 
-+ the ressource monitoring data from New Relic via a Rest API, 
-+ the Bluemix Cloud Foundry information for applications and containers via the CF API,  
-+ the NOI status information via the Netcool Rest API and
-+ the configuration data from the configuration database data source on MySQL to read and enrich the monitoring data with environment context data like deployment location and service-relationships.
-<and the synthetic monitoring results from BAM via a Rest API>
-
+    + the ressource monitoring data from New Relic via a Rest API, 
+    + the Bluemix Cloud Foundry information for applications and containers via the CF API,  
+    + the NOI status information via the Netcool Rest API and 
+    + the configuration data from the configuration database data source on MySQL to read and enrich the monitoring data with environment context data like deployment location and service-relationships.
+    <and the synthetic monitoring results from BAM via a Rest API>
+    
 3. The perl runtime mashes up all relevant data and writes the consolidated data into the Grafana database based on InfluxDB.
 
 4.	Grafana accesses the data via its defined data sources and displays the mashed-up data from the InfluxDB and individual New Relic data inside the configured dashboard pages.
 Grafana allows also the launch of external URL pages in new browser tabs as part of the use case scenarios. The includes the launch of 
-+ the event viewer page from NOI displaying events in context of a page item displaying the associated events via an ad-hoc filter for the selected item
-+ the _BlueCompute_ Service Map from New Relic
+
+    + the event viewer page from NOI displaying events in context of a page item displaying the associated events via an ad-hoc filter for the selected item
+    
+    + the _BlueCompute_ Service Map from New Relic
 <the LogMet logfile search page in context of a page item filled with the appropriate search query for the selected item>.
 
 5.Via the event viewer the Runbook Automation can be triggered and displayed.
