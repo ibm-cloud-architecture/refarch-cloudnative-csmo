@@ -10,7 +10,7 @@ Authors:
 
 The tools in the Incident Management solution are implemented to provide an end-to-end view of application. You may choose to use multiple tools to handle different functionality of the application. The below picture shows multiple tools that manages cloud native as well as hybrid application.
 
-![CSMO Incident Management Implementation](../static/imgs/Cloud_Service_Management_Incident_with_Tools_BLUE_IBM.png?raw=true)  
+![CSMO Incident Management Implementation](../static/imgs/Cloud_Service_Management_Incident_Mgmt_with_Tools.png?raw=true)  
 
 ### Reference Tools Mapping 
 
@@ -95,7 +95,7 @@ The following flow describes the setup and operations of this solution in an ove
 
 #### System Context Flow for IBM Alert Notification System
 
-![System Context Flow Grafana](../static/imgs/Notification/ANS/Cloud_Service_Management-AlertNotification.png?raw=true)
+![System Context Flow Grafana](../static/imgs/Notification/ANS/Cloud_Service_Management-AlertNotification_Hybrid.png?raw=true)
 
 The above figure shows the deep dive of ANS and its various components and various integrated tools for incident management and their interactions. 
 

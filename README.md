@@ -20,7 +20,7 @@ For more details on this reference architecture visit the [Architecture Center f
 
 ## Sample Tools Implementation
 
-See sample [Tools Implementation Guide](doc/README.md) of Incident Management solution for a hybrid application
+See sample [Tools Implementation Guide](doc/Incident_Management_Implementation.md) of Incident Management solution for a hybrid application
 
 
  
