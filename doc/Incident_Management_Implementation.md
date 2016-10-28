@@ -1,11 +1,11 @@
 # A Sample Tools Implementation of Incident Management Solution
 
 
-Authors: 	
+ ' Authors: 	
 
 		Arundhati Bhowmick (aruna1@us.ibm.com)
 			
-		Detlef Kleinfelder (detlef.kleinfelder@de.ibm.com)
+		Detlef Kleinfelder (detlef.kleinfelder@de.ibm.com)'
 
 
 The tools in the Incident Management solution are implemented to provide an end-to-end view of application. You may choose to use multiple tools to handle different functionality of the application. The below picture shows multiple tools that manages cloud native as well as hybrid application.
