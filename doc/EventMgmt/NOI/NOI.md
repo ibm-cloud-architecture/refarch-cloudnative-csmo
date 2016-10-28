@@ -1,5 +1,12 @@
 # Netcool Operations Insight event management for Hybrid application
 
+Authors: 	
+
+		Detlef Kleinfelder (detlef.kleinfelder@de.ibm.com)
+		
+		Robert Barron (brobert@il.ibm.com)
+		
+
 IBM Netcool Operations Insight accelerates the operations management lifecycle from problem detection to fix. It receives events from ressource monitoring solutions, enriches, correlates and escalates those based on automation rules.
 
 In this document you will understand how to setup IBM Netcool® Operations Insight (NOI) in the middle of the service management tool chain and demonstrate the interaction of NOI with the other tool chain components of the toolchain for operating the BlueCompute hybrid application.
