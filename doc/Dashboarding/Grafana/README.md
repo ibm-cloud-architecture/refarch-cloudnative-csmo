@@ -1,4 +1,6 @@
 
+# Monitoring Dashboard for a Hybrid Application
+
 - [Monitoring Dashboard for BlueCompute](#monitoring-dashboard-for-bluecompute)
 - [Grafana](#grafana)
 	- [Installing Grafana on Centos 7](#installing-grafana-on-centos-7)
@@ -29,7 +31,11 @@
 	- [BlueCompute application details dashboard](#first-responder---bluecompute-application-details-dashboard)
 
 # Monitoring Dashboard for BlueCompute
-Author: Rafał Szypułka (rafal.szypulka@pl.ibm.com)
+
+ Authors: 	
+			
+		Rafał Szypułka (rafal.szypulka@pl.ibm.com)
+		
 
 Monitoring Dashboard is an entry point UI for First Responder persona who will react on alerts from Incident Management.
 It gives an overall view on current status of all BlueCompute Hybrid application components. It allows also to contextually drill down to more detailed information about topology, performance metrics, log files and generated alerts.

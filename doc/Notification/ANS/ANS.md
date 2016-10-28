@@ -1,5 +1,9 @@
-# IBM Alert Notification System notification for Hybrid application
-Author: Detlef Kleinfelder (detlef.kleinfelder@de.ibm.com)
+# IBM Alert Notification System for Hybrid Application
+
+ Authors: 	
+			
+		Detlef Kleinfelder (detlef.kleinfelder@de.ibm.com)
+		
 
 It is IBM Bluemix®	service environment that instantly	delivers notifications	of problem occurrences in your	Bluemix	environment	using automated email, Short Message Service (SMS), and voice	messaging.
 IBM Alert Notification System allows you to 

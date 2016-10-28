@@ -1,5 +1,10 @@
-# Slack collaboration for Hybrid application
+# Slack Collaboration for Hybrid Application
 
+ Authors: 	
+			
+		Detlef Kleinfelder (detlef.kleinfelder@de.ibm.com)
+		
+		
 Slack is an instant messaging and collaboration system on steroids. Slack’s channels help you focus by enabling you to separate messages, discussions and notifications by purpose, department or topic. For incidents which occur in a _BlueCompute_ environment, channels can be used to collobarate on the remediation of the incident with various users like the First Responder, Subject Matter experts, Incident Owner as well as with a numerous number of tools via prebuild integrations.
   
 
