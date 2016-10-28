@@ -30,7 +30,7 @@
 	- [First Responder dashboard](#first-responder-dashboard)
 	- [BlueCompute application details dashboard](#first-responder---bluecompute-application-details-dashboard)
 
-# Monitoring Dashboard for BlueCompute
+# Monitoring Dashboard for a Hybrid Application
 
  Authors: 	
 			
