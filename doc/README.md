@@ -17,15 +17,16 @@ The tools in the Incident Management solution are implemented to provide an end-
 For this project we utilized following set of tools to showcase end-to-end incident management of [BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative) application that is hybrid in nature.  
 
 
-**Monitoring** - [NewRelic](Monitoring/NewRelic/NewRelic.md) for resource monitoring and E2E monitoring of URLs <and IBM Bluemix Application Management (BAM) for synthetic monitoring of the hybrid application and components.>
+**Monitoring** - [New Relic](Monitoring/NewRelic/NewRelic.md) for resource monitoring and E2E monitoring of URLs <and IBM Bluemix Application Management (BAM) for synthetic monitoring of the hybrid application and components.>
 
 **Event Correlation** - [IBM Netcool Operations Insights](EventMgmt/NOI/NOI.md) to fulfill the event management and correlation activities.
 
-**Notification** - [IBM Alert Notification](Notification/ANS/ANS.md)
+**Notification** - [IBM Alert Notification](Notification/ANS/ANS.md) for notifying First responder on call via preferred notification mean.
 
-**Collaboration** - [Slack](Collaboration/Slack/Slack.md)
+**Collaboration** - [Slack](Collaboration/Slack/Slack.md) for collaborating on the incidents with various personas of the reolution process.
 
-**Dashboard** - [Grafana](Dashboarding/Grafana/README.md)
+
+**Dashboard** - [Grafana](Dashboarding/Grafana/README.md) to display an overall status with key performance metrics, allowing to drill down in to detailed pages or launch details of the source tools like New Relic and NOI.
 
 
 ### Understanding System Context Flows for the Tools in CSMO Toolchain Connecting BlueCompute Application
@@ -35,17 +36,17 @@ Here is the view to system context of each these tools to give you deeper and br
 
 #### System Context Flow for New Relic
 
-![System Context Flow NewRelic](../static/imgs/Monitoring/NewRelic/Cloud_Service_Management-NewRelic_Hybrid.png?raw=true)
+![System Context Flow New Relic](../static/imgs/Monitoring/NewRelic/Cloud_Service_Management-NewRelic_Hybrid.png?raw=true)
 
-The above figure shows the deep dive of NewRelic Ressource Monitoring and its various components and various integrated tools for incident management and their interactions. 
+The above figure shows the deep dive of New Relic Ressource Monitoring and its various components and various integrated tools for incident management and their interactions. 
 
-1.	NewRelic offers the instrumentation of BlueCompute components like Node.js applications, nginx webserver/loadbalancers, java microservices and mysql databases and allows monitoring of key performance indicators for those ressources. It detects also Bluemix services used by various Bluemix applications. Both Public and SoftLayer instances are monitored. In Bluemix we will find native clound foundry applications as well as docker containers. 
+1.	New Relic offers the instrumentation of BlueCompute components like Node.js applications, nginx webserver/loadbalancers, java microservices and mysql databases and allows monitoring of key performance indicators for those ressources. It detects also Bluemix services used by various Bluemix applications. Both Public and SoftLayer instances are monitored. In Bluemix we will find native clound foundry applications as well as docker containers. 
 
-2.	The data will be transferred to NewRelic management system which is accessible with the UI and API calls.
+2.	The data will be transferred to New Relic management system which is accessible with the UI and API calls.
 
 3.	If thresholds are exceeded based on defined alert policy settings one or more alerting channels can be used to forward identified incidents.
 
-4.	These channels actually forward the incident to external event correlation, notification or emailing systems. In this scenario we are using NOI for event correlation and NewRelic forwards its events to a Netcool Omnibus message bus probe via a WebHook channel. 
+4.	These channels actually forward the incident to external event correlation, notification or emailing systems. In this scenario we are using NOI for event correlation and New Relic forwards its events to a Netcool Omnibus message bus probe via a WebHook channel. 
 
 5. The New Relic Rest API allows to query the data from external tools like Dashboarding solution. In this scenario Grafana runtime polls the New Relic data via the Rest API continously to display status and key performance metrics.
 
@@ -120,7 +121,7 @@ The above figure shows the deep dive of Grafana and its various components and v
 Data can be accessed either directly from the Dashboard Rest API data provider or from a separate runtime instance.
 
 2.	A Perl Runtime collects on a regular scheduled basis data from various data sources which provide monitoring and status information for the BlueCompute application. In this scenario this includes 
-+ the ressource monitoring data from NewRelic via a Rest API, 
++ the ressource monitoring data from New Relic via a Rest API, 
 + the Bluemix Cloud Foundry information for applications and containers via the CF API,  
 + the NOI status information via the Netcool Rest API and
 + the configuration data from the configuration database data source on MySQL to read and enrich the monitoring data with environment context data like deployment location and service-relationships.
@@ -165,7 +166,7 @@ New Relic is a Software-as-a-Service (SaaS) offering, where agents are injected 
 
 Please be aware that the instrumented components will need an active internet out-bound connection either directly or via various Gateway services.
 
-For detailed steps please continue with [How to setup NewRelic for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/Monitoring/NewRelic/NewRelic.md)
+For detailed steps please continue with [How to setup New Relic for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/Monitoring/NewRelic/NewRelic.md)
 
 <!--- ####Step 3b: How to Use for BAM for BlueCompute --->
 
@@ -194,7 +195,7 @@ For detailed steps please continue with [How to setup Slack for BlueCompute](htt
 ### Step 7: Dashboarding
 
 #### Tool option a: How to use Grafana Dashboarding for BlueCompute
-Grafana is one of the leading tools for querying and visualizing time series and metrics. In this project we used it to create dashboards for First Responder persona. Grafana features a variety of panels, including fully featured graph panels with rich visualization options. There is built in support for many of the time series data sources like InfluxDB or Graphite. We used InfluxDB - a time series database for metrics as a data source for Grafana and perl script to collect data from various APIs of BlueCompute CSMO infrastructure like NewRelic, Bluemix, NOI or CMDB. 
+Grafana is one of the leading tools for querying and visualizing time series and metrics. In this project we used it to create dashboards for First Responder persona. Grafana features a variety of panels, including fully featured graph panels with rich visualization options. There is built in support for many of the time series data sources like InfluxDB or Graphite. We used InfluxDB - a time series database for metrics as a data source for Grafana and perl script to collect data from various APIs of BlueCompute CSMO infrastructure like New Relic, Bluemix, NOI or CMDB. 
 
 For detailed steps please continue with [How to setup Grafana for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/doc/Dashboarding/Grafana/README.md)
 
@@ -205,7 +206,7 @@ For detailed steps please continue with [How to setup Grafana for BlueCompute](h
 
 [IBM Alert Notification](http://www-03.ibm.com/software/products/en/ibm-alert-notification)
  
-[NewRelic](https://newrelic.com/) 
+[New Relic](https://newrelic.com/) 
 
 [Slack](https://slack.com)
 
