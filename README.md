@@ -1,10 +1,11 @@
 # Cloud Service Management and Operation for Hybrid application
 
 
-Authors: 	
-		Arundhati Bhowmick (aruna1@us.ibm.com)
-			
-		Ingo Averdunk ( averdunk@de.ibm.com)
+> Authors: 	
+
+>		Arundhati Bhowmick (aruna1@us.ibm.com)
+
+>		Ingo Averdunk ( averdunk@de.ibm.com)
 		
 
 ## Architecture Overview
