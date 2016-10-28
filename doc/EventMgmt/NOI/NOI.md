@@ -2,8 +2,6 @@
 
 IBM Netcool Operations Insight accelerates the operations management lifecycle from problem detection to fix. It receives events from ressource monitoring solutions, enriches, correlates and escalates those based on automation rules.
 
-![System Context Flow](NOI system context flow.png?raw=true)  
-
 In this document you will understand how to setup IBM Netcool® Operations Insight (NOI) in the middle of the service management tool chain and demonstrate the interaction of NOI with the other tool chain components of the toolchain for operating the BlueCompute hybrid application.
 
 **Note**: We will not cover standard installation and operation of NOI, since this is not unique to the Bluemix environment, but we will link to appropriate references. 

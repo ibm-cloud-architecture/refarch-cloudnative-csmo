@@ -24,19 +24,19 @@ For base setup of a Slack instance, please follow the information of guide [!!!I
 
 + Watch for the channel information which have been provided and is constantly flowing in during collaboration.
 
-    [Slack Channel](Slack_378563_channel.gif)
+    ![Slack Channel](Slack_378563_channel.gif)
 
 + Beside user posted messages various activities and commands can be used for the collaboration as required for the remediation case by case, please follow the information of guide [!!!InProgess](InProgess) for a detailed description. 
 
-This includes acknowledging 
+    This includes acknowledging 
 
     `noi ack {serialnumber}`
 
-and resolving 
+    and resolving 
 
     `noi resolve {serialnumber}`
 
-the NOI event by means of a Slackbot, where {serialnumber} is the serial number of the event inside NOI.
+    the NOI event by means of a Slackbot, where {serialnumber} is the serial number of the event inside NOI.
 
 
 

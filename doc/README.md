@@ -39,13 +39,15 @@ Here is the view to system context of each these tools to give you deeper and br
 
 The above figure shows the deep dive of NewRelic Ressource Monitoring and its various components and various integrated tools for incident management and their interactions. 
 
-1.	NewRelic offers the instrumenation of BlueCompute components like Node.js applications, nginx webserver/loadbalancers, java microservices and mysql databases and allows monitoring of key performance indicators for those ressources. It detects also Bluemix services used by various Bluemix applications. Both Public and SoftLayer instances are monitored. In Bluemix we will find native clound foundry applications as well as docker containers. 
+1.	NewRelic offers the instrumentation of BlueCompute components like Node.js applications, nginx webserver/loadbalancers, java microservices and mysql databases and allows monitoring of key performance indicators for those ressources. It detects also Bluemix services used by various Bluemix applications. Both Public and SoftLayer instances are monitored. In Bluemix we will find native clound foundry applications as well as docker containers. 
 
 2.	The data will be transferred to NewRelic management system which is accessible with the UI and API calls.
 
-3.	If thresholds are exceeded based on defined alert policy settings one or more alerting channels can be used.
+3.	If thresholds are exceeded based on defined alert policy settings one or more alerting channels can be used to forward identified incidents.
 
-4.	These channels actually forward the incident to external event correlation and/or a Dashboard solutions. In this scenario we are using NOI for event correlation and NewRelic forwards its events to a Netcool Omnibus message bus probe via a WebHook channel. 
+4.	These channels actually forward the incident to external event correlation, notification or emailing systems. In this scenario we are using NOI for event correlation and NewRelic forwards its events to a Netcool Omnibus message bus probe via a WebHook channel. 
+
+5. The New Relic Rest API allows to query the data from external tools like Dashboarding solution. In this scenario Grafana runtime polls the New Relic data via the Rest API continously to display status and key performance metrics.
 
 
 <!--- #### System Context Flow for BAM 
@@ -74,13 +76,19 @@ The above figure shows the deep dive of NOI and its various components and vario
 
 The following flow describes the setup and operations of this solution in an overall cloud service management space:
 
-1.	BlueCompute application components & infrastructure are monitored by 3rd party solution NewRelic for resource monitoring and URL response <and IBM BAM for synthetic monitoring (via ANS)>.
+1.	BlueCompute application components & infrastructure are monitored by 3rd party solution New Relic for resource monitoring and URL response <and IBM BAM for synthetic monitoring (via ANS)>.
 
-2.	The probes normalize the events into a common format and send them to the central Omnibus system. The monitoring events sent to NOI via these probes are then correlated, de-duplicated, analyzed & enriched. Further action may be automated or performed by an first responder/incident Owner/runbook automated service. 
+2.	The probes normalize the events into a common format and send them to the central Omnibus system. The monitoring events sent to NOI via these probes are then correlated, de-duplicated, analyzed & enriched. Further actions may be automated or performed by a first responder/incident owner/runbook automated service. 
 
-3.	Impact has two roles. It extracts events from the BlueMix infrastructure and forwards events on to the collaboration and notification solutions. The analytics component of NOI enriches the events and finds correlations between events, limiting the number of alarms forwarded and making sure that important issues are prioritized. The dashboards are used both to display events and manually forward them if an operator decides to do so. Impact also enriches technical events with organizational and environmental context information like deployment location, service relationships or affected client. Here a MySQL configuration data source is leveraged.
+3.	Impact has three roles: 
 
-4.	The correlated events are forwarded to collaboration and notification tools. Action may be performed to solve the issues detected. NOI supports a variety of such solutions and in this document we will look at integration with Slack for collaboration and IBM Alert Notification System Duty for notification and escalation. NOI can publish events to generic targets (i.e. a single Slack channel which is used for all alerts) or specific ones (i.e. NOI will be automated to create a dedicated Slack channel for a single generated event ). 
+    + It extracts events from the BlueMix infrastructure and forwards events on to the collaboration and notification solutions. 
+    + The analytics component of NOI enriches the events and finds correlations between events based on seasonality or relationship, limiting the number of alarms forwarded and making sure that important issues are prioritized. 
+    + Impact also enriches technical events with organizational and environmental context information like deployment location, service relationships or affected client. Here a MySQL configuration data source is leveraged.
+    
+    The dashboards are used both to display events and allow manually forwarding of events if an operator decides to do so.  
+
+4.	The correlated events are forwarded to collaboration and notification tools. Action may be performed to solve the issues detected. NOI supports a variety of such solutions and in this document we will look at integration with Slack for collaboration and IBM Alert Notification System for notification and escalation. NOI can publish events to generic targets (i.e. a single Slack channel which is used for all alerts) or specific ones (i.e. NOI will be automated to create a dedicated Slack channel for a single generated event ). 
 
 5. Runbooks connected to NOI are automated to update the event status based on the resolution of the issue. The status updates can also be manually handled within NOI. It also has capability to have bi-directional communication with notification tool so that event status update can take place in either tool. This updated status is then propagated.
 
@@ -90,7 +98,10 @@ The following flow describes the setup and operations of this solution in an ove
 
 The above figure shows the deep dive of ANS and its various components and various integrated tools for incident management and their interactions. 
 
-1.	to be done
+1. An alert is raised via NOI or the POST API and sent to the Alert Notification Service (API). 
+2) Alert Notification process the alerts via Notification Policies and delivers the alert as specified in the policy (Email, SMS, Slack or Voice)
+3) Alert is delivered via one or more options, email, SMS, Slack or Voice to external targets.
+4) First Responder, Development and the Incident owner use Collaboration tools for alert resolution.
 
 
 #### System Context Flow for Grafana
@@ -99,15 +110,33 @@ The above figure shows the deep dive of ANS and its various components and vario
 
 The above figure shows the deep dive of Grafana and its various components and various integrated tools for incident management and their interactions. 
 
-1.	A Perl Runtime collects on a regular scheduled basis data from various data sources which provide monitoring and status information for the BlueCompute application. In this scenario this includes the ressource monitoring data from NewRelic via a Rest API, the Bluemix Cloud Foundry information for applications and containers via the CF API and the NOI status information via the Netcool Rest API <and the synthetic monitoring results from BAM via a Rest API>.
+1. The Dashboard relies on data from various data sources which are accessed via various interfaces. 
 
-2.	Perl runtime also accesses a configuration data source on MySQL to read and enrich the monitoring data with environment context data like deployment location and service-relationships.
++ The configuration management data is read from the database with the help of sql client tools. 
++ Status and key performance metrics from New Relic APM system is collected via the Rest APIs. 
++ Event information is read from the Netcool Omnibus system by means of a Rest API.
++ Status and configuration information for Bluemix applications and containers are also retrieved view the Bluemix API/CLI.
 
-3.	The perl runtime mashes up all relevant data and writes the consolidated data into the Grafana database based on InfluxDB.
+Data can be accessed either directly from the Dashboard Rest API data provider or from a separate runtime instance.
 
-4.	Grafana accesses the data via its defined data sources and displays the InfluxDB data inside the configured dashboard pages.
+2.	A Perl Runtime collects on a regular scheduled basis data from various data sources which provide monitoring and status information for the BlueCompute application. In this scenario this includes 
++ the ressource monitoring data from NewRelic via a Rest API, 
++ the Bluemix Cloud Foundry information for applications and containers via the CF API,  
++ the NOI status information via the Netcool Rest API and
++ the configuration data from the configuration database data source on MySQL to read and enrich the monitoring data with environment context data like deployment location and service-relationships.
+<and the synthetic monitoring results from BAM via a Rest API>
 
-5.	Grafana allows the launch of the event viewer page from NOI displaying events in context of a page item<as well as the launch og LogMet logfile search page in context of a page item>.
+3. The perl runtime mashes up all relevant data and writes the consolidated data into the Grafana database based on InfluxDB.
+
+4.	Grafana accesses the data via its defined data sources and displays the mashed-up data from the InfluxDB and individual New Relic data inside the configured dashboard pages.
+Grafana allows also the launch of external URL pages in new browser tabs as part of the use case scenarios. The includes the launch of 
++ the event viewer page from NOI displaying events in context of a page item displaying the associated events via an ad-hoc filter for the selected item
++ the _BlueCompute_ Service Map from New Relic
+<the LogMet logfile search page in context of a page item filled with the appropriate search query for the selected item>.
+
+5.Via the event viewer the Runbook Automation can be triggered and displayed.
+
+
 
 
 ### How to Use the toolchain
