@@ -14,7 +14,7 @@ The tools in the Incident Management solution are implemented to provide an end-
 
 ### Reference Tools Mapping 
 
-For this project we utilized following set of tools to showcase end-to-end incident management of [BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative) application that is hybrid in nature.  
+There are various ways to build the tool chain for an Incident Management solution. For this project we utilized the following set of tools to showcase end-to-end incident management of [BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative) application that is hybrid in nature.  
 
 
 **Monitoring** - [New Relic](Monitoring/NewRelic/NewRelic.md) for resource monitoring and E2E monitoring of URLs <and IBM Bluemix Application Management (BAM) for synthetic monitoring of the hybrid application and components.>
