@@ -217,11 +217,12 @@ The older Alert Policies technology of New Relic allows to define the monitor of
     + click on the `Ping URL icon` 
     + add the `URL to monitor` under the Availability URL section. Use the following URLs or adopt them if you use different routes.
  
-        | Application                   | URL to monitor                                    |
-        |:------------------------------|:--------------------------------------------------|
-        | bluecompute-web- app          | https://bluecompute-web-app.eu-gb.mybluemix.net   |
-        | eureka-cluster                | https://eureka-cluster-dev.eu-gb.mybluemix.net    |
-        | zuul-cluster                  | https://zuul-cluster-dev.eu-gb.mybluemix.net/info |
+        | Application                   | URL to monitor                                                        |
+        |:------------------------------|:----------------------------------------------------------------------|
+        | bluecompute-web- app          | https://bluecompute-web-app.eu-gb.mybluemix.net                       |
+        | eureka-cluster                | https://eureka-cluster-dev.eu-gb.mybluemix.net                        |
+        | zuul-cluster                  | https://zuul-cluster-dev.eu-gb.mybluemix.net/info                     |
+        | microservice-inventory        | https://micro-inventory-group-dev.eu-gb.mybluemix.net/micro/inventory |
 
     + Save settting with `Save your changes` button
 - Switch to the `Alert Channels` tab
