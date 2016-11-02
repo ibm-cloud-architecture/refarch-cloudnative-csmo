@@ -20,7 +20,7 @@ For more details on this reference architecture visit the [Architecture Center f
 ## Incident Management Architecture Overview
 
 Incident management and its operations are key to cloud service management. Incident management is optimized to restore the normal service operations as quickly as, thus ensuring the best possible levels of service quality and availability are maintained. Following figure provides deep dive into Incident Management 
-![CSMO Incident Management Architecture](static/imgs/Cloud_Service_Management-Incident_Management.png?raw=true)  
+![CSMO Incident Management Architecture](static/imgs/Cloud_Service_Management-Incident_Management_v2?raw=true)  
 
 For more details on this reference architecture visit the [Architecture Center for Incident Management](https://developer.ibm.com/architecture/gallery/incidentManagement)
 
