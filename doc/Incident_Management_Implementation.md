@@ -12,7 +12,7 @@ The tools in the Incident Management solution are implemented to provide an end-
 
 ![CSMO Incident Management Implementation](../static/imgs/Cloud_Service_Management_Incident_Mgmt_with_Tools.png?raw=true)  
 
-### Reference Tools Mapping 
+## Reference Tools Mapping 
 
 There are various ways to build the tool chain for an Incident Management solution. For this project we utilized the following set of tools to showcase end-to-end incident management of [BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative) application that is hybrid in nature.  
 
@@ -29,12 +29,12 @@ There are various ways to build the tool chain for an Incident Management soluti
 **Dashboard** - [Grafana](Dashboarding/Grafana/README.md) to display an overall status of the _BlueCompute_ business service with key performance metrics, allowing to drill down into detailed pages or launch additionals details of the other tools of the toolchain like New Relic and NOI.
 
 
-### Understanding System Context Flows for the Tools in CSMO Toolchain Connecting BlueCompute Application
+## Understanding System Context Flows for the Tools in CSMO Toolchain Connecting BlueCompute Application
 
 Here is the view to system context of each these tools to give you deeper and broader perspective of the flow and integration.
 
 
-#### System Context Flow for New Relic
+### System Context Flow for New Relic
 
 ![System Context Flow New Relic](../static/imgs/Monitoring/NewRelic/Cloud_Service_Management-NewRelic_Hybrid.png?raw=true)
 
@@ -51,7 +51,7 @@ The above figure shows the deep dive of New Relic Ressource Monitoring and its v
 5. The New Relic Rest API allows to query the data from external tools like Dashboarding solution. In this scenario Grafana runtime polls the New Relic data via the Rest API continously to display status and key performance metrics.
 
 
-<!--- #### System Context Flow for BAM 
+<!--- ### System Context Flow for BAM 
 
 ![System Context Flow BAM](../static/imgs/???.png?raw=true)
 
@@ -69,7 +69,7 @@ The above figure shows the deep dive of IBM Bluemix Application Monitoring (BAM)
 --->
 
 
-#### System Context Flow for IBM Netcool Operations Insights (NOI)
+### System Context Flow for IBM Netcool Operations Insights (NOI)
 
 ![System Context Flow NOI](../static/imgs/Eventing/NOI/Cloud_Service_Management-NOI_Hybrid.png?raw=true)
 
@@ -93,7 +93,8 @@ The following flow describes the setup and operations of this solution in an ove
 
 5. Runbooks connected to NOI are automated to update the event status based on the resolution of the issue. The status updates can also be manually handled within NOI. It also has capability to have bi-directional communication with notification tool so that event status update can take place in either tool. This updated status is then propagated.
 
-#### System Context Flow for IBM Alert Notification System
+
+### System Context Flow for IBM Alert Notification System
 
 ![System Context Flow Grafana](../static/imgs/Notification/ANS/Cloud_Service_Management-AlertNotification_Hybrid.png?raw=true)
 
@@ -108,7 +109,7 @@ The above figure shows the deep dive of ANS and its various components and vario
 4. First Responder, Development and the Incident owner use Collaboration tools for alert resolution.
 
 
-#### System Context Flow for Grafana
+### System Context Flow for Grafana
 
 ![System Context Flow Grafana](../static/imgs/Dashboarding/Grafana/Cloud_Service_Management-Grafana_Hybrid.png?raw=true)
 
@@ -144,7 +145,7 @@ Grafana allows also the launch of external URL pages in new browser tabs as part
 
 
 
-### How to Use the toolchain
+## How to Use the toolchain
  
 The following walkthrough guides you through how to use the toolchain for end-to-end monitoring of the hybrid application. You will learn how to implement basic incident management capabilities and how to build a more advanced, robust incident management solution.
 
