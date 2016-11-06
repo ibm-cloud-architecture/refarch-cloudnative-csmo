@@ -53,7 +53,7 @@ Diagram below explains the data flow for the dashboard.
 
 Collected data is stored in [InfluxDB](#influxdb) timeseries database, which is the primary data source for [Grafana](#grafana) dashboarding engine.
 
-![Flowchart](images/BlueCompute_dashboard_flowchart1.png)
+![Flowchart](images/BlueCompute_dashboard_flowchart.png)
 
 # Grafana
 [Grafana](http://grafana.org) is one of the leading tools for querying and visualizing time series and metrics. In the CSMO project we used it to create dashboards for First Responder persona.
