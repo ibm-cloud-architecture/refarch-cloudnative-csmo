@@ -46,7 +46,7 @@ Click on View All Tests
 ![View all Tests](BAMViewAllTests.png?raw=true)
 
 You will be taken to the Tests view:
-!p[Test Summary](BAMtestSummary.png?raw=true)
+![Test Summary](BAMtestSummary.png?raw=true)
 
 
 
