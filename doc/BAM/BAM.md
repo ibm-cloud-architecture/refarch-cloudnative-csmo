@@ -37,7 +37,7 @@ As you add applications to your Bluemix organizations page, the associated URL o
 
 Below is a recently deployed application. Click on the application to view the run time configuration
 ![Select Application](BAMSelectAppscr1.png?raw=true)
-![Select Monitoring Tab}(BAMSelectMonitorinTab.png?raw=true)
+![Select Monitoring Tab](BAMSelectMonitorinTab.png?raw=true)
 You will arrive at the summary screen below, where you see
 1.	Test Availability
 2.	Number of Test running
@@ -51,5 +51,8 @@ You will be taken to the Tests view:
 
 
 
+
+
+To view/edit the test click on the action bar and select edit. Note you cam also stop, delete and start a test from this menu. 
 
 
