@@ -36,16 +36,21 @@ As you add applications to your Bluemix organizations page, the associated URL o
 
 
 Below is a recently deployed application. Click on the application to view the run time configuration
+
 ![Select Application](BAMSelectAppscr1.png?raw=true)
+
 ![Select Monitoring Tab](BAMSelectMonitorinTab.png?raw=true)
+
 You will arrive at the summary screen below, where you see
 1.	Test Availability
 2.	Number of Test running
 3.	And the usage percentage of your BAM service. 
 Click on View All Tests
+
 ![View all Tests](BAMViewAllTests.png?raw=true)
 
 You will be taken to the Tests view:
+
 ![Test Summary](BAMtestSummary.png?raw=true)
 
 
