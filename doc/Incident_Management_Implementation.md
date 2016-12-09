@@ -30,6 +30,8 @@ There are various ways to build the tool chain for an Incident Management soluti
 
 **Dashboard** - [Grafana](Dashboarding/Grafana/README.md) to display an overall status of the _BlueCompute_ business service with key performance metrics, allowing to drill down into detailed pages or launch additionals details of the other tools of the toolchain like New Relic and NOI.
 
+**Ticket & Trending** - [IBM Control Desk](Ticket&Trending/Control Desk/ICD.md) to record the incident ticket and all pertaining data to enable various personas to perform ticket trending analysis.
+
 
 ## Understanding System Context Flows for the Tools in CSMO Toolchain Connecting BlueCompute Application
 
@@ -143,6 +145,20 @@ Grafana allows also the launch of external URL pages in new browser tabs as part
 <the LogMet logfile search page in context of a page item filled with the appropriate search query for the selected item>.
 
 5.Via the event viewer the Runbook Automation can be triggered and displayed.
+
+### System Context Flow for IBM Control Desk
+
+![System Context Flow IBM Control Desk](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/static/imgs/Ticketing/Cloud_Service_Management-ICD_Hybrid.png)
+
+The above figure shows the deep dive of IBM Control Desk and its various components and various integrated tools for incident management and their interactions. 
+
+1.	The user or request fulfillment system reports an incident. Stakeholders (e.g., the Application Owner) are continuously informed about the status of the incident.
+2.	The sophisticated Monitoring and Logging tools, that includes IBM or Third Party tools, connected to the managed solutions detect the issues early and send alerts to the Event Correlation tool and unified Dashboard.
+3.	The Event Correlation tool is empowered to correlate events from multiple sources and helps identifying and isolating the problem by alerting the Collaboration and Notification systems. First Responder team typically considers correlated events to narrow down the issue instantly. For complex issues the Incident Owner and Subject Matter Experts collaborate on the investigation and resolution.
+4.	The Notification system creates collaboration channel with alerts specific to an incident allowing Incident Owner and Subject Matter Expert to have records within the incident investigation and mitigation.
+5.	The Notification system creates an incident with specific details to allow the First responder to resolve using the incident record independent or in collaboration with others in a channel.  
+6.	 The Dashboard are preconfigured to provide one single view of various sources of events from Event Correlation and Monitoring systems to guide the First Responder and Subject Matter Experts to isolate and resolve the issues by executing Runbooks. 
+7.	The First Responder Team is equipped with automation and well-defined Runbooks to resolve the issue instantly. The automated process also updates the status of the event so that the dashboard, notification and collaboration channels are synchronized.
 
 
 
