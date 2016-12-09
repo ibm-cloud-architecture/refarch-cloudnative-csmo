@@ -6,6 +6,8 @@
 		Arundhati Bhowmick (aruna1@us.ibm.com)
 			
 		Detlef Kleinfelder (detlef.kleinfelder@de.ibm.com)
+		
+		Melody Bienfang (mbienfan@us.ibm.com)
 
 
 The tools in the Incident Management solution are implemented to provide an end-to-end view of application. You may choose to use multiple tools to handle different functionality of the application. The below picture shows multiple tools that manages cloud native as well as hybrid application.
@@ -197,7 +199,14 @@ Slack is an instant messaging and collaboration system on steroids. Slack’s ch
 
 For detailed steps please continue with [How to setup Slack for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/Collaboration/Slack/Slack.md)
 
-### Step 7: Dashboarding
+### Step 7: Ticketing & Trending
+
+#### Tool option a: How to use IBM Control Desk for BlueCompute
+IBM Control Desk unified IT asset and service management software provides a common control center for managing business processes for both digital and physical assets. It enables control, governance and compliance to applications, endpoints and assets to protect critical data and prevent outages.
+
+For detailed steps please continue with [How to setup IBM Control Desk for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/doc/Ticketing/ICD)
+
+### Step 8: Dashboarding
 
 #### Tool option a: How to use Grafana Dashboarding for BlueCompute
 Grafana is one of the leading tools for querying and visualizing time series and metrics. In this project we used it to create dashboards for First Responder persona. Grafana features a variety of panels, including fully featured graph panels with rich visualization options. There is built in support for many of the time series data sources like InfluxDB or Graphite. We used InfluxDB - a time series database for metrics as a data source for Grafana and perl script to collect data from various APIs of BlueCompute CSMO infrastructure like New Relic, Bluemix, NOI or CMDB. 
