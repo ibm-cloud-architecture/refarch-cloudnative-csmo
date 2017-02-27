@@ -12,7 +12,7 @@ The initial implementation of the health check API provides an example of adding
 The microservice used for this example is the StoreWebApp component of the IBM BlueCompute Store application, which provides the application's web front end for browsers.
 The following diagram shows the reference architecture used by the BlueCompute Store application.
 
-<img src="BlueComputeStore.png" width="1000">
+<img src="https://raw.githubusercontent.com/ibm-cloud-architecture/refarch-cloudnative/master/static/imgs/app_architecture.png" width="1000">
 
 The requirements for the health check API were derived from the CSMO Build to Manage PoV document, and the implementation is based on the Broadly node-healthchecks module. 
 
