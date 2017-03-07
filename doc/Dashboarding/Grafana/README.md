@@ -1,36 +1,5 @@
-
 # Monitoring Dashboard for a Hybrid Application
-
-- [Monitoring Dashboard for BlueCompute](#monitoring-dashboard-for-bluecompute)
-- [Grafana](#grafana)
-	- [Installing Grafana on Centos 7](#installing-grafana-on-centos-7)
-	- [Grafana configuration](#grafana-configuration)
-- [InfluxDB](#influxdb)
-	- [Requirements](#requirements)
-	- [Installing InfluxDB on Centos 7](#installing-influxdb-on-centos-7)
-	- [Configure InfluxDB](#configure-influxdb)
-- [MySQL](#mysql)
-	- [Installing MySQL on Centos 7](#installing-mysql-on-centos-7)
-	- [Create a CMDB User and Database](#create-a-cmdb-user-and-database)
-	- [Create CMDB database schema and import example](#create-cmdb-database-schema-and-import-example)
-- [PHP](#php)
-	- [CMDB UI configuration](#cmdb-ui-configuration)
-- [Data collection for Dashboard - grafana_collect.pl](#data-collection-for-dashboard---grafana_collectpl)
-	- [Install prerequisite Centos packages](#install-prerequisite-centos-packages)
-	- [Install prerequisite perl modules](#install-prerequisite-perl-modules)
-	- [Complete script configuration](#complete-script-configuration)
-	- [Configure perl script to start with the system](#configure-perl-script-to-start-with-the-system)
-	- [Schedule periodic API calls](#schedule-periodic-api-calls)
-- [Dashboard configuration](#dashboard-configuration)
-	- [Configuring data sources](#configuring-data-sources)
-		- [InfluxDB](#influxdb)
-		- [New Relic APM](#new-relic-apm)
-	- [Import dashboards](#import-dashboards)
-- [CSMO dashboard for BlueCompute](#csmo-dashboard-for-bluecompute)
-	- [First Responder dashboard](#first-responder-dashboard)
-	- [BlueCompute application details dashboard](#first-responder---bluecompute-application-details-dashboard)
-
-# Monitoring Dashboard for a Hybrid Application
+[TOC]
 
  Authors: 	
 			
@@ -681,3 +650,78 @@ Click on the header of the topology panel moves to more detailed Application Sum
 
 ##Application summary dashboard
 ![img](images/app_summary_dash.png)
+
+Dashboard is divided into the following sections:
+
+- Key metrics for BlueCompute Hybrid Application.
+- Bluemix Cloud Foundry Applications
+- Bluemix Container Applications
+- Bluemix Containers
+- Bluemix Infrastructure Databases
+- Bluemix Infrastructure Servers
+- Bluemix Services
+
+**Grafana panels:**
+
+- Bluemix Cloud Foundry Applications and Bluemix Container Applications
+
+|Panel   |Description   |Source   |
+|---|---|---|
+|Region   |Location of the application   | CMDB   |
+|Language   |Programming language of the application   |New Relic API   |
+|NR Status   |Application status in New Relic   |New Relic API   |
+|NOI Severity   |Highest severity for NOI alert for specific application   |Omnibus ObjectServer API   |
+|BMX status   |Status of the CF application in Bluemix   |Bluemix Cloud Foundry API   |
+|BMX Instances   |Number of CF Application instances   |Bluemix Cloud Foundry API   |
+|Response Time <br/>Error Rate<br/>APDEX score<br/>APDEX target|Key application metrics |New Relic API
+- Bluemix Containers
+
+|Panel   |Description   |Source   |
+|---|---|---|
+|Region   |Location of the application   | CMDB   |
+|BMX status   |Status of the IBM Container in Bluemix   |Bluemix IBM Container API   |
+|NOI Status   |Highest severity for NOI alert for specific container   |Omnibus ObjectServer API   |
+|IC Type   |IBM Container type: single container or container group   |Bluemix IBM container API   |
+|Instances  |Highest severity for NOI alert for specific application   |Bluemix IBM container API   |
+|IC instances status   |Number of CF Application instances   |Bluemix IBM container API   |
+
+
+- Bluemix Infrastructure Databases
+
+|Panel   |Description   |Source   |
+|---|---|---|
+|Region   |Location of the MySQL Database   | CMDB   |
+|NOI Status   |Highest severity for NOI alert for MySQL   |Omnibus ObjectServer API   |
+|Reads/s  |MySQL Reads per second   |New Relic API   |
+|Writes/s  |MySQL Writes per second  |New Relic API   |
+|Connections   |MySQL number of connections  |New Relic API   |
+
+- Bluemix Infrastructure Servers
+
+|Panel   |Description   |Source   |
+|---|---|---|
+|Region   |Location of the MySQL Database   | CMDB   |
+|NOI Status   |Highest severity for NOI alert for MySQL   |Omnibus ObjectServer API   |
+|CPU  |CPU utilization %   |New Relic API   |
+|Disk IO  |Disk IO %  |New Relic API   |
+|Memory   |Memory utilization %  |New Relic API   |
+|Memory Total|Total memory MB|New Relic API   |
+|Memory Used|Memory used MB|New Relic API   |
+|Fullest Disk|Fullest disk usage %|New Relic API   |
+|Fullest Disk Free|Fullest disk free MB|New Relic API   |
+
+- Bluemix Services
+
+|Panel   |Description   |Source   |
+|---|---|---|
+|Region   |Location of the MySQL Database   | Omnibus ObjectServer API   |
+|OpenWhisk   |Number of open events for OpenWhisk   |Omnibus ObjectServer API   |
+|API Connect  |Number of open events for API Connect |Omnibus ObjectServer API    |
+|Message Hub  |Number of open events for Message Hub  |Omnibus ObjectServer API    |
+|Elasticsearch|Number of open events for Elasticsearch|Omnibus ObjectServer API|
+|Cloudant|Number of open events for Cloudant|Omnibus ObjectServer API|
+|Whatson - Tone Analyzer|Number of open events for Whatson - Tone Analyzer|Omnibus ObjectServer API
+
+**Drill down and external integration entry points**
+
+Drill down and external integration entry points are the same as for [First Responder dashboard](#first-responder-dashboard).
