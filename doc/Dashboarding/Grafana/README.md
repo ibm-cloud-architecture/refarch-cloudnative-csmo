@@ -4,21 +4,33 @@
 - [Grafana](#grafana)
   * [Installing Grafana on Centos 7](#installing-grafana-on-centos-7)
   * [Grafana configuration](#grafana-configuration)
+- [InfluxDB](#influxdb)
   * [Requirements](#requirements)
   * [Installing InfluxDB on Centos 7](#installing-influxdb-on-centos-7)
+  * [Configure InfluxDB](#configure-influxdb)
 - [MySQL](#mysql)
   * [Installing MySQL on Centos 7](#installing-mysql-on-centos-7)
+  * [Create a CMDB User and Database](#create-a-cmdb-user-and-database)
+  * [Create CMDB database schema and import example](#create-cmdb-database-schema-and-import-example)
 - [PHP](#php)
   * [CMDB UI configuration](#cmdb-ui-configuration)
+- [Data collection for Dashboard](#data-collection-for-dashboard)
+  * [Install prerequisite Centos packages](#install-prerequisite-centos-packages)
+  * [Install prerequisite perl modules](#install-prerequisite-perl-modules)
+  * [Complete script configuration](#complete-script-configuration)
+  * [Configure perl script to start with the system](#configure-perl-script-to-start-with-the-system)
+  * [Schedule periodic API calls](#schedule-periodic-api-calls)
 - [Dashboard configuration](#dashboard-configuration)
   * [Configuring data sources](#configuring-data-sources)
+    + [InfluxDB](#influxdb-1)
+    + [New Relic APM](#new-relic-apm)
   * [Import dashboards](#import-dashboards)
 - [CSMO dashboard for BlueCompute deployed in a single region](#csmo-dashboard-for-bluecompute-deployed-in-a-single-region)
   * [First Responder dashboard](#first-responder-dashboard)
   * [BlueCompute application details dashboard](#bluecompute-application-details-dashboard)
 - [CSMO dashboard for BlueCompute with Resiliency](#csmo-dashboard-for-bluecompute-with-resiliency)
   * [Overall dashboard](#overall-dashboard)
-  * [Application summary dashboard](#application-summary-dashboard)
+  * [Application Summary dashboard](#application-summary-dashboard)
  
  
  Authors: 	
@@ -108,7 +120,7 @@ The configuration file is located at `/etc/grafana/grafana.ini`.  Go the
 those options.
 
 
-#InfluxDB
+# InfluxDB
 [InfluxDB](https://www.influxdata.com/time-series-platform/influxdb/) is an open-source time series database developed by InfluxData as part of their time series platform. It is written in Go and optimized for fast, high-availability storage and retrieval of time series data in fields such as operations monitoring, application metrics, Internet of Things sensor data, and real-time analytics. Here InfluxDB is used as storage for metrics collected by perl runtime and primary data source for Grafana dashboard.
 
 ## Requirements
@@ -138,7 +150,7 @@ sudo systemctl start influxdb
 sudo systemctl status influxdb
 ```
 
-##Configure InfluxDB
+## Configure InfluxDB
 
 By default your config file will be at `/etc/influxdb/influxdb.conf`.  However, you can create a new config file to modify if desired.
 
@@ -225,7 +237,7 @@ You’ll then be presented with a welcome header and the MySQL prompt as shown b
 
 	mysql>
 
-##Create a CMDB User and Database
+## Create a CMDB User and Database
 In the example below, `cmdb` is the name of the database, `cmdb` is the user, and `cmdb` is the user’s password.
 
 ```sql
@@ -235,7 +247,7 @@ grant all on cmdb.* to 'cmdb' identified by 'cmdb';
 ```
 
 
-##Create CMDB database schema and import example
+## Create CMDB database schema and import example
 Use provided sql script [cmdb.sql](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/CMDB/cmdb.sql) to create table and import example data.
 
 	mysql -u cmdb -p cmdb < cmdb.sql
@@ -264,9 +276,9 @@ Once you answer yes to the PHP prompt, PHP will be installed.
 
 ![cmdb_ui](images/cmdb_ui1.png)
 
-#Data collection for Dashboard - grafana_collect.pl
+# Data collection for Dashboard
 
-Perl script [`grafana_collect.pl_resilient_arch`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect_resilient_arch.pl) is a data collection component of dashboarding solution for BlueCompute.
+Perl script [`grafana_collect_resilient_arch.pl`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect_resilient_arch.pl) is a data collection component of dashboarding solution for BlueCompute.
 It collects data from the following data sources:
 
 - Bluemix Clound Foundry API
@@ -280,11 +292,11 @@ Script is based on [Mojolicious](http://mojolicious.org) perl web framework and 
 
 Use the following steps to install prerequisite system packages and perl modules required for data collection script.
 
-##Install prerequisite Centos packages
+## Install prerequisite Centos packages
 
 	sudo yum install perl-devel perl-CPAN gcc
 
-##Install prerequisite perl modules
+## Install prerequisite perl modules
 
 There are meny methods of installing perl modules - one of them is `cpanm`.
 
@@ -310,7 +322,7 @@ Install the following perl modules using `cpanm` (_require internet connection_)
 ```
 cpanm Mojolicious::Lite Data::Dumper JSON Text::ASCIITable InfluxDB::LineProtocol Hijk HTML::Table DBD::MySQL
 ```
-##Complete script configuration
+## Complete script configuration
 Copy [`grafana_collect_resilient_arch.pl`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect_resilient_arch.pl) to the server (_I used /case directory_) and make it executable.
 List routes defined by the script to check if it starts correctly:
 
@@ -402,7 +414,7 @@ If the script is configured correctly (proper credentials, proper API keys, CMDB
 
 Stop the script using `CTRL-c`.
 
-##Configure perl script to start with the system
+## Configure perl script to start with the system
 
 Centos 7 uses `systemd` to initialize operating system components that must be started after Linux kernel is booted. Configure `systemd` to start grafana_collect.pl as a daemon together with the Operating System.
 
@@ -467,7 +479,7 @@ Expected output:
 	| eu-bluecompute-web-cloudnative-qa             | 45389888 | bmx_eu-gb    | BlueCompute    | CASE-DEV | nodejs   | green  |          39.3 | -          |
 	'-----------------------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------'
 
-##Schedule periodic API calls
+## Schedule periodic API calls
 
 API calls done by [`grafana_collect_resilient_arch.pl`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect_resilient_arch.pl) are activated by external HTTP GET requests to perl runtime web server, listening on port `3001` by default. One of the ways to schedule periodic API calls is to create short shell script that will do the HTTP GET requests and schedule it by cron.
 Below are the configuration steps:
@@ -519,7 +531,7 @@ Having a data collection layer up and runnig and data coming to InfluxDB, we can
 
 ## Configuring data sources
 
-###InfluxDB
+### InfluxDB
 
 InfluxDB Primary is the primary data source for the BlueCompute dashboard. It is installed by default in Grafana.
 
@@ -531,7 +543,7 @@ Open the URL: `http://\<grafana_hostname>:3000/datasources` in the browser and e
 
 Click Save & Test.
 
-###New Relic APM
+### New Relic APM
 
 Detailed dashboards for BlueCompute components monitored by New Relic are rendered based on New Relic Data Source.
 
