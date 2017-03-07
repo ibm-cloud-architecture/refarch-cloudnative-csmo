@@ -16,7 +16,7 @@
 - [CSMO dashboard for BlueCompute deployed in a single region](#csmo-dashboard-for-bluecompute-deployed-in-a-single-region)
   * [First Responder dashboard](#first-responder-dashboard)
   * [BlueCompute application details dashboard](#bluecompute-application-details-dashboard)
-- [CSMO dashboard for BlueCompute resilient architecture (multiple Bluemix regions)](#csmo-dashboard-for-bluecompute-resilient-architecture--multiple-bluemix-regions-)
+- [CSMO dashboard for BlueCompute with Resiliency](#csmo-dashboard-for-bluecompute-with-resiliency)
   * [Overall dashboard](#overall-dashboard)
   * [Application summary dashboard](#application-summary-dashboard)
  
@@ -658,7 +658,7 @@ BlueCompute application details dashboard shows detailed graphs for BleuCompute 
 
 ![img](images/Grafana_first_responder_detail_big.png)
 
-# CSMO dashboard for BlueCompute resilient architecture (multiple Bluemix regions)
+# CSMO dashboard for BlueCompute with Resiliency
 
 ## Overall dashboard
 Overall dashboard shows overall status of the application. If the application is deployed in multiple regions, it will show key metris per region.
