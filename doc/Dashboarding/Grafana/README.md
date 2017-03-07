@@ -1,6 +1,26 @@
 # Monitoring Dashboard for a Hybrid Application
-[TOC]
 
+- [Monitoring Dashboard for a Hybrid Application](#monitoring-dashboard-for-a-hybrid-application)
+- [Grafana](#grafana)
+  * [Installing Grafana on Centos 7](#installing-grafana-on-centos-7)
+  * [Grafana configuration](#grafana-configuration)
+  * [Requirements](#requirements)
+  * [Installing InfluxDB on Centos 7](#installing-influxdb-on-centos-7)
+- [MySQL](#mysql)
+  * [Installing MySQL on Centos 7](#installing-mysql-on-centos-7)
+- [PHP](#php)
+  * [CMDB UI configuration](#cmdb-ui-configuration)
+- [Dashboard configuration](#dashboard-configuration)
+  * [Configuring data sources](#configuring-data-sources)
+  * [Import dashboards](#import-dashboards)
+- [CSMO dashboard for BlueCompute deployed in a single region](#csmo-dashboard-for-bluecompute-deployed-in-a-single-region)
+  * [First Responder dashboard](#first-responder-dashboard)
+  * [BlueCompute application details dashboard](#bluecompute-application-details-dashboard)
+- [CSMO dashboard for BlueCompute resilient architecture (multiple Bluemix regions)](#csmo-dashboard-for-bluecompute-resilient-architecture--multiple-bluemix-regions-)
+  * [Overall dashboard](#overall-dashboard)
+  * [Application summary dashboard](#application-summary-dashboard)
+ 
+ 
  Authors: 	
 			
 		Rafał Szypułka (rafal.szypulka@pl.ibm.com)
@@ -541,7 +561,7 @@ Dashboad json files can be imported using Grafana UI: click on the top-left menu
 # CSMO dashboard for BlueCompute deployed in a single region
 
 
-##First Responder dashboard
+## First Responder dashboard
 First responder dashboard URL:
 
 `http://<dashboard_server_ip>:3000/dashboard/db/1-bluecompute-application-summary-first-responder`
@@ -615,7 +635,7 @@ First Responder Dashboard includes several context entry point to more detailed 
 
 ![img](images/Grafana_first_responder_big_desc1.png)
 
-##BlueCompute application details dashboard
+## BlueCompute application details dashboard
 
 BlueCompute application details dashboard shows detailed graphs for BleuCompute components monitored. All metrics in this dashboard are collected using [New Relic Data Source](#new-relic-apm) that collects data directly from New Relic API.
 
@@ -631,7 +651,7 @@ BlueCompute application details dashboard shows detailed graphs for BleuCompute 
 
 # CSMO dashboard for BlueCompute resilient architecture (multiple Bluemix regions)
 
-##Overall dashboard
+## Overall dashboard
 Overall dashboard shows overall status of the application. If the application is deployed in multiple regions, it will show key metris per region.
 
 Overall dashboard URL:
@@ -648,7 +668,7 @@ Dashboard is divided into the following sections:
 
 Click on the header of the topology panel moves to more detailed Application Summary dashboard for specific Bleumix region.
 
-##Application summary dashboard
+## Application summary dashboard
 ![img](images/app_summary_dash.png)
 
 Dashboard is divided into the following sections:
