@@ -550,8 +550,17 @@ Open the `URL: http://\<grafana_hostname>:3000/datasources` and enter the name o
 ## Import dashboards
 The following dashboards were developed by CSMO for BlueCompute:
 
+**For BlueCompute deployed in a single Bluemix region (old version)**
+
 - [1 - BlueCompute Application Summary - First Responder](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/Dashboards/1 - BlueCompute Application Summary - First Responder.json)
 - [2 - BlueCompute Application Details](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/Dashboards/2 - BlueCompute Application Details.json)
+
+**For BlueCompute Resilient Architecture (deployed in multiple Bluemix regions)**
+
+- [BlueCompute - Overall View - Resiliency](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/Dashboards)
+- [BlueCompute - Application Summary - USA](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/Dashboards)
+- [BlueCompute - Application Summary - EU](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/Dashboards)
+
 
 Click on the links above or clone this git repository to access dashboard definition json files.
 Dashboad json files can be imported using Grafana UI: click on the top-left menu and select Dashboards -> Import.
@@ -668,7 +677,12 @@ Dashboard is divided into the following sections:
 
 Click on the header of the topology panel moves to more detailed Application Summary dashboard for specific Bleumix region.
 
-## Application summary dashboard
+## Application Summary dashboard
+Application Summary dashboard can be accessed from the Overall dashboard or directly using the following links:
+
+`http://<dashboard_server_ip>:3000/dashboard/db/bluecompute-application-summary-usa`
+`http://<dashboard_server_ip>:3000/dashboard/db/bluecompute-application-summary-eu`
+
 ![img](images/app_summary_dash.png)
 
 Dashboard is divided into the following sections:
