@@ -277,7 +277,7 @@ Once you answer yes to the PHP prompt, PHP will be installed.
 
 #Data collection for Dashboard - grafana_collect.pl
 
-Perl script [`grafana_collect.pl_resilient_arch`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect_resilient_arch.pl) is a data collection component of dashboarding solution for BlueCompute.
+Perl script [`grafana_collect.pl`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect.pl) is a data collection component of dashboarding solution for BlueCompute.
 It collects data from the following data sources:
 
 - Bluemix Clound Foundry API
@@ -306,7 +306,7 @@ sudo curl -L http://cpanmin.us | perl - --sudo App::cpanminus
 ```
 
 Before installing perl modules, make sure that MySQL server or client is installed on the system.
-In our environment, MySQL server with `cmdb` database was installed on the same Centos 7 VM as other dashboarding solution components: Grafana, InfluxDB and [`grafana_collect_resilient_arch.pl`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect_resilient_arch.pl).
+In our environment, MySQL server with `cmdb` database was installed on the same Centos 7 VM as other dashboarding solution components: Grafana, InfluxDB and [`grafana_collect.pl`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect.pl).
 Install the following perl modules using `cpanm` (_require internet connection_):
 
 - Mojolicious::Lite
@@ -322,10 +322,10 @@ Install the following perl modules using `cpanm` (_require internet connection_)
 cpanm Mojolicious::Lite Data::Dumper JSON Text::ASCIITable InfluxDB::LineProtocol Hijk HTML::Table DBD::MySQL
 ```
 ##Complete script configuration
-Copy [`grafana_collect_resilient_arch.pl`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect_resilient_arch.pl) to the server (_I used /case directory_) and make it executable.
+Copy [`grafana_collect.pl`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect.pl) to the server (_I used /case directory_) and make it executable.
 List routes defined by the script to check if it starts correctly:
 
-	./grafana_collect_resilient_arch.pl routes
+	./grafana_collect.pl routes
 
 The output should be similar to the following:
 
@@ -340,50 +340,34 @@ The output should be similar to the following:
 	/noi_app_severity  GET  noi_app_severity
 	/list              GET  list
 	/html              GET  html
+	/query             *    query
+	/search            *    search
 
-
-Edit the script [`grafana_collect_resilient_arch.pl`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect_resilient_arch.pl) and change the following variables according to comments inside the script:
+Edit the script [`grafana_collect.pl`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect.pl) and change the following variables according to comments inside the script:
 
 ```perl
-#### New Relic settings ###
-my $newrelic_url        = 'https://api.newrelic.com/v2/applications.json';
-my $newrelic_components = 'https://api.newrelic.com/v2/components.json';
-my $newrelic_servers    = 'https://api.newrelic.com/v2/servers.json';
-my $api_key             = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+############### Edit section below ###############################################################
+my $api_key       = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'; # New relic API Key
+my $bmx_space_guid =
+  'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';               # cf space cloudnative-dev --guid
 
-### Bluemix settings ###
-my $bluemix_auth        = 'https://login.ng.bluemix.net/UAALoginServerWAR/oauth/token';
-my $bmx_containers_api_us  = 'https://containers-api.ng.bluemix.net/v3/containers/json';
-my $bmx_containers_api_eugb = 'https://containers-api.eu-gb.bluemix.net/v3/containers/json';
-my $bmx_container_group = 'https://containers-api.ng.bluemix.net/v3/containers/groups';
-#cf space cloudnative-prod --guid (executed on ng)
-my $bmx_space_guid_us_prod    = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; 	
-my $bmx_space_guid_eugb_prod  = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-my $bmx_space_guid_us_integ   = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; 	
-my $bmx_space_guid_eugb_integ = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-my $bmx_space_guid_eugb_qa    = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-my $bmx_space_guid_us_qa      = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-my $bmx_apps_api_us_prod      = "https://api.ng.bluemix.net/v2/spaces/${bmx_space_guid_us_prod}/summary";
-my $bmx_apps_api_eugb_prod    = "https://api.eu-gb.bluemix.net/v2/spaces/${bmx_space_guid_eugb_prod}/summary";
-my $bmx_apps_api_us_integ     = "https://api.ng.bluemix.net/v2/spaces/${bmx_space_guid_us_integ}/summary";
-my $bmx_apps_api_eugb_integ   = "https://api.eu-gb.bluemix.net/v2/spaces/${bmx_space_guid_eugb_integ}/summary";
-my $bmx_apps_api_us_qa        = "https://api.ng.bluemix.net/v2/spaces/${bmx_space_guid_us_qa}/summary";
-my $bmx_apps_api_eugb_qa      = "https://api.eu-gb.bluemix.net/v2/spaces/${bmx_space_guid_eugb_qa}/summary";
-my $bmx_username              = 'xxxxxxxxxxxxxxxx';
-my $bmx_password              = 'xxxxxxxxxx';
-
-### NOI settings ###
-my $noi_user     = "xxxxx";
-my $noi_password = "xxxxxxxxx";
-my $noi_server   = "xxxxxxxxxxx";
-my $noi_api      = "http://${noi_user}:${noi_password}\@${noi_server}:8080/objectserver/restapi/sql/factory/";
-my $noi_sql      = 'select Serial, Node, Service, to_char(LastOccurrence), Severity from alerts.status where SuppressEscl < 4';
-
+my $noi_user     = "xxxx";                                 # Omnibus user
+my $noi_password = "xxxxxxxxx";                            # Ominbus user password
+my $noi_api =
+  "http://${noi_user}:${noi_password}\@xxx.xxx.xxx.xxx:8080/objectserver/restapi/sql/factory/";
+                                                           # insert Netcool Omnibus IP address above
+my $bmx_username = 'xxxxxxxxxxxxxxxx';                     # Bluemix user id
+my $bmx_password = 'xxxxxxxx';                             # Bluemix user password
+my $influx_host  = 'localhost';                            # change is InfluxDB is installed remotely
+my $influx_port  = '8086';                                 # change is Inlfux DB port is non-default
+my $uid = "cmdb";                                          # MySQL user for CMDB database
+my $pwd = 'cmdb';                                          # MySQL user password
+##########################################################################################
 ```
 
 Start the script. It will automatically start buil-in web server.
 
-	./grafana_collect_resilient_arch.pl daemon -l http://*:3002
+	./grafana_collect.pl daemon -l http://*:3002
 
 In the separate shell session on the same server execute:
 
@@ -391,25 +375,16 @@ In the separate shell session on the same server execute:
 
 If the script is configured correctly (proper credentials, proper API keys, CMDB properly set up, etc.), you should see the similar output:
 
-	[root@rscase case]# curl http://localhost:3002/list
-	.------------------------------------------------------------------------------------------------------------------------------------------------------.
-	|                                                               New Relic Service Status                                                               |
-	+-----------------------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------+
-	| Name                                          | Id       | Region Name  | Service Name   | Client   | Language | Status | Response time | Error rate |
-	+-----------------------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------+
-	| us-micro-orders-cloudnative-qa                | 45309534 | bmx_us-south | BlueCompute    | CASE-DEV | java     | green  |         0.767 | -          |
-	| us-micro-inventory-cloudnative-qa             | 45310489 | bmx_us-south | BlueCompute    | CASE-DEV | java     | green  |        0.0207 | -          |
-	| us-micro-catalog-cloudnative-qa               | 45310698 | bmx_us-south | BlueCompute    | CASE-DEV | java     | green  | -             | -          |
-	| us-micro-customer-cloudnative-qa              | 45313599 | bmx_us-south | BlueCompute    | CASE-DEV | java     | green  |        0.0274 | -          |
-	| eu-netflix-eureka-cloudnative-qa              | 45370063 | bmx_eu-gb    | BlueCompute    | CASE-DEV | java     | green  |          12.9 | -          |
-	| eu-auth-cloudnative-qa                        | 45379935 | bmx_eu-gb    | BlueCompute    | CASE-DEV | java     | green  |          1.54 | -          |
-	| eu-netflix-zuul-cloudnative-qa                | 45380333 | bmx_eu-gb    | BlueCompute    | CASE-DEV | java     | green  |          1.59 | -          |
-	| eu-micro-inventory-cloudnative-qa             | 45382080 | bmx_eu-gb    | BlueCompute    | CASE-DEV | java     | green  |        0.0344 | -          |
-	| eu-micro-customer-cloudnative-qa              | 45383692 | bmx_eu-gb    | BlueCompute    | CASE-DEV | java     | green  |         0.488 | -          |
-	| eu-micro-catalog-cloudnative-qa               | 45387086 |              |                |          | java     | green  | -             | -          |
-	| eu-micro-orders-cloudnative-qa                | 45388869 | bmx_eu-gb    | BlueCompute    | CASE-DEV | java     | green  |          1.19 | -          |
-	| eu-bluecompute-web-cloudnative-qa             | 45389888 | bmx_eu-gb    | BlueCompute    | CASE-DEV | nodejs   | green  |          39.3 | -          |
-	'-----------------------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------'
+	[root@rscase case]# curl localhost:3002/list
+	.------------------------------------------------------------------------------------------------------------------------------------------.
+	|                                                         New Relic Service Status                                                         |
+	+-----------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------+
+	| Name                              | Id       | Region Name  | Service Name   | Client   | Language | Status | Response time | Error rate |
+	+-----------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------+
+	| inventory-bff-app-dev             | 31935607 | bmx_eu-gb    | BlueCompute    | CASE-DEV | nodejs   | green  | -             | -          |
+	| bluecompute-web-app               | 31939678 | bmx_eu-gb    | BlueCompute    | CASE-DEV | nodejs   | green  |          15.8 | -          |
+	| socialreview-bff-app              | 32528997 | bmx_eu-gb    | BlueCompute    | CASE-DEV | nodejs   | green  |            64 | -          |
+	'-----------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------'
 
 Stop the script using `CTRL-c`.
 
@@ -447,11 +422,11 @@ Expected output:
 	 Main PID: 1115 (grafana_nr.sh)
 	   CGroup: /system.slice/grafana_nr.service
 	           ├─ 1115 /bin/sh /case/grafana_nr.sh
-	           ├─ 1207 perl /case/grafana_collect_resilient_arch.pl prefork -m production -l http://*:3001
-	           ├─ 1210 perl /case/grafana_collect_resilient_arch.pl prefork -m production -l http://*:3001
-	           ├─15076 perl /case/grafana_collect_resilient_arch.pl prefork -m production -l http://*:3001
-	           ├─15277 perl /case/grafana_collect_resilient_arch.pl prefork -m production -l http://*:3001
-	           └─15347 perl /case/grafana_collect_resilient_arch.pl prefork -m production -l http://*:3001
+	           ├─ 1207 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
+	           ├─ 1210 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
+	           ├─15076 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
+	           ├─15277 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
+	           └─15347 perl /case/1grafana_nr.pl prefork -m production -l http://*:3001
 ```
 
 	curl http://localhost:3001/list
@@ -459,28 +434,19 @@ Expected output:
 Expected output:
 
 	[root@rscase case]# curl localhost:3001/list
-	.------------------------------------------------------------------------------------------------------------------------------------------------------.
-	|                                                               New Relic Service Status                                                               |
-	+-----------------------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------+
-	| Name                                          | Id       | Region Name  | Service Name   | Client   | Language | Status | Response time | Error rate |
-	+-----------------------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------+
-	| us-micro-orders-cloudnative-qa                | 45309534 | bmx_us-south | BlueCompute    | CASE-DEV | java     | green  |         0.767 | -          |
-	| us-micro-inventory-cloudnative-qa             | 45310489 | bmx_us-south | BlueCompute    | CASE-DEV | java     | green  |        0.0207 | -          |
-	| us-micro-catalog-cloudnative-qa               | 45310698 | bmx_us-south | BlueCompute    | CASE-DEV | java     | green  | -             | -          |
-	| us-micro-customer-cloudnative-qa              | 45313599 | bmx_us-south | BlueCompute    | CASE-DEV | java     | green  |        0.0274 | -          |
-	| eu-netflix-eureka-cloudnative-qa              | 45370063 | bmx_eu-gb    | BlueCompute    | CASE-DEV | java     | green  |          12.9 | -          |
-	| eu-auth-cloudnative-qa                        | 45379935 | bmx_eu-gb    | BlueCompute    | CASE-DEV | java     | green  |          1.54 | -          |
-	| eu-netflix-zuul-cloudnative-qa                | 45380333 | bmx_eu-gb    | BlueCompute    | CASE-DEV | java     | green  |          1.59 | -          |
-	| eu-micro-inventory-cloudnative-qa             | 45382080 | bmx_eu-gb    | BlueCompute    | CASE-DEV | java     | green  |        0.0344 | -          |
-	| eu-micro-customer-cloudnative-qa              | 45383692 | bmx_eu-gb    | BlueCompute    | CASE-DEV | java     | green  |         0.488 | -          |
-	| eu-micro-catalog-cloudnative-qa               | 45387086 |              |                |          | java     | green  | -             | -          |
-	| eu-micro-orders-cloudnative-qa                | 45388869 | bmx_eu-gb    | BlueCompute    | CASE-DEV | java     | green  |          1.19 | -          |
-	| eu-bluecompute-web-cloudnative-qa             | 45389888 | bmx_eu-gb    | BlueCompute    | CASE-DEV | nodejs   | green  |          39.3 | -          |
-	'-----------------------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------'
+	.------------------------------------------------------------------------------------------------------------------------------------------.
+	|                                                         New Relic Service Status                                                         |
+	+-----------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------+
+	| Name                              | Id       | Region Name  | Service Name   | Client   | Language | Status | Response time | Error rate |
+	+-----------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------+
+	| inventory-bff-app-dev             | 31935607 | bmx_eu-gb    | BlueCompute    | CASE-DEV | nodejs   | green  | -             | -          |
+	| bluecompute-web-app               | 31939678 | bmx_eu-gb    | BlueCompute    | CASE-DEV | nodejs   | green  |          15.8 | -          |
+	| socialreview-bff-app              | 32528997 | bmx_eu-gb    | BlueCompute    | CASE-DEV | nodejs   | green  |            64 | -          |
+	'-----------------------------------+----------+--------------+----------------+----------+----------+--------+---------------+------------'
 
 ##Schedule periodic API calls
 
-API calls done by [`grafana_collect_resilient_arch.pl`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect_resilient_arch.pl) are activated by external HTTP GET requests to perl runtime web server, listening on port `3001` by default. One of the ways to schedule periodic API calls is to create short shell script that will do the HTTP GET requests and schedule it by cron.
+API calls done by [`grafana_collect.pl`](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect.pl) are activated by external HTTP GET requests to perl runtime web server, listening on port `3001` by default. One of the ways to schedule periodic API calls is to create short shell script that will do the HTTP GET requests and schedule it by cron.
 Below are the configuration steps:
 
 1. Copy the [grafana_collect_run.sh](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/scripts/Dashboarding/Grafana/DataCollection/grafana_collect_run.sh) to the server (_I copied it to my home drectory_) and make it executable.
@@ -569,8 +535,7 @@ Dashboad json files can be imported using Grafana UI: click on the top-left menu
 
 ![grafana_import](images/grafana_import.png)
 
-# CSMO dashboard for BlueCompute deployed in single region
-
+# CSMO dashboard for BlueCompute
 
 ##First Responder dashboard
 First responder dashboard URL:
@@ -659,18 +624,3 @@ BlueCompute application details dashboard shows detailed graphs for BleuCompute 
 
 
 ![img](images/Grafana_first_responder_detail_big.png)
-
-# CSMO dashboard for BlueCompute resilient architecture (multiple Bluemix regions)
-
-##Overall dashboard
-Overall dashboard shows overall status of the application. If the application is deployed in multiple regions, it will show key metris per region.
-
-Overall dashboard URL:
-
-`http://<dashboard_server_ip>:3000/dashboard/db/bluecompute-overall-view-resiliency`
-
-Dashboard is divided into the following sections: 
- 
-- Overall status - color panel that shows the highest severity alert open for all regions (red if critical, yellow if warning, geen if no open alerts). 
-- High level topology per region.
-- Volume of requests and response time of web frontend application per region.
