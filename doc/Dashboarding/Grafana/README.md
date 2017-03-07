@@ -330,7 +330,7 @@ List routes defined by the script to check if it starts correctly:
 The output should be similar to the following:
 
 
-	[root@rscase case]# ./grafana_collect.pl routes
+	[root@rscase case]# ./grafana_collect_resilient_arch.pl routes
 	/nr_cmdb           GET  nr_cmdb
 	/nr_mysql_cmdb     GET  nr_mysql_cmdb
 	/nr_nginx_cmdb     GET  nr_nginx_cmdb
@@ -569,7 +569,7 @@ Dashboad json files can be imported using Grafana UI: click on the top-left menu
 
 ![grafana_import](images/grafana_import.png)
 
-# CSMO dashboard for BlueCompute deployed in single region
+# CSMO dashboard for BlueCompute deployed in a single region
 
 
 ##First Responder dashboard
@@ -672,5 +672,12 @@ Overall dashboard URL:
 Dashboard is divided into the following sections: 
  
 - Overall status - color panel that shows the highest severity alert open for all regions (red if critical, yellow if warning, geen if no open alerts). 
-- High level topology per region.
-- Volume of requests and response time of web frontend application per region.
+- High level topology per region (USA and EU) - shows NOI alerts per application component type.
+- Volume of requests and response time of web frontend application per region (USA and EU).
+
+![img](images/overall_dash.png)
+
+Click on the header of the topology panel moves to more detailed Application Summary dashboard for specific Bleumix region.
+
+##Application summary dashboard
+![img](images/app_summary_dash.png)
