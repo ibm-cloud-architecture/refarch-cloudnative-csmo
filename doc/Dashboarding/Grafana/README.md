@@ -43,14 +43,13 @@ It gives an overall view on current status of all BlueCompute Hybrid application
 This document will describe, how to deploy whole dashboarding solution on a single Centos 7 server.
 
 Diagram below explains the data flow for the dashboard.
-[Data collection component](#data-collection-for-dashboard---grafana_collectpl) collects data from the following data sources:
+[Data collection component](#data-collection-for-dashboard) collects data from the following data sources:
 
 - Bluemix Clound Foundry API
 - Bluemix Container API
 - New Relic API
 - NOI (Omnibus ObjectServer) API
 - CMDB database
-- BAM (planned)
 
 Collected data is stored in [InfluxDB](#influxdb) timeseries database, which is the primary data source for [Grafana](#grafana) dashboarding engine.
 
