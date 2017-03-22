@@ -30,7 +30,7 @@ There are various ways to build the tool chain for an Incident Management soluti
 
 **Dashboard** - [Grafana](Dashboarding/Grafana/README.md) to display an overall status of the _BlueCompute_ business service with key performance metrics, allowing to drill down into detailed pages or launch additionals details of the other tools of the toolchain like New Relic and NOI.
 
-**Ticket & Trending** - [IBM Control Desk](Ticket&Trending/Control Desk/ICD.md) to record the incident ticket and all pertaining data to enable various personas to perform ticket trending analysis.
+**Ticket & Trending** - [IBM Control Desk](Ticketing/ICD/ICD.md) to record the incident ticket and all pertaining data to enable various personas to perform ticket trending analysis.
 
 
 ## Understanding System Context Flows for the Tools in CSMO Toolchain Connecting BlueCompute Application
