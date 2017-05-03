@@ -148,7 +148,7 @@ Grafana allows also the launch of external URL pages in new browser tabs as part
 
 ### System Context Flow for IBM Control Desk
 
-![System Context Flow IBM Control Desk](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/static/imgs/Ticketing/Cloud_Service_Management-ICD_Hybrid.png)
+![System Context Flow IBM Control Desk](../static/imgs/Ticketing/Cloud_Service_Management-ICD_Hybrid.png)
 
 The above figure shows the deep dive of IBM Control Desk and its various components and various integrated tools for incident management and their interactions.
 
@@ -160,7 +160,9 @@ The above figure shows the deep dive of IBM Control Desk and its various compone
 6.	 The Dashboard are preconfigured to provide one single view of various sources of events from Event Correlation and Monitoring systems to guide the First Responder and Subject Matter Experts to isolate and resolve the issues by executing Runbooks.
 7.	The First Responder Team is equipped with automation and well-defined Runbooks to resolve the issue instantly. The automated process also updates the status of the event so that the dashboard, notification and collaboration channels are synchronized.
 
-![System Context Flow IBM Runbook Automation](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/static/imgs/Runbook/RBA/Cloud_Service_Management_Runbook_Hybrid.png)
+### System Context Flow for IBM Runbook Automation
+
+![System Context Flow IBM Runbook Automation](../static/imgs/Runbook/RBA/Cloud_Service_Management_Runbook_Hybrid.png)
 
 The above figure shows the deep dive of IBM Runbook Automation and the Runbook Automation workflow to resolve incidents.
 
@@ -178,21 +180,21 @@ The above figure shows the deep dive of IBM Runbook Automation and the Runbook A
 
 The following walkthrough guides you through how to use the toolchain for end-to-end monitoring of the hybrid application. You will learn how to implement basic incident management capabilities and how to build a more advanced, robust incident management solution.
 
-###Step 1: Installation prerequisites
+### Step 1: Installation prerequisites
 
 When deployed using an instant runtime, the solution for incident management requires the following items:
 
   +  IBM Bluemix account
   +  A hybrid application - [BlueCompute application set up instruction](https://github.com/ibm-cloud-architecture/refarch-cloudnative)
 
-###Step 2: Incident Management walkthrough
+### Step 2: Incident Management walkthrough
 
 The cloud native Cloud Service Management and Operations [incident management walkthrough](https://developer.ibm.com/architecture/gallery/incidentManagement/walkthrough/Introduction) is provided with the tools in the toolchain.
 
 
 The following sections only focusses on updates needed to instrument or use a hybrid application and will defer to the published how-to documents for the selected tools of the toolchain.
 
-###Step 3: Monitoring
+### Step 3: Monitoring
 
 #### Tool option a: How to Use New Relic for BlueCompute
 
@@ -212,7 +214,7 @@ IBM Netcool Operations Insight accelerates the operations management lifecycle f
 
 For detailed steps please continue with [How to setup NOI for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/EventMgmt/NOI/NOI.md)
 
-###Step 5: Notification
+### Step 5: Notification
 
 #### Tool option a: How to use IBM Alert Notification System for BlueCompute
 IBM Alert Notification System is IBM Bluemix®	service environment that instantly	delivers notifications	of problem occurrences in your	Bluemix	environment	using automated email, Short Message Service (SMS), and voice	messaging.
@@ -240,7 +242,7 @@ Grafana is one of the leading tools for querying and visualizing time series and
 
 For detailed steps please continue with [How to setup Grafana for BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/tree/master/doc/Dashboarding/Grafana/README.md)
 
-### Step 8: Runbook
+### Step 9: Runbook
 
 #### Tool option a: How to use IBM Runbook Automation for BlueCompute
 IBM Runbook Automation (RBA) is an easy-to-use-service.  The service can help IT Operations to simplify and automate operational issues/problems with Applications.  It can help eliminate the reliance on manual efforts and remove issues dealing with varying skill sets.  With the use of RBA, you can reduce delays, disruption, and risk of errors.  With RBA, you create a repeatable set of instructions to resolve an issue.   
@@ -250,6 +252,8 @@ For detailed steps please continue with [How to setup IBM Runbook Automation for
 ## Reference Product Links
 
 [IBM Netcool Operations Insights](http://www-03.ibm.com/software/products/en/netcool-operations-insight)
+
+[IBM Runbook Automation](http://www-03.ibm.com/software/products/en/ibm-runbook-automation)
 
 [IBM Alert Notification](http://www-03.ibm.com/software/products/en/ibm-alert-notification)
 
