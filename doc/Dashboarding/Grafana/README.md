@@ -218,7 +218,15 @@ MySQL is a popular database management system used for web and server applicatio
 	yum install mysql-server
 	systemctl start mysqld
 
-After installation, run interactive configuration program and specify configuration settings according to prompts.
+
+MySQL may generates a random password for root after installation and store it in the mysql error log file, located at /var/log/mysqld.log
+
+Use the following command to find the password:
+
+	`sudo grep 'temporary password' /var/log/mysqld.log`
+
+
+After installation, run the interactive configuration program and specify configuration settings according to prompts.
 
 	sudo mysql_secure_installation
 
