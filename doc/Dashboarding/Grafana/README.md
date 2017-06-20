@@ -223,7 +223,7 @@ MySQL may generates a random password for root after installation and store it i
 
 Use the following command to find the password:
 
-	`sudo grep 'temporary password' /var/log/mysqld.log`
+	sudo grep 'temporary password' /var/log/mysqld.log
 
 
 After installation, run the interactive configuration program and specify configuration settings according to prompts.
