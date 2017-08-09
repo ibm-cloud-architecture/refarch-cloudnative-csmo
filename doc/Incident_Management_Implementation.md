@@ -19,7 +19,7 @@ The tools in the Incident Management solution are implemented to provide an end-
 There are various ways to build the tool chain for an Incident Management solution. For this project we utilized the following set of tools to showcase end-to-end incident management of [BlueCompute](https://github.com/ibm-cloud-architecture/refarch-cloudnative) application that is hybrid in nature.  
 
 
-**Monitoring** - [New Relic](Monitoring/NewRelic/NewRelic.md) for resource monitoring and E2E monitoring of URLs <and IBM Bluemix Application Management (BAM) for synthetic monitoring of the hybrid application and components.>
+**Monitoring** - [New Relic](Monitoring/NewRelic/NewRelic.md) for resource monitoring and E2E monitoring of URLs and [IBM Bluemix Application Management (BAM)](https://github.com/ibm-cloud-architecture/refarch-cloudnative-csmo/blob/master/doc/BAM/BAM.md) for synthetic monitoring of the hybrid application and components.
 
 **Event Correlation** - [IBM Netcool Operations Insights](EventMgmt/NOI/NOI.md) to fulfill the event management and correlation activities.
 
