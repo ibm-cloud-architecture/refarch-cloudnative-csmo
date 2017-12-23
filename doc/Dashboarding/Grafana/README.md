@@ -42,7 +42,7 @@ Monitoring Dashboard is an entry point UI for First Responder persona who will r
 It gives an overall view on current status of all BlueCompute Hybrid application components. It allows also to contextually drill down to more detailed information about topology, performance metrics, log files and generated alerts.
 This document will describe, how to deploy whole dashboarding solution on a single Centos 7 server.
 
-Diagram below explains the data flow for the dashboard.
+The diagram below explains the data flow for the dashboard.
 [Data collection component](#data-collection-for-dashboard) collects data from the following data sources:
 
 - Bluemix Clound Foundry API
