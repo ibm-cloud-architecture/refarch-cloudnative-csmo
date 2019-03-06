@@ -1,0 +1,37 @@
+#<jmgr:submitJobFromJSDL xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jmgr="http://www.ibm.com/xmlns/prod/scheduling/1.0/JobManager" xmlns:jsdl="http://www.ibm.com/xmlns/prod/scheduling/1.0/jsdl" xmlns:jsdlremotecommand="http://www.ibm.com/xmlns/prod/scheduling/1.0/jsdlremotecommand" xmlns:sdo="http://www.eclipse.org/emf/2003/SDO">
+#<jmgr:JobDefinitionDocument>
+#<jsdl:jobDefinition name="REMOTECOMMAND">
+#<jsdl:application name="remotecommand">
+#<jsdlremotecommand:remotecommand>
+#<jsdlremotecommand:RemoteCommandParameters>
+#<jsdlremotecommand:taskPanel>
+$<jsdlremotecommand:command>+</jsdlremotecommand:command>
+#</jsdlremotecommand:taskPanel>
+#<jsdlremotecommand:environmentPanel>
+#<jsdlremotecommand:standardOutput></jsdlremotecommand:standardOutput>
+#<jsdlremotecommand:standardError></jsdlremotecommand:standardError>
+#</jsdlremotecommand:environmentPanel>
+#<jsdlremotecommand:serverPanel>
+#<jsdlremotecommand:serverInfo>
+#<jsdlremotecommand:serverName>${agent:rba.ssh.rba:hostname}</jsdlremotecommand:serverName>
+#<jsdlremotecommand:port>${agent:rba.ssh.rba:port}</jsdlremotecommand:port>
+#<jsdlremotecommand:protocol>ssh</jsdlremotecommand:protocol>
+#</jsdlremotecommand:serverInfo>
+#<jsdlremotecommand:credentials>
+#<jsdl:userName>${agent:rba.ssh.rba:username}</jsdl:userName>
+#<jsdl:password>${agent:rba.ssh.rba:password}</jsdl:password>
+#</jsdlremotecommand:credentials>
+#<jsdlremotecommand:certificates>
+#<jsdlremotecommand:keystoreFilePath></jsdlremotecommand:keystoreFilePath>
+#<jsdlremotecommand:password></jsdlremotecommand:password>
+#</jsdlremotecommand:certificates>
+#</jsdlremotecommand:serverPanel>
+#</jsdlremotecommand:RemoteCommandParameters> </jsdlremotecommand:remotecommand>
+#</jsdl:application>
+#<jsdl:resources/>
+#</jsdl:jobDefinition>
+#</jmgr:JobDefinitionDocument>
+#</jmgr:Alias>
+#<jmgr:ClientNotifyURI></jmgr:ClientNotifyURI>
+#</jmgr:submitJobFromJSDL>
+

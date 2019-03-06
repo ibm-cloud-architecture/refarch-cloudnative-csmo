@@ -1,0 +1,2 @@
+# Run Crontab_directory_Cleanup.sh to cleanup /tmp of old files
+00 0 * * * /opt/IBM/RBA/bin/Crontab_directory_Cleanup.sh tmp
